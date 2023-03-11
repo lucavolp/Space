@@ -1,10 +1,10 @@
-
 /**
- * Aggiungi qui una descrizione della classe MyFrame
+ * Aggiungi qui una descrizione della classe Test
  * 
- * @author (il tuo nome) 
- * @version (un numero di versione o una data)
+ * @author (Inserisci_nome) 
+ * @version (1.0)
  */
+ 
 public class MyFrame
 {
     // variabili d'istanza - sostituisci l'esempio che segue con il tuo
