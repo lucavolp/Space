@@ -1,7 +1,7 @@
 /**
  * Aggiungi qui una descrizione della classe Test
  * 
- * @author (Inserisci_nome)
+ * @author (Battistelli Kevin - Volpinari Luca)
  * @version (1.0)
  */
 
