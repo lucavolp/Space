@@ -13,6 +13,6 @@
      {
          super(titolo);
          setDefaultCloseOperation(EXIT_ON_CLOSE);
-         setBounds(300,300,800,600);
+         setBounds(600,600,800,600);
      }
  }
