@@ -4,8 +4,14 @@
  * @author (Battistelli Kevin - Volpinari Luca)
  * @version (1.0)
  */
- 
-public class MyPanel
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+
+public class MyPanel extends JPanel //implements ActionListener 
 {
 
     public MyPanel()
