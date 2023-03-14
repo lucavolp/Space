@@ -14,9 +14,17 @@ import java.util.*;
 public class MyPanel extends JPanel //implements ActionListener 
 {
     private JLabel lillo;
+    private JButton change;
+    public AscoltatoreEsterno as;
+
     public MyPanel()
     {
-        lillo = new JLabel("Lillo");
+        as= new AscoltatoreEsterno();
+        
+        lillo = new JLabel("Panel 1");
         add(lillo);
+        change = new JButton("New Game");
+        change.addActionListener(as);
+        add(change);
     }
 }

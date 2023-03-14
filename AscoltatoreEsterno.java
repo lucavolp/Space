@@ -9,11 +9,15 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class AscoltatoreEsterno implements ActionListener
+public class AscoltatoreEsterno extends Test implements ActionListener
 {
     
     public void actionPerformed(ActionEvent e)
     {
-        
+        if(e.getActionCommand() == "New Game")
+        {
+            f.setVisible(false);
+            f2.setVisible(true);
+        }
     }
 }
