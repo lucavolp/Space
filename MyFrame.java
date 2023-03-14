@@ -6,13 +6,14 @@
  */
 
 import javax.swing.*;
+import java.awt.Toolkit;
 
 public class MyFrame extends JFrame 
 {
     public MyFrame(String titolo) {
         super(titolo);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setBounds(100, 100, 800, 600);
+        setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
     }
 }
  
