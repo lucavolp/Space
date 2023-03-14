@@ -5,13 +5,14 @@
  * @version (1.0)
  */
 
- import javax.swing.*;
- 
- public class MyFrame extends JFrame {
-     public MyFrame(String titolo) {
-         super(titolo);
-         setDefaultCloseOperation(EXIT_ON_CLOSE);
-         setBounds(100, 100, 800, 600);
-     }
- }
+import javax.swing.*;
+
+public class MyFrame extends JFrame 
+{
+    public MyFrame(String titolo) {
+        super(titolo);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setBounds(100, 100, 800, 600);
+    }
+}
  

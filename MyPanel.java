@@ -13,9 +13,10 @@ import java.util.*;
 
 public class MyPanel extends JPanel //implements ActionListener 
 {
-
+    private JLabel lillo;
     public MyPanel()
     {
-        
+        lillo = new JLabel("Lillo");
+        add(lillo);
     }
 }
