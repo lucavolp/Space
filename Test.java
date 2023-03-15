@@ -9,6 +9,14 @@ import java.awt.*;
 
 public class Test {
 
+
+     public static void main(String[] args) 
+     {
+        init();
+     }
+    
+    
+    
     public static MyFrame f;
     public static MyFrame f2;
 
@@ -27,7 +35,5 @@ public class Test {
         f2.setVisible(false);
     }
 
-    public static void main(String[] args) {
-        init();
-    }
+   
 }

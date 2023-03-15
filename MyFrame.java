@@ -16,4 +16,3 @@ public class MyFrame extends JFrame
         setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
     }
 }
- 

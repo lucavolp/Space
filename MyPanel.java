@@ -19,13 +19,15 @@ public class MyPanel extends JPanel //implements ActionListener
 
     public MyPanel()
     {
+
         as= new AscoltatoreEsterno();
         
         lillo = new JLabel("Panel 1");
         add(lillo);
         change = new JButton("New Game");
         change.addActionListener(as);
-        add(change);
-        //cambiamento
+        add(change); //cambiamento
+        
     }
+
 }
