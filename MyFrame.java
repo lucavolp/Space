@@ -5,14 +5,14 @@
  * @version (1.0)
  */
 
- import java.awt.*;
- import javax.swing.*;
- public class MyFrame extends JFrame
- {
-     public MyFrame(String titolo)
-     {
-         super(titolo);
-         setDefaultCloseOperation(EXIT_ON_CLOSE);
-         setBounds(600,600,800,600);
-     }
- }
+import javax.swing.*;
+import java.awt.Toolkit;
+
+public class MyFrame extends JFrame 
+{
+    public MyFrame(String titolo) {
+        super(titolo);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
+    }
+}
