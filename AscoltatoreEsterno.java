@@ -19,5 +19,10 @@ public class AscoltatoreEsterno extends Test implements ActionListener
             f.setVisible(false);
             f2.setVisible(true);
         }
+        if(e.getActionCommand() == "Home")
+        {
+            f.setVisible(true);
+            f2.setVisible(false);
+        }
     }
 }

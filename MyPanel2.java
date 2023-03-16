@@ -14,10 +14,18 @@ import java.util.*;
 public class MyPanel2 extends JPanel
 {
     private JLabel pippo;
+    private JButton change;
+    public AscoltatoreEsterno as;
 
     public MyPanel2()
     {
+        
+        as= new AscoltatoreEsterno();
+        
         pippo= new JLabel("Panel 2");
         add(pippo);
+        change = new JButton("Home");
+        change.addActionListener(as);
+        add(change); //cambiamento
     }
 }

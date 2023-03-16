@@ -19,7 +19,7 @@ public class MyPanel extends JPanel //implements ActionListener
 
     public MyPanel()
     {
-
+        
         as= new AscoltatoreEsterno();
         
         lillo = new JLabel("Panel 1");
