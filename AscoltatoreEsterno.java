@@ -16,13 +16,12 @@ public class AscoltatoreEsterno extends Test implements ActionListener
     {
         if(e.getActionCommand() == "New Game")
         {
-            f.setVisible(false);
-            f2.setVisible(true);
+            //f.setVisible(false);
+            //f2.setVisible(true);
+            change();
         }
         if(e.getActionCommand() == "Home")
         {
-            f.setVisible(true);
-            f2.setVisible(false);
         }
     }
 }
