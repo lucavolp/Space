@@ -27,5 +27,7 @@ public class MyPanel2 extends JPanel
         change = new JButton("Home");
         change.addActionListener(as);
         add(change); //cambiamento
+        
+        
     }
 }
