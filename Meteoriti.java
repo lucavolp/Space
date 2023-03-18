@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.Point;
 
 public class Meteoriti extends JFrame {
     private JLabel label;
+    private Point labelLocation;
 
     public Meteoriti() {
         label = new JLabel("Hello World!");
@@ -14,10 +16,15 @@ public class Meteoriti extends JFrame {
 
             public void actionPerformed(ActionEvent evt) {
                 x += deltaX;
-                /*if (x + label.getWidth() > getWidth() || x < 0) {
-                    deltaX *= -1;
-                }*/
-                label.setLocation(0, x);
+                labelLocation = label.getLocation();//Prende la posizione della Label
+                
+                if (labelLocation.y > getHeight()) {
+                    remove(label);
+                    revalidate(); // Aggiorna il pannello per mostrare le modifiche
+                    repaint();    // Ridisegna il pannello per mostrare le modifiche
+                    System.out.println("Ho eliminato la Label");
+                }
+                label.setLocation(1, x);
             }
         });
 
