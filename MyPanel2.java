@@ -8,26 +8,34 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.*;
-import java.util.*;
- 
+import java.util.Random;
+
 public class MyPanel2 extends JPanel
 {
     private JLabel pippo;
-    private JButton change;
     public AscoltatoreEsterno as;
-
-    public MyPanel2()
-    {
-        
+    private int velocitaMeteoriti;
+    private Timer timer;
+    protected Dimension panelSize;//Dimensione del pannello
+    protected Random rand = new Random();
+    
+    
+    public MyPanel2() {
+        velocitaMeteoriti = 1;
         as= new AscoltatoreEsterno();
-        
         pippo= new JLabel("Panel 2");
         add(pippo);
-        change = new JButton("Home");
-        change.addActionListener(as);
-        add(change); //cambiamento
         
-        
+        // Crea un timer che genera un nuovo oggetto Meteoriti ogni 5 secondi
+        timer = new Timer(2000, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                Meteoriti m; 
+                m = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
+                add(m); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2
+                repaint(); // Ridisegna il pannello per visualizzare l'oggetto Meteoriti
+                System.out.println("Ho creato il meteorite");
+            }
+        });
+        timer.start();
     }
 }
