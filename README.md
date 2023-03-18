@@ -1,3 +1,3 @@
 # Space
 
-Questo readme sarà inutile :)
+Spaceshooter game come negli anni 90 nelle sale giochi.
