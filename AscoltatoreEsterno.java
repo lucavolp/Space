@@ -9,7 +9,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class AscoltatoreEsterno extends Test implements ActionListener
+public class AscoltatoreEsterno implements ActionListener
 {
     MyPanel p;
     MyPanel2 p2;
