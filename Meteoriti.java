@@ -104,6 +104,7 @@ public class Meteoriti extends JLabel implements ActionListener
             revalidate(); // Aggiorna il pannello per mostrare le modifiche
             repaint();    // Ridisegna il pannello per mostrare le modifiche
             timer.stop();   //Ferma il timer così smette di eseguire il codice
+            //System.out.println("Ho eliminato il meteorite");
         }
         this.setLocation(posGenerazione, y);
     }

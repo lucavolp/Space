@@ -28,7 +28,7 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
         gbc.gridx = 0;
         gbc.gridy = 0;
         
-        velocitaMeteoriti = 5;
+        velocitaMeteoriti = 7;
         velocitaSpawn = 2000;
         as= new AscoltatoreEsterno();
         pippo= new JLabel("Panel 2");
