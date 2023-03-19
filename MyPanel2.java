@@ -15,10 +15,10 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
     private JLabel pippo;
     public AscoltatoreEsterno as;
     private int velocitaMeteoriti;
-    protected Dimension panelSize;//Dimensione del pannello
+    private int velocitaSpawn;
     protected Random rand = new Random();
     private Meteoriti meteoriti;
-    private Timer timer;    
+    private Timer timer;
     
     public MyPanel2() 
     {
@@ -28,21 +28,21 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
         gbc.gridx = 0;
         gbc.gridy = 0;
         
-        
         velocitaMeteoriti = 5;
+        velocitaSpawn = 2000;
         as= new AscoltatoreEsterno();
         pippo= new JLabel("Panel 2");
         add(pippo);
         
-        // Crea un timer che genera un nuovo oggetto Meteoriti ogni 5 secondi
-        timer = new Timer(2000, new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        // Crea un timer che genera un nuovo oggetto Meteoriti ogni x secondi
+        timer = new Timer(velocitaSpawn, new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent evt) 
+            {
                 meteoriti = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
-                add(meteoriti, gbc); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2  
-                //meteoriti.setVisible(false);
+                add(meteoriti, gbc); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2 
                 revalidate();
                 repaint();
-                //meteoriti.setVisible(true);
             }
         });
         timer.start();

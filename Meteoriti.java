@@ -1,3 +1,10 @@
+/**
+ * Aggiungi qui una descrizione della classe Test
+ * 
+ * @author (Battistelli Kevin - Volpinari Luca)
+ * @version (1.0)
+*/
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -37,8 +44,9 @@ public class Meteoriti extends JLabel implements ActionListener
         timer.start();
     }
     
-    private void setPosizioneGenerazione(int pos){
-        //posGenerazione = pos;
+    private void setPosizioneGenerazione(int pos)//Gestisce lo spawn del meteorite e lo divide nello schermo
+    {
+        
         int posX = Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
         posX /= 20;//Divide lo schermo in 20 parti
         int colonne = (int)posX * 5; //Le prime 5 parti le lascio per una colonna con i dati
@@ -81,7 +89,8 @@ public class Meteoriti extends JLabel implements ActionListener
         deltaY= d;
     }
     
-    public void actionPerformed(ActionEvent evt) {
+    public void actionPerformed(ActionEvent evt) 
+    {
         y += deltaY;
         labelLocation = this.getLocation();//Prende la posizione della Label
         
