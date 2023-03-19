@@ -11,6 +11,19 @@ import java.awt.event.*;
 
 public class AscoltatoreEsterno extends Test implements ActionListener
 {
+    MyPanel p;
+    MyPanel2 p2;
+    MyFrame f;
+    
+    public AscoltatoreEsterno(MyPanel p, MyPanel2 p2, MyFrame f)
+    {
+        this.p = p;
+        this.p2 = p2;
+        this.f = f;
+    }
+    
+    public AscoltatoreEsterno()
+    {}
     
     public void actionPerformed(ActionEvent e)
     {
@@ -21,5 +34,14 @@ public class AscoltatoreEsterno extends Test implements ActionListener
         if(e.getActionCommand() == "Home")
         {
         }
+    }
+    
+    //Cambia pannello e lo switcha a quello contenente il gioco
+    public void change()
+    {
+        f.remove(p);
+        f.add(p2);
+        f.revalidate();
+        f.repaint();
     }
 }

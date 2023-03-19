@@ -11,7 +11,7 @@ import java.awt.Toolkit;
 public class MyFrame extends JFrame 
 {
     public MyFrame(String titolo) {
-        super(titolo);
+        super(titolo); 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
     }

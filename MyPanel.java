@@ -16,11 +16,15 @@ public class MyPanel extends JPanel //implements ActionListener
     private JLabel lillo;
     private JButton change;
     public AscoltatoreEsterno as;
+    private MyPanel2 p2;
+    private MyFrame f;
 
-    public MyPanel()
+    public MyPanel(MyPanel2 p2, MyFrame f)
     {
+        this.p2 = p2;
+        this.f = f;
         
-        as= new AscoltatoreEsterno();
+        as= new AscoltatoreEsterno(this, p2, f);
         
         lillo = new JLabel("Panel 1");
         add(lillo);
