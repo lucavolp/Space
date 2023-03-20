@@ -20,10 +20,17 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
     private Meteoriti meteoriti;
     private Timer timer;
     
+    private Spaceship spaceship;
     
     private JLabel spaceshipLabel;
     private int spaceshipX, spaceshipY;
     private int spaceshipSpeed;
+    private JLabel pluto;
+    public int saveX=999999;
+    public int saveY=999999;
+    
+    public int pos[];
+    
     public MyPanel2() 
     {
         super();
@@ -31,17 +38,20 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
+        RepaintManager repCmp=new RepaintManager();
         
         
+        /**
+         * ogni volta che si invoca il repaint() dei meteoriti la spaceship viene visualizzata al centro fino all'input dopo
+        **/
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 7;
         velocitaSpawn = 2000;
         as= new AscoltatoreEsterno();
         pippo= new JLabel("Panel 2");
         add(pippo);
-        
         // Crea un timer che genera un nuovo oggetto Meteoriti ogni x secondi
-        timer = new Timer(velocitaSpawn, new ActionListener() 
+        timer = new Timer(velocitaSpawn, new ActionListener()
         {
             public void actionPerformed(ActionEvent evt) 
             {
@@ -54,58 +64,13 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
         timer.start();
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
-        
+
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    
-        // Initialize the spaceship image
-        ImageIcon spaceshipIcon = new ImageIcon("./img/spaceship.jpg");
-        spaceshipLabel = new JLabel(spaceshipIcon);
-        spaceshipLabel.setSize(70,70);
-        spaceshipX = 0;
-        spaceshipY = 100;
-        spaceshipSpeed = 5;
-        add(spaceshipLabel);
-
-        // Create a timer to move the spaceship
-        
-        timer = new Timer(1000, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-        timer.start();
-        
-        // Add keyboard event listeners to move the spaceship left and right
-        addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_LEFT) {
-                    spaceshipSpeed = -5;
-                    System.out.println("Sinistra");
-                    spaceshipX += spaceshipSpeed;
-                    spaceshipLabel.setBounds(spaceshipX, spaceshipY, spaceshipIcon.getIconWidth(), spaceshipIcon.getIconHeight());
-                } else if (keyCode == KeyEvent.VK_RIGHT) {
-                    spaceshipSpeed = 5;
-                    System.out.println("Destra");
-                    spaceshipX += spaceshipSpeed;
-                    spaceshipLabel.setBounds(spaceshipX, spaceshipY, spaceshipIcon.getIconWidth(), spaceshipIcon.getIconHeight());
-                }
-            }
-
-            public void keyReleased(KeyEvent e) {
-                int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT) {
-                    spaceshipSpeed = 0;
-                }
-            }
-        });
-        setFocusable(true);
+        pluto= new JLabel("Spaceship");
+        add(pluto);
+        spaceship = new Spaceship();
+        add(spaceship,gbc); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
+        spaceship.setFocusable(true);
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     }
-
-    public void stopMoving() {
-        timer.stop();
-    }
-    
-    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
-//}
