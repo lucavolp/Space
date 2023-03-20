@@ -38,7 +38,6 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        RepaintManager repCmp=new RepaintManager();
         
         
         /**

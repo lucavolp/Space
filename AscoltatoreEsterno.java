@@ -31,8 +31,9 @@ public class AscoltatoreEsterno implements ActionListener
         {
             change();
         }
-        if(e.getActionCommand() == "Home")
+        if(e.getActionCommand() == "Chiudi")
         {
+             System.exit(0);
         }
     }
     

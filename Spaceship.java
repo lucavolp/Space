@@ -16,6 +16,7 @@ public class Spaceship extends JLabel
 {
     private Point labelLocation; 
     private Timer timer;
+    private Timer timer2;
     private int posY= 0;   //posizione Y attuale spaceship
     private int posX= 0;   //posizione X attuale spaceship 
     private int spaceshipSpeed = 0;
@@ -25,12 +26,13 @@ public class Spaceship extends JLabel
     private int spaceshipY;
     private Image sps;
     private int incr = 5;    
+    private int msecInVel=10000;
     
     public Spaceship() 
     {
         this.setLocation(posX, posY);
         setPosizioneGenerazione();
-        
+        incrVelocita();
         //Inserimento e ridimensionamento dell'immagine
         try
         {
@@ -45,13 +47,17 @@ public class Spaceship extends JLabel
         
         
         this.setLocation(posX, posY);
-        
+        //timer di frequenza di ascolto degli input
         timer = new Timer(5, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-            }
+            public void actionPerformed(ActionEvent e) 
+            {
+            }            
         });
         timer.start();
+        
+        
+        
+        
         
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
@@ -100,10 +106,26 @@ public class Spaceship extends JLabel
     
     private void move()
     {
-        posX+=spaceshipSpeed;
+        if((posX>0)&&(posX<dimX-80))
+            posX+=spaceshipSpeed;
+        else if((spaceshipSpeed<0)&&(posX>=dimX-80))
+            posX+=spaceshipSpeed;
+        else if((spaceshipSpeed>0)&&(posX==0))
+            posX+=spaceshipSpeed;            
     }
     
-    
+    //ogni secInVel aumenta la velocità di movimento [incr] di 1 (aumenta la fluidità in accordo con più meteoriti spawnati)
+    private void incrVelocita()
+    {
+        timer2 = new Timer(msecInVel, new ActionListener() 
+        {
+              public void actionPerformed(ActionEvent evt) 
+            {
+               incr++;
+            }                    
+        });
+        timer2.start();
+    }
     
 }
     
