@@ -19,6 +19,7 @@ public class Meteoriti extends JLabel implements ActionListener
     private int y = 0;
     private int deltaY;//DeltaY è la velocità con cui scende il meteorite
     private int posGenerazione;
+    private int posX;
     
     private Image met;
     
@@ -47,7 +48,7 @@ public class Meteoriti extends JLabel implements ActionListener
     private void setPosizioneGenerazione(int pos)//Gestisce lo spawn del meteorite e lo divide nello schermo
     {
         
-        int posX = Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
+        posX = Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
         posX /= 20;//Divide lo schermo in 20 parti
         int colonne = (int)posX * 5; //Le prime 5 parti le lascio per una colonna con i dati
         switch(pos)
@@ -107,5 +108,10 @@ public class Meteoriti extends JLabel implements ActionListener
             //System.out.println("Ho eliminato il meteorite");
         }
         this.setLocation(posGenerazione, y);
+    }
+    
+    public int getDimCol()
+    {
+        return posX; 
     }
 }

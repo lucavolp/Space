@@ -32,7 +32,9 @@ public class Spaceship extends JLabel
     {
         this.setLocation(posX, posY);
         setPosizioneGenerazione();
-        incrVelocita();
+        
+        
+        
         //Inserimento e ridimensionamento dell'immagine
         try
         {
@@ -64,7 +66,7 @@ public class Spaceship extends JLabel
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_LEFT) {
                     spaceshipSpeed = -(incr);
-                    System.out.println("Sinistra");
+                    //System.out.println("Sinistra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
                     move();
                     setLocation(posX, posY);
@@ -72,7 +74,7 @@ public class Spaceship extends JLabel
                     //saveY=posY;
                 } else if (keyCode == KeyEvent.VK_RIGHT) {
                     spaceshipSpeed = incr;
-                    System.out.println("Destra");
+                    //System.out.println("Destra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
                     move();
                     setLocation(posX, posY);
@@ -119,9 +121,10 @@ public class Spaceship extends JLabel
     {
         timer2 = new Timer(msecInVel, new ActionListener() 
         {
-              public void actionPerformed(ActionEvent evt) 
+            public void actionPerformed(ActionEvent evt) 
             {
                incr++;
+               System.out.println(incr);
             }                    
         });
         timer2.start();
