@@ -50,7 +50,7 @@ public class Spaceship extends JLabel
         
         this.setLocation(posX, posY);
         //timer di frequenza di ascolto degli input
-        timer = new Timer(5, new ActionListener() {
+        timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent e) 
             {
             }            
@@ -69,7 +69,7 @@ public class Spaceship extends JLabel
                     //System.out.println("Sinistra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
                     move();
-                    setLocation(posX, posY);
+                    setBounds(posX, posY,80,80);
                     //saveX=posX;
                     //saveY=posY;
                 } else if (keyCode == KeyEvent.VK_RIGHT) {

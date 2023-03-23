@@ -94,9 +94,9 @@ public class MyPanel2 extends JPanel
     
     public void repaintCenter() 
     {
-        int centerX = getWidth() / 2 - meteoriti.getDimCol()/2;
-        int centerY =  getWidth() / 2 - meteoriti.getDimCol()/2;
-        Rectangle repaintRect = new Rectangle(centerX, 0, 500, 500);
+        int centerX = getWidth();
+        int centerY =  getHeight();
+        Rectangle repaintRect = new Rectangle(0, centerY, centerX, centerY+150);
         
         repaint(repaintRect);
     }
