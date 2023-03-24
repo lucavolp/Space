@@ -5,6 +5,8 @@
  * @version (1.0)
 */
 
+/* Non so per quale motivo ci sia questa classe, se non ti serve cancellala pure */
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -13,17 +15,17 @@ import java.util.Random;
 public class MyPanel2 extends JPanel 
 {
     private JLabel pippo;
-    public AscoltatoreEsterno as;
+    //public AscoltatoreEsterno as;
     private int velocitaMeteoriti;
     private int velocitaSpawn;
     protected Random rand = new Random();
-    private Meteoriti meteoriti;
+    //private Meteoriti meteoriti;
     private Timer timerMet;
     
     private Timer timerGame;
     private int tGioco=0;
     
-    private Spaceship spaceship;
+    //private Spaceship spaceship;
     private JLabel spaceshipLabel;
     private int spaceshipX, spaceshipY;
     private int spaceshipSpeed;
@@ -49,7 +51,7 @@ public class MyPanel2 extends JPanel
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 7;
         velocitaSpawn = 2000;
-        as= new AscoltatoreEsterno();
+        //as= new AscoltatoreEsterno();
         pippo= new JLabel("Panel 2");
         add(pippo);
         // Crea un timer che genera un nuovo oggetto Meteoriti ogni x secondi
@@ -57,8 +59,8 @@ public class MyPanel2 extends JPanel
         {
             public void actionPerformed(ActionEvent evt) 
             {
-                meteoriti = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
-                add(meteoriti, gbc); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2 
+                //meteoriti = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
+                //add(meteoriti, gbc); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2 
                 //add(meteoriti);
                 revalidate();
                 repaintCenter();
@@ -74,9 +76,9 @@ public class MyPanel2 extends JPanel
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         pluto= new JLabel("Spaceship");
         add(pluto);
-        spaceship = new Spaceship();
-        add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
-        spaceship.setFocusable(true);
+        //spaceship = new Spaceship();
+        //add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
+        //spaceship.setFocusable(true);
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
         

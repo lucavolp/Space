@@ -17,7 +17,7 @@ public class AscoltatoreEsterno implements ActionListener
     private MyPanelMenu panelMenu;
     private MyFrame f;
     
-    public AscoltatoreEsterno(MyPanel p, MyPanelGioco p2, MyPanelScore p3, MyPanelMenu p4, MyFrame f)
+    public AscoltatoreEsterno(MyPanel p, MyPanelGioco p2, MyPanelScore p3, MyPanelMenu p4, MyFrame f)//Viene usato dalla pagina principale
     {
         this.p = p;
         this.panelGioco = p2;
@@ -26,11 +26,16 @@ public class AscoltatoreEsterno implements ActionListener
         this.f = f;
     }
     
-    public AscoltatoreEsterno()
-    {}
+    public AscoltatoreEsterno(){}
+    
+    public AscoltatoreEsterno(MyPanelGioco p2)
+    {
+        this.panelGioco = p2;
+    }
     
     public void actionPerformed(ActionEvent e)
-    {
+    {   
+        //Controlli schermata principale
         if(e.getActionCommand() == "New Game")
         {
             change();
@@ -38,6 +43,29 @@ public class AscoltatoreEsterno implements ActionListener
         if(e.getActionCommand() == "Chiudi")
         {
              System.exit(0);
+        }
+        
+        //Controlli pannello del menù
+        if(e.getActionCommand() == "Pausa")
+        {
+            panelGioco.timerGame.stop();
+            panelGioco.timerMet.stop();
+            panelGioco.meteoriti.stopTimer();
+            //System.out.println("Ho premuto il bottone");
+        }
+        if(e.getActionCommand() == "Riprendi")
+        {
+            panelGioco.timerGame.start();
+            panelGioco.timerMet.start();
+            panelGioco.meteoriti.startTimer();
+        }
+        if(e.getActionCommand() == "Restart")
+        {
+            
+        }
+        if(e.getActionCommand() == "Torna al menù principale")
+        {
+            //Lucaaa non so come si fa sta roba
         }
     }
     
@@ -55,5 +83,7 @@ public class AscoltatoreEsterno implements ActionListener
         
         f.revalidate();
         f.repaint();
+        
+        
     }
 }

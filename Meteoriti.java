@@ -106,7 +106,6 @@ public class Meteoriti extends JLabel implements ActionListener
             //parent.revalidate(); // Aggiorna il pannello per mostrare le modifiche
             //parent.repaint();    // Ridisegna il pannello per mostrare le modifiche
             timer.stop();   //Ferma il timer così smette di eseguire il codice
-            //System.out.println("Ho eliminato il meteorite");
         }
         
     }
@@ -114,5 +113,15 @@ public class Meteoriti extends JLabel implements ActionListener
     public int getDimCol()
     {
         return posX; 
+    }
+    
+    public void stopTimer()
+    {
+        timer.stop();
+    }
+    
+    public void startTimer()
+    {
+        timer.start();
     }
 }

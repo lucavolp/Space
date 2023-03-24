@@ -13,11 +13,12 @@ import java.util.*;
 
 public class MyPanelScore extends JPanel
 {
-    private JLabel score;
+    private MyPanelGioco pannelloGioco;
     
-    public MyPanelScore()
+    public MyPanelScore(MyPanelGioco p2)
     {
-        score = new JLabel("Score");
-        add(score);
+        super();
+        
+        pannelloGioco = p2;
     }
 }
