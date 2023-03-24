@@ -12,13 +12,15 @@ public class Test
     public static void main(String[] args) 
     {
         //Creazione del frame principale
-        MyFrame f = new MyFrame("Space"); 
-        Container c = f.getContentPane();
+        MyFrame frame = new MyFrame("Space"); 
+        Container c = frame.getContentPane();
         
-        MyPanelGioco p2 = new MyPanelGioco();
+        MyPanelGioco panelGioco = new MyPanelGioco();
+        MyPanelScore panelScore = new MyPanelScore();
+        MyPanelMenu panelMenu = new MyPanelMenu();
         
-        MyPanel p = new MyPanel(p2, f);
+        MyPanel p = new MyPanel(panelGioco, panelScore, panelMenu, frame);
         c.add(p);
-        f.setVisible(true);        
+        frame.setVisible(true);   
     }   
 }
