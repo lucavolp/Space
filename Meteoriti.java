@@ -103,8 +103,8 @@ public class Meteoriti extends JLabel implements ActionListener
         {
             Container parent = getParent(); //ottieni il pannello genitore
             parent.remove(this); //rimuovi il componente dal pannello
-            revalidate(); // Aggiorna il pannello per mostrare le modifiche
-            repaint();    // Ridisegna il pannello per mostrare le modifiche
+            //parent.revalidate(); // Aggiorna il pannello per mostrare le modifiche
+            //parent.repaint();    // Ridisegna il pannello per mostrare le modifiche
             timer.stop();   //Ferma il timer così smette di eseguire il codice
             //System.out.println("Ho eliminato il meteorite");
         }
