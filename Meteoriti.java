@@ -115,4 +115,9 @@ public class Meteoriti extends JLabel implements ActionListener
     {
         return posX; 
     }
+    
+    public int getDimCol()
+    {
+        return posX; 
+    }
 }
