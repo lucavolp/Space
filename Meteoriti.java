@@ -94,6 +94,7 @@ public class Meteoriti extends JLabel implements ActionListener
         y += deltaY;
         labelLocation = this.getLocation();//Prende la posizione della Label
         
+        this.setLocation(posGenerazione, y);
         Dimension dimensione = getSize(); // Ottenere la dimensione del pannello
         int altezza = dimensione.height;
         
@@ -106,6 +107,6 @@ public class Meteoriti extends JLabel implements ActionListener
             timer.stop();   //Ferma il timer così smette di eseguire il codice
             //System.out.println("Ho eliminato il meteorite");
         }
-        this.setLocation(posGenerazione, y);
+        
     }
 }

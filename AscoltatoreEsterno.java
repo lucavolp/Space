@@ -12,10 +12,10 @@ import java.awt.event.*;
 public class AscoltatoreEsterno implements ActionListener
 {
     MyPanel p;
-    MyPanel2 p2;
+    MyPanelGioco p2;
     MyFrame f;
     
-    public AscoltatoreEsterno(MyPanel p, MyPanel2 p2, MyFrame f)
+    public AscoltatoreEsterno(MyPanel p, MyPanelGioco p2, MyFrame f)
     {
         this.p = p;
         this.p2 = p2;

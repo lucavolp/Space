@@ -17,10 +17,10 @@ public class MyPanel extends JPanel //implements ActionListener
     private JButton change;
     private JButton chiudi;
     public AscoltatoreEsterno as;
-    private MyPanel2 p2;
+    private MyPanelGioco p2;
     private MyFrame f;
 
-    public MyPanel(MyPanel2 p2, MyFrame f)
+    public MyPanel(MyPanelGioco p2, MyFrame f)
     {
         this.p2 = p2;
         this.f = f;

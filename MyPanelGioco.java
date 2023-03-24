@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.Random;
 
-public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non quando si clicca avvio
+public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e non quando si clicca avvio
 {
     private JLabel pippo;
     public AscoltatoreEsterno as;
@@ -31,7 +31,7 @@ public class MyPanel2 extends JPanel //Inizia ad eseguire subito il codice e non
     
     public int pos[];
     
-    public MyPanel2() 
+    public MyPanelGioco() 
     {
         super();
         setLayout(new GridBagLayout());

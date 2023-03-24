@@ -15,7 +15,7 @@ public class Test
         MyFrame f = new MyFrame("Space"); 
         Container c = f.getContentPane();
         
-        MyPanel2 p2 = new MyPanel2();
+        MyPanelGioco p2 = new MyPanelGioco();
         
         MyPanel p = new MyPanel(p2, f);
         c.add(p);
