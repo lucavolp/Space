@@ -14,11 +14,14 @@ import java.util.*;
 public class MyPanelScore extends JPanel
 {
     private MyPanelGioco pannelloGioco;
+    private JLabel punteggio;
     
     public MyPanelScore(MyPanelGioco p2)
     {
         super();
         
         pannelloGioco = p2;
+        
+        punteggio = new JLabel("0");
     }
 }

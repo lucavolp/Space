@@ -12,6 +12,8 @@ import java.util.Random;
 
 public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e non quando si clicca avvio
 {
+    
+    
     private JLabel pippo;
     public AscoltatoreEsterno as;
     
@@ -42,6 +44,10 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     public MyPanelGioco() 
     {
         super();
+        
+        //SENZA LAYOUT SEMBRA CHE ALCUNI METEORITI RIMANGONO E NON ELIMINA LE LABEL
+        
+        
         /*setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -106,6 +112,8 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         
         repaint(repaintRect);
     }
+    
+    
     /*    
     public void paint(Graphics g)
     {
