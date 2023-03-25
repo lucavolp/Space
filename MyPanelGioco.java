@@ -5,6 +5,8 @@
  * @version (1.0)
 */
 
+//hai cambiato un botto di coses che non me ne ero accorto e ho fatto na figura di merda con la piergio hahah
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -26,7 +28,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     
-    protected Timer timerGame;
+    public Timer timerGame;
     private int tGioco=0;
     
     //Variabili per la navicella
@@ -84,10 +86,10 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         
 
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        pluto= new JLabel("Spaceship");
-        add(pluto);
+        //pluto= new JLabel("Spaceship");
+        //add(pluto);
         spaceship = new Spaceship();
-        add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
+        this.add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
         spaceship.setFocusable(true);
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
@@ -95,10 +97,10 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         //TIMER DI GIOCO
         timerGame = new Timer(1000, new ActionListener() 
         {
-              public void actionPerformed(ActionEvent evt) 
+            public void actionPerformed(ActionEvent evt) 
             {
                tGioco++;
-               //System.out.println(tGioco);
+               System.out.println(tGioco);
             }                    
         });
         timerGame.start();
@@ -114,17 +116,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     }
     
     
-    /*    
-    public void paint(Graphics g)
-    {
-        // Set the color of the lines to red
-        g.setColor(Color.RED);
-        
-        // Draw the first vertical line
-        g.drawLine(50, 0, 50, 100);
-                
-        // Draw the second vertical line
-        g.drawLine(100, 0, 100, 100);
-    }*/
+    
 }
 

@@ -51,6 +51,7 @@ public class AscoltatoreEsterno implements ActionListener
             panelGioco.timerGame.stop();
             panelGioco.timerMet.stop();
             panelGioco.meteoriti.stopTimer();
+            //panelMenu.pause.(false);
             //System.out.println("Ho premuto il bottone");
         }
         if(e.getActionCommand() == "Riprendi")
@@ -63,9 +64,10 @@ public class AscoltatoreEsterno implements ActionListener
         {
             
         }
-        if(e.getActionCommand() == "Torna al menù principale")
+        if(e.getActionCommand().equals("Torna al menù principale"))
         {
-            //Lucaaa non so come si fa sta roba
+            backHome();
+            System.out.println("Ho premuto il bottone");
         }
     }
     
@@ -83,7 +85,19 @@ public class AscoltatoreEsterno implements ActionListener
         
         f.revalidate();
         f.repaint();
+        //panelGioco.timerGame.stop();
+    }
+    
+    
+    public void backHome()
+    {
+        //Rimouve il pannello contenente il menù principale
+        f.remove(panelGioco);
         
+        f.add(p);
         
+        f.revalidate();
+        f.repaint();
+        System.out.println("Ho premuto il bottone");
     }
 }

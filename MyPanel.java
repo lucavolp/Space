@@ -41,12 +41,11 @@ public class MyPanel extends JPanel //implements ActionListener
         
         
         //Layout home
-        
-        this.setAlignmentX(Component.CENTER_ALIGNMENT);         //sto coso dovrebbe centrare al centro dello schermo ma non centra :)
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(change);
-        this.add(Box.createVerticalStrut(10)); //spazio fra i tasti senno sono brutti
-        this.add(chiudi);
+        new FlowLayout(FlowLayout.CENTER, 15, 15);
+        add(lillo);
+        add(change);
+        add(chiudi);
         //--------
+        
     }
 }

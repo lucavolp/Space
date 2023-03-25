@@ -1,5 +1,5 @@
 /**
- * Aggiungi qui una descrizione della classe Test
+ * PER ADESSO QUESTA SEMBRA INUTILE, NON LA GUARDARE PERCHE C'è ROBA BRUTTA BLEH
  * 
  * @author (Battistelli Kevin - Volpinari Luca)
  * @version (1.0)
