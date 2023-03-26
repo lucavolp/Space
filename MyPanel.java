@@ -24,6 +24,8 @@ public class MyPanel extends JPanel //implements ActionListener
 
     public MyPanel(MyPanelGioco p2, MyPanelScore p3, MyPanelMenu p4, MyFrame f)
     {
+        //panelGioco.timerMet.stop();
+        //panelGioco.timerGame.stop();
         this.panelGioco = p2;
         this.panelScore = p3;
         this.panelMenu = p4;

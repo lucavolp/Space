@@ -36,17 +36,17 @@ public class AscoltatoreEsterno implements ActionListener
     public void actionPerformed(ActionEvent e)
     {   
         //Controlli schermata principale
-        if(e.getActionCommand() == "New Game")
+        if(e.getActionCommand().equals("New Game"))
         {
             change();
         }
-        if(e.getActionCommand() == "Chiudi")
+        if(e.getActionCommand().equals("Chiudi"))
         {
              System.exit(0);
         }
         
         //Controlli pannello del menù
-        if(e.getActionCommand() == "Pausa")
+        if(e.getActionCommand().equals("Pausa"))
         {
             panelGioco.timerGame.stop();
             panelGioco.timerMet.stop();
@@ -54,13 +54,15 @@ public class AscoltatoreEsterno implements ActionListener
             //panelMenu.pause.(false);
             //System.out.println("Ho premuto il bottone");
         }
-        if(e.getActionCommand() == "Riprendi")
+        if(e.getActionCommand().equals("Riprendi"))
         {
+            panelMenu.resume.setEnabled(false);
+            panelMenu.pause.setEnabled(true);
             panelGioco.timerGame.start();
             panelGioco.timerMet.start();
             panelGioco.meteoriti.startTimer();
         }
-        if(e.getActionCommand() == "Restart")
+        if(e.getActionCommand().equals("Restart"))
         {
             
         }
@@ -68,6 +70,8 @@ public class AscoltatoreEsterno implements ActionListener
         {
             backHome();
             System.out.println("Ho premuto il bottone");
+            
+            //PER QUALCHE MOTIVO NON ENTRA QUI E TRA UN PO LANCIO IL PORTATILE IN TESTA A FABIO E STEFNAO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         }
     }
     
@@ -85,7 +89,8 @@ public class AscoltatoreEsterno implements ActionListener
         
         f.revalidate();
         f.repaint();
-        //panelGioco.timerGame.stop();
+        panelGioco.timerGame.start();
+        panelGioco.timerMet.start();
     }
     
     
@@ -98,6 +103,6 @@ public class AscoltatoreEsterno implements ActionListener
         
         f.revalidate();
         f.repaint();
-        System.out.println("Ho premuto il bottone");
+        //System.out.println("Ho premuto il bottone");     //sto bambozzo non vaa
     }
 }

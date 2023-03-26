@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Spaceship extends JLabel
 {
@@ -80,6 +81,8 @@ public class Spaceship extends JLabel
                     setLocation(posX, posY);
                     //saveX=posX;
                     //=posY;
+                } else if (keyCode == KeyEvent.VK_UP) {
+                    //List<Projectile> projectiles = new ArrayList<Projectile>();       //chatgpt dice di fare così e con la classe in piu
                 }
             }
 

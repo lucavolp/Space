@@ -46,7 +46,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     public MyPanelGioco() 
     {
         super();
-        
         //SENZA LAYOUT SEMBRA CHE ALCUNI METEORITI RIMANGONO E NON ELIMINA LE LABEL
         
         
@@ -90,6 +89,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         //add(pluto);
         spaceship = new Spaceship();
         this.add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
+        //set();
         spaceship.setFocusable(true);
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
@@ -115,7 +115,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         repaint(repaintRect);
     }
     
-    
-    
+        
 }
 
