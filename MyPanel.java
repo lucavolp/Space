@@ -20,18 +20,16 @@ public class MyPanel extends JPanel //implements ActionListener
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
-    private MyFrame f;
 
-    public MyPanel(MyPanelGioco p2, MyPanelScore p3, MyPanelMenu p4, MyFrame f)
+    public MyPanel()
     {
         //panelGioco.timerMet.stop();
         //panelGioco.timerGame.stop();
-        this.panelGioco = p2;
+        /*this.panelGioco = p2;
         this.panelScore = p3;
-        this.panelMenu = p4;
-        this.f = f;
+        this.panelMenu = p4;*/
         
-        as= new AscoltatoreEsterno(this, panelGioco, panelScore, panelMenu, f);
+        as= new AscoltatoreEsterno(this);
         lillo = new JLabel("Panel 1");
         add(lillo);
         change = new JButton("New Game");

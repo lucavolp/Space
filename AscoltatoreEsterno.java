@@ -15,22 +15,23 @@ public class AscoltatoreEsterno implements ActionListener
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
-    private MyFrame f;
     
-    public AscoltatoreEsterno(MyPanel p, MyPanelGioco p2, MyPanelScore p3, MyPanelMenu p4, MyFrame f)//Viene usato dalla pagina principale
+    public AscoltatoreEsterno(MyPanel p)//Viene usato dalla pagina principale
     {
         this.p = p;
-        this.panelGioco = p2;
-        this.panelScore = p3;
-        this.panelMenu = p4;
-        this.f = f;
+        /*panelGioco = p2;
+        panelScore = p3;
+        panelMenu = p4;*/
     }
     
     public AscoltatoreEsterno(){}
     
-    public AscoltatoreEsterno(MyPanelGioco p2)
-    {
-        this.panelGioco = p2;
+    public AscoltatoreEsterno(MyPanel p, MyPanelGioco pg, MyPanelScore ps, MyPanelMenu pm)
+    { //usato dal MyPanelMenu
+        this.p = p;
+        panelGioco = pg;
+        panelScore = ps;
+        panelMenu = pm;
     }
     
     public void actionPerformed(ActionEvent e)
@@ -38,7 +39,8 @@ public class AscoltatoreEsterno implements ActionListener
         //Controlli schermata principale
         if(e.getActionCommand().equals("New Game"))
         {
-            change();
+            //change();
+            avviaGioco();
         }
         if(e.getActionCommand().equals("Chiudi"))
         {
@@ -48,8 +50,7 @@ public class AscoltatoreEsterno implements ActionListener
         //Controlli pannello del menù
         if(e.getActionCommand().equals("Pausa"))
         {
-            panelGioco.timerGame.stop();
-            panelGioco.timerMet.stop();
+            panelGioco.stopTimer();
             panelGioco.meteoriti.stopTimer();
             //panelMenu.pause.(false);
             //System.out.println("Ho premuto il bottone");
@@ -76,8 +77,9 @@ public class AscoltatoreEsterno implements ActionListener
     }
     
     //Cambia pannello e lo switcha a quello contenente il gioco
-    public void change()
+    /*public void change()
     {
+        Container f = p.getParent();
         //Rimouve il pannello contenente il menù principale
         f.remove(p);
         //Imposta il layout per aggiungere i 3 pannelli
@@ -91,18 +93,42 @@ public class AscoltatoreEsterno implements ActionListener
         f.repaint();
         panelGioco.timerGame.start();
         panelGioco.timerMet.start();
+    }*/
+    
+    
+    public void backHome() //Funziona e consente di tornare al pannello principale
+    {
+        Container container = panelGioco.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
+        container.removeAll();
+        panelGioco.stopTimer(); //dato che non li elimina richiama il metodo stopTimer() almeno smette di generare robe e contare punti
+        panelGioco = null; //dovrebbe eliminare i pannelli però non li elimina haha siummm
+        panelScore = null;
+        panelMenu = null;
+        container.add(p);
+        container.revalidate();
+        container.repaint();
+
     }
     
-    
-    public void backHome()
+    public void avviaGioco() //La funzione che ti dicevo che crea la nuova finestra quando si preme new game
     {
-        //Rimouve il pannello contenente il menù principale
-        f.remove(panelGioco);
+        panelGioco = new MyPanelGioco();
+        panelScore = new MyPanelScore(panelGioco);
+        panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
         
-        f.add(p);
+        Container f = p.getParent();
+        //Rimouve il pannello contenente il menù principale
+        f.remove(p);
+        //Imposta il layout per aggiungere i 3 pannelli
+        f.setLayout(new BorderLayout());
+        //Aggiunge i 3 pannelli
+        f.add(panelGioco, BorderLayout.CENTER);
+        f.add(panelMenu, BorderLayout.EAST);
+        f.add(panelScore, BorderLayout.WEST);
         
         f.revalidate();
         f.repaint();
-        //System.out.println("Ho premuto il bottone");     //sto bambozzo non vaa
+        panelGioco.timerGame.start();
+        panelGioco.timerMet.start();
     }
 }

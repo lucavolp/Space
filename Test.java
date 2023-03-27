@@ -15,11 +15,9 @@ public class Test
         MyFrame frame = new MyFrame("Space"); 
         Container c = frame.getContentPane();
         
-        MyPanelGioco panelGioco = new MyPanelGioco();
-        MyPanelScore panelScore = new MyPanelScore(panelGioco);
-        MyPanelMenu panelMenu = new MyPanelMenu(panelGioco);
         
-        MyPanel p = new MyPanel(panelGioco, panelScore, panelMenu, frame);
+        
+        MyPanel p = new MyPanel();
         
         c.add(p);
         frame.setVisible(true);   

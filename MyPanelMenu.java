@@ -21,14 +21,20 @@ public class MyPanelMenu extends JPanel
     private JButton back; // torna al menù principale
     private AscoltatoreEsterno as;
     
+    private MyPanelGioco pg;
+    private MyPanelScore ps;
+    private MyPanel p;
     
-    public MyPanelMenu(MyPanelGioco p)
+    
+    public MyPanelMenu(MyPanelGioco pg, MyPanelScore ps, MyPanel p)
     {
         super();
         
-        pannelloGioco = p;
+        this.pg = pg;
+        this.p = p;
+        this.ps = ps;
         
-        as = new AscoltatoreEsterno(pannelloGioco);
+        as = new AscoltatoreEsterno(p, pg, ps, this);
         
         pause = new JButton("Pausa");
         pause.addActionListener(as);

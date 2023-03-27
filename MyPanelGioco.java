@@ -115,6 +115,10 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         repaint(repaintRect);
     }
     
-        
+    public void stopTimer()
+    {
+        timerMet.stop();
+        timerGame.stop();
+    }
 }
 
