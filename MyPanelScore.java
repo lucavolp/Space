@@ -23,5 +23,6 @@ public class MyPanelScore extends JPanel
         pannelloGioco = p2;
         
         punteggio = new JLabel("0");
+        add(punteggio);
     }
 }

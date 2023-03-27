@@ -69,9 +69,7 @@ public class AscoltatoreEsterno implements ActionListener
         }
         if(e.getActionCommand().equals("Torna al menù principale"))
         {
-            backHome();
-            System.out.println("Ho premuto il bottone");
-            
+            backHome();            
             //PER QUALCHE MOTIVO NON ENTRA QUI E TRA UN PO LANCIO IL PORTATILE IN TESTA A FABIO E STEFNAO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         }
     }

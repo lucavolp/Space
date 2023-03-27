@@ -100,7 +100,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
             public void actionPerformed(ActionEvent evt) 
             {
                tGioco++;
-               System.out.println(tGioco);
+               //System.out.println(tGioco);
             }                    
         });
         timerGame.start();
