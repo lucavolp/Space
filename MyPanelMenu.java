@@ -72,6 +72,8 @@ public class MyPanelMenu extends JPanel
         c.gridy = 3;
         layout.setConstraints(back, c);
         
+        
+        
         // Aggiunge i bottoni al pannello
         add(pause);
         add(resume);

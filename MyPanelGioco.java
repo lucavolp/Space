@@ -27,9 +27,11 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     protected Timer timerMet;
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
-    
+    public int totM=0;      //totale di meteoriti spawnati
     public Timer timerGame;
     private int tGioco=0;
+    
+    
     
     //Variabili per la navicella
     private Spaceship spaceship;
@@ -75,10 +77,12 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
                 add(meteoriti);
                 revalidate();
                 repaintCenter();
-                
+                totM++;
             }
         });
         timerMet.start();
+        
+        
         
         
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -100,7 +104,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
             public void actionPerformed(ActionEvent evt) 
             {
                tGioco++;
-               //System.out.println(tGioco);
             }                    
         });
         timerGame.start();
@@ -119,6 +122,12 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     {
         timerMet.stop();
         timerGame.stop();
+    }
+    
+    
+    public int getTotM()
+    {
+        return totM;
     }
 }
 
