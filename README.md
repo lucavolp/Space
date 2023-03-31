@@ -15,6 +15,20 @@ classe navicella deve estendere Jpanel e non label, e crearci dentro la label na
 
 meteoriti in un array, almeno ne salva 10.
 
+roba che cambia il tasto pausa/resume cambiando il nome del pulsante e usando la variabile booleana.
+
+collisioni con la posizione se jaco non si muove a mandarci il file da 2 settimane. 
 
 
+
+
+
+
+
+
+
+
+
+quando (e se) funzionerà 
+ 
 
