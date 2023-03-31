@@ -16,10 +16,10 @@ public class MyPanelScore extends JPanel
 {
     private MyPanelGioco pannelloGioco;
     private JLabel punteggio;
-    private int dimY;
     private MyPanelGioco p2;
-    private String tUpdate="1";
-    
+    private Timer tUpPunti;     //timer di update dei punti
+    private long pt;
+    private int tUpdate;        //ms di aggiornamento e aggiunta punti
     private Timer update;
     
     public MyPanelScore(MyPanelGioco p2)
@@ -34,18 +34,19 @@ public class MyPanelScore extends JPanel
         add(punteggio);
         
         
-        //TIMER AGGIORNA PUNTI 1/s
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() 
+        //TIMER AGGIORNA PUNTI .5/s
+        tUpPunti = new Timer();
+        tUpPunti.schedule(new TimerTask() 
         {
             public void run() {
                 aggPunti();
             }
-        }, 0, 1000);
+        }, 0, 500);
     }
         
     public void aggPunti()
     {
-        punteggio.setText(p2.getTotM()+"");
+        pt++;
+        punteggio.setText((p2.getTotM()+pt)+"");
     }
 }

@@ -29,12 +29,9 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     //si ti ho copiato le freccette perché sono carine
     public int totM=0;      //totale di meteoriti spawnati
     public Timer timerGame;
-    private int tGioco=0;
-    
-    
-    
+        
     //Variabili per la navicella
-    private Spaceship spaceship;
+    public Spaceship spaceship;
     private JLabel spaceshipLabel;
     private int spaceshipX, spaceshipY;
     private int spaceshipSpeed;
@@ -89,24 +86,16 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         
 
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        //pluto= new JLabel("Spaceship");
-        //add(pluto);
+        
+        /*
         spaceship = new Spaceship();
-        this.add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
-        //set();
+        add(spaceship);
         spaceship.setFocusable(true);
+        */
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
         
-        //TIMER DI GIOCO
-        timerGame = new Timer(1000, new ActionListener() 
-        {
-            public void actionPerformed(ActionEvent evt) 
-            {
-               tGioco++;
-            }                    
-        });
-        timerGame.start();
+        
     }
     
     public void repaintCenter() 

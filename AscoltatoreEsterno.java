@@ -24,10 +24,10 @@ public class AscoltatoreEsterno implements ActionListener
         panelMenu = p4;*/
     }
     
-    public AscoltatoreEsterno(){}
+    public AscoltatoreEsterno(){}   //costruttore vuoto normale
     
-    public AscoltatoreEsterno(MyPanel p, MyPanelGioco pg, MyPanelScore ps, MyPanelMenu pm)
-    { //usato dal MyPanelMenu
+    public AscoltatoreEsterno(MyPanel p, MyPanelGioco pg, MyPanelScore ps, MyPanelMenu pm)  //usato dal MyPanelMenu
+    { 
         this.p = p;
         panelGioco = pg;
         panelScore = ps;
@@ -123,9 +123,13 @@ public class AscoltatoreEsterno implements ActionListener
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
         
+        
+        panelGioco.spaceship = new Spaceship();
+        f.add(panelGioco.spaceship, BorderLayout.PAGE_END);
+        panelGioco.spaceship.setFocusable(true);
+        
         f.revalidate();
         f.repaint();
-        panelGioco.timerGame.start();
         panelGioco.timerMet.start();
     }
 }

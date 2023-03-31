@@ -13,7 +13,7 @@ import java.io.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Spaceship extends JLabel
+public class Spaceship extends JPanel
 {
     private Point labelLocation; 
     private Timer timer;
@@ -28,28 +28,33 @@ public class Spaceship extends JLabel
     private Image sps;
     private int incr = 5;    
     private int msecInVel=10000;
+    private int saveX;
+    private int saveY;
+    
+    private JLabel imm;
     
     public Spaceship() 
     {
-        this.setLocation(posX, posY);
+        //this.setLocation(posX, posY);
         setPosizioneGenerazione();
-        
+        imm=new JLabel();
         
         
         //Inserimento e ridimensionamento dell'immagine
         try
         {
-            BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.jpg"));
-            sps = bufferedImage.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
+            BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.png"));
+            sps = bufferedImage.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
         }catch(IOException e) 
         { 
           e.printStackTrace();
         }
         
-        this.setIcon(new ImageIcon(sps));
+        imm.setIcon(new ImageIcon(sps));
         
+        add(imm);
+        imm.setLocation(posX, posY);
         
-        this.setLocation(posX, posY);
         //timer di frequenza di ascolto degli input
         timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent e) 
@@ -67,20 +72,20 @@ public class Spaceship extends JLabel
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_LEFT) {
                     spaceshipSpeed = -(incr);
-                    //System.out.println("Sinistra");     //DEBUG
+                    System.out.println("Sinistra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
                     move();
-                    setBounds(posX, posY,80,80);
-                    //saveX=posX;
-                    //saveY=posY;
+                    imm.setLocation(posX, posY);
+                    saveX=posX;
+                    saveY=posY;
                 } else if (keyCode == KeyEvent.VK_RIGHT) {
                     spaceshipSpeed = incr;
-                    //System.out.println("Destra");     //DEBUG
+                    System.out.println("Destra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
                     move();
-                    setLocation(posX, posY);
-                    //saveX=posX;
-                    //=posY;
+                    imm.setLocation(posX, posY);
+                    saveX=posX;
+                    saveY=posY;
                 } else if (keyCode == KeyEvent.VK_UP) {
                     //List<Projectile> projectiles = new ArrayList<Projectile>();       //chatgpt dice di fare così e con la classe in piu
                 }
@@ -105,7 +110,7 @@ public class Spaceship extends JLabel
         dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende la larghezza dello schermo
         
         posX=(dimX/2)-40;  //posiziona partenza al centro dello schermo
-        posY=dimY-200; //posiziona un po' staccata dal fondo
+        posY=dimY; //posiziona un po' staccata dal fondo
         
     }
     
@@ -133,6 +138,10 @@ public class Spaceship extends JLabel
         timer2.start();
     }
     
+    public void riposiziona()
+    {
+        setLocation(saveX, saveY);
+    }
 }
     
     

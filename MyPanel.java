@@ -34,7 +34,7 @@ public class MyPanel extends JPanel //implements ActionListener
         add(lillo);
         change = new JButton("New Game");
         change.addActionListener(as);
-        add(change); //cambiamento
+        add(change); //passa di là
         chiudi = new JButton("Chiudi");
         chiudi.addActionListener(as);
         add(chiudi);
