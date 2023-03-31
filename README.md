@@ -29,4 +29,6 @@ rimettere la roba del saveX appena repainta
 
 quando (e se) funzionerà 
  
+highscore 
+highscore a persona
 
