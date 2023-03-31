@@ -106,7 +106,11 @@ public class MyPanelMenu extends JPanel
             tSec=0;
             tMin++;
         }
-        timer.setText("Tempo di Gioco: "+tMin+":"+tSec);
+        if(tSec>9)
+            timer.setText("Tempo di Gioco: "+tMin+":"+tSec);
+        else
+            timer.setText("Tempo di Gioco: "+tMin+":0"+tSec);
+            
     }
 }
 

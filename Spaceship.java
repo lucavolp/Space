@@ -13,13 +13,16 @@ import java.io.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Spaceship extends JPanel
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class Spaceship extends JPanel implements KeyListener
 {
     private Point labelLocation; 
     private Timer timer;
     private Timer timer2;
-    private int posY= 0;   //posizione Y attuale spaceship
-    private int posX= 0;   //posizione X attuale spaceship 
+    public int posY= 0;   //posizione Y attuale spaceship
+    public int posX= 0;   //posizione X attuale spaceship 
     private int spaceshipSpeed = 0;
     private int dimX;   //dimensione X schermo
     private int dimY;   //dimensione Y schermo
@@ -39,7 +42,6 @@ public class Spaceship extends JPanel
         setPosizioneGenerazione();
         imm=new JLabel();
         
-        
         //Inserimento e ridimensionamento dell'immagine
         try
         {
@@ -55,10 +57,14 @@ public class Spaceship extends JPanel
         add(imm);
         imm.setLocation(posX, posY);
         
+        
+        
+        /*
         //timer di frequenza di ascolto degli input
-        timer = new Timer(1, new ActionListener() {
+        timer = new Timer(10, new ActionListener()
+        {
             public void actionPerformed(ActionEvent e) 
-            {
+            {  
             }            
         });
         timer.start();
@@ -68,9 +74,11 @@ public class Spaceship extends JPanel
         
         
         addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(KeyEvent e) 
+            {
                 int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_LEFT) {
+                if (keyCode == KeyEvent.VK_LEFT) 
+                {
                     spaceshipSpeed = -(incr);
                     System.out.println("Sinistra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
@@ -78,7 +86,8 @@ public class Spaceship extends JPanel
                     imm.setLocation(posX, posY);
                     saveX=posX;
                     saveY=posY;
-                } else if (keyCode == KeyEvent.VK_RIGHT) {
+                } else if (keyCode == KeyEvent.VK_RIGHT) 
+                {
                     spaceshipSpeed = incr;
                     System.out.println("Destra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
@@ -87,8 +96,9 @@ public class Spaceship extends JPanel
                     saveX=posX;
                     saveY=posY;
                 } else if (keyCode == KeyEvent.VK_UP) {
-                    //List<Projectile> projectiles = new ArrayList<Projectile>();       //chatgpt dice di fare così e con la classe in piu
+                    //Projectile projectiles = new Projectile(posX,posY,15);       //chatgpt dice di fare così e con la classe in piu
                 }
+                System.out.println("Destra"); 
             }
 
             public void keyReleased(KeyEvent e) {
@@ -98,8 +108,11 @@ public class Spaceship extends JPanel
                 }
             }
         });
+        //this.setFocusable(true);
+        */
+       
         this.setFocusable(true);
-        
+        this.addKeyListener(this);  
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
@@ -141,6 +154,35 @@ public class Spaceship extends JPanel
     public void riposiziona()
     {
         setLocation(saveX, saveY);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+     public void keyTyped(KeyEvent e) {
+        // Not used in this example
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            System.out.println("Up arrow key pressed");
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            System.out.println("Down arrow key pressed");
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.println("Left arrow key pressed");
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            System.out.println("Right arrow key pressed");
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Not used in this example
     }
 }
     

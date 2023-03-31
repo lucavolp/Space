@@ -9,12 +9,15 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+
 public class AscoltatoreEsterno implements ActionListener
 {
     private MyPanel p;
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
+    
+    //Eeeeeeeeeeeeeeeee basta io ci rinuncio
     
     public AscoltatoreEsterno(MyPanel p)//Viene usato dalla pagina principale
     {
@@ -59,7 +62,7 @@ public class AscoltatoreEsterno implements ActionListener
         {
             panelMenu.resume.setEnabled(false);
             panelMenu.pause.setEnabled(true);
-            panelGioco.timerGame.start();
+            //panelGioco.timerGame.start();
             panelGioco.timerMet.start();
             panelGioco.meteoriti.startTimer();
         }
@@ -104,7 +107,6 @@ public class AscoltatoreEsterno implements ActionListener
         container.add(p);
         container.revalidate();
         container.repaint();
-
     }
     
     public void avviaGioco() //La funzione che ti dicevo che crea la nuova finestra quando si preme new game
@@ -127,6 +129,8 @@ public class AscoltatoreEsterno implements ActionListener
         panelGioco.spaceship = new Spaceship();
         f.add(panelGioco.spaceship, BorderLayout.PAGE_END);
         panelGioco.spaceship.setFocusable(true);
+        panelGioco.setFocusable(true);
+        
         
         f.revalidate();
         f.repaint();

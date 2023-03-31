@@ -29,7 +29,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     //si ti ho copiato le freccette perché sono carine
     public int totM=0;      //totale di meteoriti spawnati
     public Timer timerGame;
-        
+    
     //Variabili per la navicella
     public Spaceship spaceship;
     private JLabel spaceshipLabel;
@@ -110,7 +110,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     public void stopTimer()
     {
         timerMet.stop();
-        timerGame.stop();
+        //timerGame.stop();
     }
     
     
