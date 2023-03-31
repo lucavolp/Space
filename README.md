@@ -19,9 +19,7 @@ roba che cambia il tasto pausa/resume cambiando il nome del pulsante e usando la
 
 collisioni con la posizione se jaco non si muove a mandarci il file da 2 settimane. 
 
-
-
-
+rimettere la roba del saveX appena repainta
 
 
 
