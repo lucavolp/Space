@@ -44,6 +44,8 @@ public class Spaceship extends JPanel implements KeyListener
         imm=new JLabel();
         
         
+        //setLayout(null);
+        
         
         //Inserimento e ridimensionamento dell'immagine
         try
@@ -133,7 +135,7 @@ public class Spaceship extends JPanel implements KeyListener
         
     }
     
-    private void move()
+    private void move()    //fa fare l'azione di movimento solo se si è all'interno dei 
     {
         if((posX>0)&&(posX<dimX-80))
             posX+=spaceshipSpeed;
@@ -142,8 +144,7 @@ public class Spaceship extends JPanel implements KeyListener
         else if((spaceshipSpeed>0)&&(posX==0))
             posX+=spaceshipSpeed;            
     }
-    
-    //ogni secInVel aumenta la velocità di movimento [incr] di 1 (aumenta la fluidità in accordo con più meteoriti spawnati)
+
     private void incrVelocita()
     {
         timer2 = new Timer(msecInVel, new ActionListener() 
@@ -164,33 +165,42 @@ public class Spaceship extends JPanel implements KeyListener
     
     
     
-    
-    
-    
-    
-    
      public void keyTyped(KeyEvent e) {
-        // Not used in this example
+        imm.setBounds(0,0,80,80);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.println("Up arrow key pressed");
+            System.out.println("Freccia su");
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            System.out.println("Down arrow key pressed");
+            System.out.println("Freccia Giu");
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.println("Left arrow key pressed");
+            spaceshipSpeed = -(incr);
+            //System.out.println("Sinistra");     //DEBUG
+            spaceshipX += spaceshipSpeed;
+            move();
+            imm.setBounds(posX, posY,100,100);
+            saveX=posX;
+            saveY=posY;
+            //imm.setBounds(0,0,80,80);
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.println("Right arrow key pressed");
+            spaceshipSpeed = incr;
+            //System.out.println("Destra");     //DEBUG
+            spaceshipX += spaceshipSpeed;
+            move();
+            imm.setBounds(posX, posY,100,100);
+            saveX=posX;
+            saveY=posY;
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        // Not used in this example
+    public void keyReleased(KeyEvent e) 
+    {
+        int keyCode = e.getKeyCode();
+            spaceshipSpeed = 0;        
     }
 }
-    
     
 
