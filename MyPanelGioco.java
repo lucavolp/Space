@@ -11,6 +11,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
 
 public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e non quando si clicca avvio
 {
@@ -23,16 +25,21 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     private int velocitaMeteoriti;
     private int velocitaSpawn;
     protected Random rand = new Random();
-    protected Meteoriti meteoriti;
+    //protected Meteoriti meteoriti;
     protected Timer timerMet;
+    
+    //prove
+    private List<Meteoriti> meteoritis;
+    private Thread mainThread;
+    
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     
+    public int totM=0;      //totale di meteoriti spawnati
     public Timer timerGame;
-    private int tGioco=0;
     
     //Variabili per la navicella
-    private Spaceship spaceship;
+    public Spaceship spaceship;
     private JLabel spaceshipLabel;
     private int spaceshipX, spaceshipY;
     private int spaceshipSpeed;
@@ -46,66 +53,62 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     public MyPanelGioco() 
     {
         super();
-        //SENZA LAYOUT SEMBRA CHE ALCUNI METEORITI RIMANGONO E NON ELIMINA LE LABEL
-        
-        
-        /*setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        as= new AscoltatoreEsterno();
-        pippo= new JLabel("Panel 2");
-        add(pippo);*/
-        
-        /**
-         * ogni volta che si invoca il repaint() dei meteoriti la spaceship viene visualizzata al centro fino all'input dopo
-        **/
-        
-        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        //pluto= new JLabel("Spaceship");
-        //add(pluto);
-        spaceship = new Spaceship();
-        this.add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
-        //set();
-        spaceship.setFocusable(true);
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        
         
         
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv        
         velocitaMeteoriti = 7;
         velocitaSpawn = 2000;
         
-        // Crea un timer che genera un nuovo oggetto Meteoriti ogni x secondi
+        //test
+        meteoritis = new ArrayList<Meteoriti>();
+        //Tutto il resto del codice (creazione e aggiunta) lo gestisce nel metodo run()
+                
+        /*// Crea un timer che genera un nuovo oggetto Meteoriti ogni x secondi
         timerMet = new Timer(velocitaSpawn, new ActionListener()
         {
             public void actionPerformed(ActionEvent evt) 
             {
-                meteoriti = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
-                //add(meteoriti, gbc); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2 
-                add(meteoriti);
-                //revalidate();
+                Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
+                add(meteorite); //lo aggiunge al pannello
+                meteoritis.add(meteorite); //lo aggiunge alla lista
+                revalidate();
                 repaintCenter();
-                
+                totM++;
             }
         });
-        timerMet.start();
-        
-        
+        timerMet.start();*/
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
-
         
-        //TIMER DI GIOCO
-        timerGame = new Timer(1000, new ActionListener() 
+        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+        /*spaceship = new Spaceship();
+        add(spaceship);
+        spaceship.setFocusable(true);*/
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+        mainThread = new Thread(this);
+        mainThread.start();
+    }
+    
+    public void run()
+    {
+        while(true)
         {
-            public void actionPerformed(ActionEvent evt) 
-            {
-               tGioco++;
-               //System.out.println(tGioco);
-            }                    
-        });
-        timerGame.start();
+            Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
+            add(meteorite); //lo aggiunge al pannello
+            meteoritis.add(meteorite); //lo aggiunge alla lista
+            revalidate();
+            
+            repaint();
+            
+            System.out.println("Ho eseguito un ciclo");
+            try {
+                Thread.sleep(50); //ferma il thread ogni 10millisecondi, intervallo di ascolto
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+        }
     }
     
     public void repaintCenter() 
@@ -119,8 +122,14 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     
     public void stopTimer()
     {
-        timerMet.stop();
-        timerGame.stop();
+        //timerMet.stop();
+        //timerGame.stop();
+    }
+    
+    
+    public int getTotM()
+    {
+        return totM;
     }
 }
 

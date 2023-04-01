@@ -13,13 +13,16 @@ import java.io.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Spaceship extends JLabel
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class Spaceship extends JPanel implements KeyListener
 {
     private Point labelLocation; 
     private Timer timer;
     private Timer timer2;
-    private int posY= 0;   //posizione Y attuale spaceship
-    private int posX= 0;   //posizione X attuale spaceship 
+    public int posY= 0;   //posizione Y attuale spaceship
+    public int posX= 0;   //posizione X attuale spaceship 
     private int spaceshipSpeed = 0;
     private int dimX;   //dimensione X schermo
     private int dimY;   //dimensione Y schermo
@@ -28,32 +31,45 @@ public class Spaceship extends JLabel
     private Image sps;
     private int incr = 5;    
     private int msecInVel=10000;
+    private int saveX;
+    private int saveY;
+    
+    private JLabel imm;
     
     public Spaceship() 
     {
-        this.setLocation(posX, posY);
+        //this.setLocation(posX, posY);
+        super();
         setPosizioneGenerazione();
-        this.setLocation(posX, posY);
+        imm=new JLabel();
+        
+        
+        //setLayout(null);
         
         
         //Inserimento e ridimensionamento dell'immagine
         try
         {
-            BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.jpg"));
-            sps = bufferedImage.getScaledInstance(80, 80, Image.SCALE_DEFAULT);
+            BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.png"));
+            sps = bufferedImage.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
         }catch(IOException e) 
         { 
           e.printStackTrace();
         }
         
-        this.setIcon(new ImageIcon(sps));
+        imm.setIcon(new ImageIcon(sps));
+        
+        add(imm);
+        imm.setLocation(posX, posY);
         
         
         
+        /*
         //timer di frequenza di ascolto degli input
-        timer = new Timer(1, new ActionListener() {
+        timer = new Timer(10, new ActionListener()
+        {
             public void actionPerformed(ActionEvent e) 
-            {
+            {  
             }            
         });
         timer.start();
@@ -63,27 +79,31 @@ public class Spaceship extends JLabel
         
         
         addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
+            public void keyPressed(KeyEvent e) 
+            {
                 int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_LEFT) {
+                if (keyCode == KeyEvent.VK_LEFT) 
+                {
                     spaceshipSpeed = -(incr);
-                    //System.out.println("Sinistra");     //DEBUG
+                    System.out.println("Sinistra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
                     move();
-                    setBounds(posX, posY,80,80);
-                    //saveX=posX;
-                    //saveY=posY;
-                } else if (keyCode == KeyEvent.VK_RIGHT) {
+                    imm.setLocation(posX, posY);
+                    saveX=posX;
+                    saveY=posY;
+                } else if (keyCode == KeyEvent.VK_RIGHT) 
+                {
                     spaceshipSpeed = incr;
-                    //System.out.println("Destra");     //DEBUG
+                    System.out.println("Destra");     //DEBUG
                     spaceshipX += spaceshipSpeed;
                     move();
-                    setLocation(posX, posY);
-                    //saveX=posX;
-                    //=posY;
+                    imm.setLocation(posX, posY);
+                    saveX=posX;
+                    saveY=posY;
                 } else if (keyCode == KeyEvent.VK_UP) {
-                    //List<Projectile> projectiles = new ArrayList<Projectile>();       //chatgpt dice di fare così e con la classe in piu
+                    //Projectile projectiles = new Projectile(posX,posY,15);       //chatgpt dice di fare così e con la classe in piu
                 }
+                System.out.println("Destra"); 
             }
 
             public void keyReleased(KeyEvent e) {
@@ -93,7 +113,13 @@ public class Spaceship extends JLabel
                 }
             }
         });
+        //this.setFocusable(true);
+        */
+       
         this.setFocusable(true);
+
+
+        this.addKeyListener(this); 
         
     }
     
@@ -105,11 +131,11 @@ public class Spaceship extends JLabel
         dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende la larghezza dello schermo
         
         posX=(dimX/2)-40;  //posiziona partenza al centro dello schermo
-        posY=dimY-200; //posiziona un po' staccata dal fondo
+        posY=dimY; //posiziona un po' staccata dal fondo
         
     }
     
-    private void move()
+    private void move()    //fa fare l'azione di movimento solo se si è all'interno dei 
     {
         if((posX>0)&&(posX<dimX-80))
             posX+=spaceshipSpeed;
@@ -118,8 +144,7 @@ public class Spaceship extends JLabel
         else if((spaceshipSpeed>0)&&(posX==0))
             posX+=spaceshipSpeed;            
     }
-    
-    //ogni secInVel aumenta la velocità di movimento [incr] di 1 (aumenta la fluidità in accordo con più meteoriti spawnati)
+
     private void incrVelocita()
     {
         timer2 = new Timer(msecInVel, new ActionListener() 
@@ -133,7 +158,49 @@ public class Spaceship extends JLabel
         timer2.start();
     }
     
-}
+    public void riposiziona()
+    {
+        setLocation(saveX, saveY);
+    }
     
+    
+    
+     public void keyTyped(KeyEvent e) {
+        imm.setBounds(0,0,80,80);
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            System.out.println("Freccia su");
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            System.out.println("Freccia Giu");
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            spaceshipSpeed = -(incr);
+            //System.out.println("Sinistra");     //DEBUG
+            spaceshipX += spaceshipSpeed;
+            move();
+            imm.setBounds(posX, posY,100,100);
+            saveX=posX;
+            saveY=posY;
+            //imm.setBounds(0,0,80,80);
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            spaceshipSpeed = incr;
+            //System.out.println("Destra");     //DEBUG
+            spaceshipX += spaceshipSpeed;
+            move();
+            imm.setBounds(posX, posY,100,100);
+            saveX=posX;
+            saveY=posY;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) 
+    {
+        int keyCode = e.getKeyCode();
+            spaceshipSpeed = 0;        
+    }
+}
     
 

@@ -2,7 +2,7 @@
  * Aggiungi qui una descrizione della classe Test
  * 
  * @author (Battistelli Kevin - Volpinari Luca)
- * @version (1.0) / ormai troppe
+ * @version (1.0)
 */
 
 import java.awt.geom.Point2D;
@@ -17,6 +17,7 @@ public class Projectile {
         this.position = new Point2D.Double(x, y);
         this.velocity = velocity;
         this.bounds = new Rectangle2D.Double(x, y, 5, 5); // set the bounds of the projectile
+        
     }
 
     public void move() {

@@ -44,10 +44,6 @@ public class MyPanel2 extends JPanel
         gbc.gridy = 0;
         
         
-        
-        /**
-         * ogni volta che si invoca il repaint() dei meteoriti la spaceship viene visualizzata al centro fino all'input dopo
-        **/
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 7;
         velocitaSpawn = 2000;

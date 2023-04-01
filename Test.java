@@ -15,11 +15,10 @@ public class Test
         MyFrame frame = new MyFrame("Space"); 
         Container c = frame.getContentPane();
         
-        
-        
         MyPanel p = new MyPanel();
         
         c.add(p);
         frame.setVisible(true);   
+        
     }   
 }

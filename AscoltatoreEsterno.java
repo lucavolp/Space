@@ -9,12 +9,16 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+
 public class AscoltatoreEsterno implements ActionListener
 {
     private MyPanel p;
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
+    private Spaceship spaceship;
+    
+    //Eeeeeeeeeeeeeeeee basta io ci rinuncio
     
     public AscoltatoreEsterno(MyPanel p)//Viene usato dalla pagina principale
     {
@@ -24,10 +28,10 @@ public class AscoltatoreEsterno implements ActionListener
         panelMenu = p4;*/
     }
     
-    public AscoltatoreEsterno(){}
+    public AscoltatoreEsterno(){}   //costruttore vuoto normale
     
-    public AscoltatoreEsterno(MyPanel p, MyPanelGioco pg, MyPanelScore ps, MyPanelMenu pm)
-    { //usato dal MyPanelMenu
+    public AscoltatoreEsterno(MyPanel p, MyPanelGioco pg, MyPanelScore ps, MyPanelMenu pm)  //usato dal MyPanelMenu
+    { 
         this.p = p;
         panelGioco = pg;
         panelScore = ps;
@@ -51,7 +55,7 @@ public class AscoltatoreEsterno implements ActionListener
         if(e.getActionCommand().equals("Pausa"))
         {
             panelGioco.stopTimer();
-            panelGioco.meteoriti.stopTimer();
+            //panelGioco.meteoriti.stopTimer();
             //panelMenu.pause.(false);
             //System.out.println("Ho premuto il bottone");
         }
@@ -59,9 +63,9 @@ public class AscoltatoreEsterno implements ActionListener
         {
             panelMenu.resume.setEnabled(false);
             panelMenu.pause.setEnabled(true);
-            panelGioco.timerGame.start();
+            //panelGioco.timerGame.start();
             panelGioco.timerMet.start();
-            panelGioco.meteoriti.startTimer();
+            //panelGioco.meteoriti.startTimer();
         }
         if(e.getActionCommand().equals("Restart"))
         {
@@ -70,42 +74,20 @@ public class AscoltatoreEsterno implements ActionListener
         if(e.getActionCommand().equals("Torna al menù principale"))
         {
             backHome();            
-            //PER QUALCHE MOTIVO NON ENTRA QUI E TRA UN PO LANCIO IL PORTATILE IN TESTA A FABIO E STEFNAO AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         }
-    }
-    
-    //Cambia pannello e lo switcha a quello contenente il gioco
-    /*public void change()
-    {
-        Container f = p.getParent();
-        //Rimouve il pannello contenente il menù principale
-        f.remove(p);
-        //Imposta il layout per aggiungere i 3 pannelli
-        f.setLayout(new BorderLayout());
-        //Aggiunge i 3 pannelli
-        f.add(panelGioco, BorderLayout.CENTER);
-        f.add(panelMenu, BorderLayout.EAST);
-        f.add(panelScore, BorderLayout.WEST);
-        
-        f.revalidate();
-        f.repaint();
-        panelGioco.timerGame.start();
-        panelGioco.timerMet.start();
-    }*/
-    
+    }    
     
     public void backHome() //Funziona e consente di tornare al pannello principale
     {
         Container container = panelGioco.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
         container.removeAll();
-        panelGioco.stopTimer(); //dato che non li elimina richiama il metodo stopTimer() almeno smette di generare robe e contare punti
+        //panelGioco.stopTimer(); //dato che non li elimina richiama il metodo stopTimer() almeno smette di generare robe e contare punti
         panelGioco = null; //dovrebbe eliminare i pannelli però non li elimina haha siummm
         panelScore = null;
         panelMenu = null;
         container.add(p);
         container.revalidate();
         container.repaint();
-
     }
     
     public void avviaGioco() //La funzione che ti dicevo che crea la nuova finestra quando si preme new game
@@ -113,6 +95,7 @@ public class AscoltatoreEsterno implements ActionListener
         panelGioco = new MyPanelGioco();
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
+        spaceship = new Spaceship();
         
         Container f = p.getParent();
         //Rimouve il pannello contenente il menù principale
@@ -124,9 +107,19 @@ public class AscoltatoreEsterno implements ActionListener
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
         
+        
+
+        f.add(spaceship, BorderLayout.PAGE_END);
+        
+        spaceship.setFocusable(true);
+        spaceship.grabFocus();
+        if(spaceship.isFocusOwner())
+            System.out.println("focus");
+
+        
+        
         f.revalidate();
         f.repaint();
-        panelGioco.timerGame.start();
-        panelGioco.timerMet.start();
+        //panelGioco.timerMet.start();
     }
 }
