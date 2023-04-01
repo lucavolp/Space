@@ -198,11 +198,8 @@ public class Spaceship extends JPanel implements KeyListener
     @Override
     public void keyReleased(KeyEvent e) 
     {
-        /*int keyCode = e.getKeyCode();
-        if (keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT) {
-            spaceshipSpeed = 0;
-        }*/
-    
+        int keyCode = e.getKeyCode();
+            spaceshipSpeed = 0;        
     }
 }
     
