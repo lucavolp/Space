@@ -17,6 +17,7 @@ public class Projectile {
         this.position = new Point2D.Double(x, y);
         this.velocity = velocity;
         this.bounds = new Rectangle2D.Double(x, y, 5, 5); // set the bounds of the projectile
+        
     }
 
     public void move() {
