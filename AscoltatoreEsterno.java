@@ -55,7 +55,7 @@ public class AscoltatoreEsterno implements ActionListener
         if(e.getActionCommand().equals("Pausa"))
         {
             panelGioco.stopTimer();
-            panelGioco.meteoriti.stopTimer();
+            //panelGioco.meteoriti.stopTimer();
             //panelMenu.pause.(false);
             //System.out.println("Ho premuto il bottone");
         }
@@ -65,7 +65,7 @@ public class AscoltatoreEsterno implements ActionListener
             panelMenu.pause.setEnabled(true);
             //panelGioco.timerGame.start();
             panelGioco.timerMet.start();
-            panelGioco.meteoriti.startTimer();
+            //panelGioco.meteoriti.startTimer();
         }
         if(e.getActionCommand().equals("Restart"))
         {

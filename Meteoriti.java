@@ -20,13 +20,17 @@ public class Meteoriti extends JLabel implements ActionListener
     private int deltaY;//DeltaY è la velocità con cui scende il meteorite
     private int posGenerazione;
     private int posX;
-    
     private Image met;
+
+    //private JLabel lblMeteorite;
+    Thread thread;
     
-    public Meteoriti(int pos, int deltaY) 
+    public Meteoriti(int pos, int deltaY) //Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
         setPosizioneGenerazione(pos);
         setDeltaY(deltaY);
+        
+        //lblMeteorite = new JLabel();
         
         //Inserimento e ridimensionamento dell'immagine
         try
@@ -43,6 +47,32 @@ public class Meteoriti extends JLabel implements ActionListener
 
         timer = new Timer(10, this);
         timer.start();
+        
+        thread = new Thread("Meteorite");
+        thread.start();
+        
+    }
+    //Fare un ciclo che scorre tutta la lista e ogni volta chiamare il metodo move() (dentro il metodo run nella classe primaria)
+    //Label = getMeteorite() per ogni elemento così aggiorna il meteorite
+    
+    public void run()
+    {}
+    public void actionPerformed(ActionEvent evt) //richiamato ogni volta che il Timer si annulla
+    {
+        y += deltaY;
+        labelLocation = this.getLocation();//Prende la posizione della Label
+        
+        this.setLocation(posGenerazione, y);
+        
+        if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height) //Controlla se la Label contenente il meteorite è andata fuori dallo schermo
+        {
+            Container parent = getParent(); //ottieni il pannello genitore
+            parent.remove(this); //rimuovi il componente dal pannello
+            parent.revalidate(); // Aggiorna il pannello per mostrare le modifiche
+            parent.repaint();    // Ridisegna il pannello per mostrare le modifiche
+            timer.stop();   //Ferma il timer così smette di eseguire il codice
+        }
+        
     }
     
     private void setPosizioneGenerazione(int pos)//Gestisce lo spawn del meteorite e lo divide nello schermo
@@ -85,43 +115,21 @@ public class Meteoriti extends JLabel implements ActionListener
                 break;
         }
     }
-
+    
+    
     private void setDeltaY(int d){
         deltaY= d;
     }
     
-    public void actionPerformed(ActionEvent evt) 
-    {
-        y += deltaY;
-        labelLocation = this.getLocation();//Prende la posizione della Label
-        
-        this.setLocation(posGenerazione, y);
-        Dimension dimensione = getSize(); // Ottenere la dimensione del pannello
-        int altezza = dimensione.height;
-        
-        if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height) //Controlla se la Label contenente il meteorite è andata fuori dallo schermo
-        {
-            Container parent = getParent(); //ottieni il pannello genitore
-            parent.remove(this); //rimuovi il componente dal pannello
-            //parent.revalidate(); // Aggiorna il pannello per mostrare le modifiche
-            //parent.repaint();    // Ridisegna il pannello per mostrare le modifiche
-            timer.stop();   //Ferma il timer così smette di eseguire il codice
-        }
-        
-    }
-    
-    public int getDimCol()
-    {
+    public int getDimCol(){
         return posX; 
     }
     
-    public void stopTimer()
-    {
+    public void stopTimer(){
         timer.stop();
     }
     
-    public void startTimer()
-    {
+    public void startTimer(){
         timer.start();
     }
 }

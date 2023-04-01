@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.Random;
 import java.util.List;
+import java.util.ArrayList;
 
 public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e non quando si clicca avvio
 {
@@ -24,13 +25,16 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     private int velocitaMeteoriti;
     private int velocitaSpawn;
     protected Random rand = new Random();
-    protected Meteoriti meteoriti;
+    //protected Meteoriti meteoriti;
     protected Timer timerMet;
     
     //prove
-    //private List<Meteoriti> meteoriti;
+    private List<Meteoriti> meteoritis;
+    
+    
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
+    
     public int totM=0;      //totale di meteoriti spawnati
     public Timer timerGame;
     
@@ -58,14 +62,17 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         velocitaMeteoriti = 7;
         velocitaSpawn = 2000;
         
+        //test
+        meteoritis = new ArrayList<Meteoriti>();
+        
         // Crea un timer che genera un nuovo oggetto Meteoriti ogni x secondi
         timerMet = new Timer(velocitaSpawn, new ActionListener()
         {
             public void actionPerformed(ActionEvent evt) 
             {
-                meteoriti = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
-                //add(meteoriti, gbc); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2 
-                add(meteoriti);
+                Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
+                add(meteorite); //lo aggiunge al pannello
+                meteoritis.add(meteorite); //lo aggiunge alla lista
                 revalidate();
                 repaintCenter();
                 totM++;
