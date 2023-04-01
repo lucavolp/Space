@@ -74,27 +74,7 @@ public class AscoltatoreEsterno implements ActionListener
         {
             backHome();            
         }
-    }
-    
-    //Cambia pannello e lo switcha a quello contenente il gioco
-    /*public void change()
-    {
-        Container f = p.getParent();
-        //Rimouve il pannello contenente il menù principale
-        f.remove(p);
-        //Imposta il layout per aggiungere i 3 pannelli
-        f.setLayout(new BorderLayout());
-        //Aggiunge i 3 pannelli
-        f.add(panelGioco, BorderLayout.CENTER);
-        f.add(panelMenu, BorderLayout.EAST);
-        f.add(panelScore, BorderLayout.WEST);
-        
-        f.revalidate();
-        f.repaint();
-        panelGioco.timerGame.start();
-        panelGioco.timerMet.start();
-    }*/
-    
+    }    
     
     public void backHome() //Funziona e consente di tornare al pannello principale
     {
@@ -128,7 +108,7 @@ public class AscoltatoreEsterno implements ActionListener
         
         panelGioco.spaceship = new Spaceship();
         f.add(panelGioco.spaceship, BorderLayout.PAGE_END);
-        panelGioco.spaceship.setFocusable(true);
+        //panelGioco.spaceship.setFocusable(true);
         panelGioco.setFocusable(true);
         
         

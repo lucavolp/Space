@@ -113,6 +113,8 @@ public class Spaceship extends JPanel implements KeyListener
        
         this.setFocusable(true);
         this.addKeyListener(this);  
+        if(isFocusOwner())
+            System.out.println("È Focussato");
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
