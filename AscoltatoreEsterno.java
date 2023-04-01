@@ -16,6 +16,7 @@ public class AscoltatoreEsterno implements ActionListener
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
+    private Spaceship spaceship;
     
     //Eeeeeeeeeeeeeeeee basta io ci rinuncio
     
@@ -114,6 +115,7 @@ public class AscoltatoreEsterno implements ActionListener
         panelGioco = new MyPanelGioco();
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
+        spaceship = new Spaceship();
         
         Container f = p.getParent();
         //Rimouve il pannello contenente il menù principale
@@ -126,10 +128,12 @@ public class AscoltatoreEsterno implements ActionListener
         f.add(panelScore, BorderLayout.WEST);
         
         
-        panelGioco.spaceship = new Spaceship();
-        f.add(panelGioco.spaceship, BorderLayout.PAGE_END);
-        panelGioco.spaceship.setFocusable(true);
-        panelGioco.setFocusable(true);
+        f.add(spaceship, BorderLayout.PAGE_END);
+        
+        spaceship.setFocusable(true);
+        spaceship.grabFocus();
+        if(spaceship.isFocusOwner())
+            System.out.println("focus");
         
         
         f.revalidate();

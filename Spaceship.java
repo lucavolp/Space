@@ -39,8 +39,11 @@ public class Spaceship extends JPanel implements KeyListener
     public Spaceship() 
     {
         //this.setLocation(posX, posY);
+        super();
         setPosizioneGenerazione();
         imm=new JLabel();
+        
+        
         
         //Inserimento e ridimensionamento dell'immagine
         try
@@ -112,7 +115,8 @@ public class Spaceship extends JPanel implements KeyListener
         */
        
         this.setFocusable(true);
-        this.addKeyListener(this);  
+        this.addKeyListener(this); 
+        
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
