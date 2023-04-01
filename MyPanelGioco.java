@@ -28,7 +28,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     protected Timer timerMet;
     
     //prove
-    //private List<Meteoriti> meteoriti;
+    private List<Meteoriti> meteoriti;
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     public int totM=0;      //totale di meteoriti spawnati
