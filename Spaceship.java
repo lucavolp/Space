@@ -33,7 +33,7 @@ public class Spaceship extends JLabel
     {
         this.setLocation(posX, posY);
         setPosizioneGenerazione();
-        
+        this.setLocation(posX, posY);
         
         
         //Inserimento e ridimensionamento dell'immagine
@@ -49,7 +49,7 @@ public class Spaceship extends JLabel
         this.setIcon(new ImageIcon(sps));
         
         
-        this.setLocation(posX, posY);
+        
         //timer di frequenza di ascolto degli input
         timer = new Timer(1, new ActionListener() {
             public void actionPerformed(ActionEvent e) 

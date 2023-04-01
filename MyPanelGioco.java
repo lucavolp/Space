@@ -61,6 +61,17 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
          * ogni volta che si invoca il repaint() dei meteoriti la spaceship viene visualizzata al centro fino all'input dopo
         **/
         
+        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+        //pluto= new JLabel("Spaceship");
+        //add(pluto);
+        spaceship = new Spaceship();
+        this.add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
+        //set();
+        spaceship.setFocusable(true);
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        
+        
+        
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv        
         velocitaMeteoriti = 7;
         velocitaSpawn = 2000;
@@ -73,7 +84,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
                 meteoriti = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
                 //add(meteoriti, gbc); // Aggiunge l'oggetto Meteoriti al pannello MyPanel2 
                 add(meteoriti);
-                revalidate();
+                //revalidate();
                 repaintCenter();
                 
             }
@@ -84,15 +95,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
 
-        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        //pluto= new JLabel("Spaceship");
-        //add(pluto);
-        spaceship = new Spaceship();
-        this.add(spaceship); // Aggiunge l'oggetto Spaceship al pannello MyPanel2 
-        //set();
-        spaceship.setFocusable(true);
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        
         
         //TIMER DI GIOCO
         timerGame = new Timer(1000, new ActionListener() 
