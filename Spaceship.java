@@ -115,6 +115,7 @@ public class Spaceship extends JPanel implements KeyListener
         */
        
         this.setFocusable(true);
+
         this.addKeyListener(this); 
         
     }

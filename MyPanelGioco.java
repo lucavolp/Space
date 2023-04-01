@@ -11,6 +11,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.Random;
+import java.util.List;
 
 public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e non quando si clicca avvio
 {
@@ -25,6 +26,9 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     protected Random rand = new Random();
     protected Meteoriti meteoriti;
     protected Timer timerMet;
+    
+    //prove
+    //private List<Meteoriti> meteoriti;
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     public int totM=0;      //totale di meteoriti spawnati
@@ -44,17 +48,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     
     public MyPanelGioco() 
     {
-        super();
-        //SENZA LAYOUT SEMBRA CHE ALCUNI METEORITI RIMANGONO E NON ELIMINA LE LABEL
-        
-        
-        /*setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        as= new AscoltatoreEsterno();
-        pippo= new JLabel("Panel 2");
-        add(pippo);*/
+        super();      
         
         /**
          * ogni volta che si invoca il repaint() dei meteoriti la spaceship viene visualizzata al centro fino all'input dopo
@@ -82,6 +76,7 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         
         
         
+        
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
 
@@ -93,8 +88,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         spaceship.setFocusable(true);
         */
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        
-        
         
     }
     
