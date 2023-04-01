@@ -172,9 +172,9 @@ public class Spaceship extends JPanel implements KeyListener
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.println("Up arrow key pressed");
+            System.out.println("Freccia su");
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            System.out.println("Down arrow key pressed");
+            System.out.println("Freccia Giu");
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             spaceshipSpeed = -(incr);
             //System.out.println("Sinistra");     //DEBUG
