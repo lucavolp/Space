@@ -11,13 +11,12 @@ schermata home
 
 ho lasciato degli appunti per i proiettili in una cartella
 
-classe navicella deve estendere Jpanel e non label, e crearci dentro la label navicella, metterla in sovrimpressione sugli altri pannelli.
+navicella che si muove
 
 meteoriti in un array, almeno ne salva 10.
 
 roba che cambia il tasto pausa/resume cambiando il nome del pulsante e usando la variabile booleana.
-
-collisioni con la posizione se jaco non si muove a mandarci il file da 2 settimane. 
+ 
 
 rimettere la roba del saveX appena repainta
 
