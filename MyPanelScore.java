@@ -33,7 +33,7 @@ public class MyPanelScore extends JPanel
         
         add(punteggio);
         
-        
+        /*
         //TIMER AGGIORNA PUNTI .5/s
         tUpPunti = new Timer();
         tUpPunti.schedule(new TimerTask() 
@@ -42,11 +42,12 @@ public class MyPanelScore extends JPanel
                 aggPunti();
             }
         }, 0, 500);
+        */
     }
         
     public void aggPunti()
     {
         pt++;
-        punteggio.setText((p2.getTotM()+pt)+"");
+        punteggio.setText("SCORE: "+(p2.getTotM()+pt)+"");
     }
 }

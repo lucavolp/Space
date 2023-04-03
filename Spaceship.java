@@ -13,6 +13,9 @@ import java.io.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -35,6 +38,9 @@ public class Spaceship extends JPanel implements KeyListener
     private int saveY;
     
     private JLabel imm;
+    
+    
+    private List<Projectile> projectiles;
     
     public Spaceship() 
     {
@@ -65,19 +71,6 @@ public class Spaceship extends JPanel implements KeyListener
         
         
         /*
-        //timer di frequenza di ascolto degli input
-        timer = new Timer(10, new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e) 
-            {  
-            }            
-        });
-        timer.start();
-        
-        
-        
-        
-        
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) 
             {
@@ -171,8 +164,17 @@ public class Spaceship extends JPanel implements KeyListener
 
     @Override
     public void keyPressed(KeyEvent e) {
+        
+        
+        Projectile pr;
+        projectiles=new ArrayList<Projectile>();
+        
+        
+        
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            System.out.println("Freccia su");
+            pr= new Projectile(posX,posY,15);
+            projectiles.add(pr);
+            setVisible(true);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             System.out.println("Freccia Giu");
         } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -200,6 +202,16 @@ public class Spaceship extends JPanel implements KeyListener
     {
         int keyCode = e.getKeyCode();
             spaceshipSpeed = 0;        
+    }
+    
+    public double getPX()
+    {
+        return (double)posX;
+    }
+    
+    public double getPY()
+    {
+        return (double)posY;
     }
 }
     

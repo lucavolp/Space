@@ -50,12 +50,16 @@ public class AscoltatoreEsterno implements ActionListener
         if(e.getActionCommand().equals("Pausa"))
         {
             panelGioco.stopThread();
+            panelMenu.isGamePaused=true;
+            panelMenu.pause.setVisible(false);
+            panelMenu.resume.setVisible(true);
         }
         if(e.getActionCommand().equals("Riprendi"))
         {
-            panelMenu.resume.setEnabled(false);
-            panelMenu.pause.setEnabled(true);
-            panelGioco.timerMet.start();
+            panelMenu.resume.setVisible(false);
+            //panelGioco.startThread(); -----------------------------------------------------------da errore perche startThread non so se si possa fare così
+            panelMenu.isGamePaused=false;
+            panelMenu.pause.setVisible(true);
         }
         if(e.getActionCommand().equals("Restart"))
         {

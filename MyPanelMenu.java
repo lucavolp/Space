@@ -28,6 +28,7 @@ public class MyPanelMenu extends JPanel
     protected JLabel timer;
     private int tMin=0;
     private int tSec=0;
+    public boolean isGamePaused=false;
     
     
     public MyPanelMenu(MyPanelGioco pg, MyPanelScore ps, MyPanel p)
@@ -96,6 +97,7 @@ public class MyPanelMenu extends JPanel
         add(restart);
         add(back);
         add(timer);
+        resume.setVisible(false);
     }
     
     private void setTempo()

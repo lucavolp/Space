@@ -15,6 +15,10 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
+
+
+
+
 public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire subito il codice e non quando si clicca avvio
 {
     
@@ -49,6 +53,10 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
     //^^^^^^^^^^^^^^^^^^^^^^^^^^
     
     
+    
+    //private List<Projectile> projectiles;
+
+    
     public MyPanelGioco() 
     {
         super();
@@ -62,9 +70,8 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         mainThread.start();
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
-        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
+        
+        
     }
     
     public void run()
@@ -73,6 +80,7 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         {
             Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
             meteorite.setBounds(0 , 0, 40, 40);
+            totM++;     //contatore di meteoriti utilizzato per il punteggio
             add(meteorite); //lo aggiunge al pannello
             meteoritis.add(meteorite); //lo aggiunge alla lista
             revalidate();
@@ -83,6 +91,13 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            
+            /*
+            Projectile pr;
+            projectiles=new ArrayList<Projectile>();
+            pr= new Projectile(800,800,15);
+            projectiles.add(pr);
+            */
         }
     }
     
@@ -106,6 +121,14 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
             meteorite.stopThread();
         }
         mainThread.stop();
+    }
+    
+    public void startThread()
+    {
+        for (Meteoriti meteorite : meteoritis) {
+            meteorite.startThread();
+        }
+        mainThread.start();
     }
     
     public int getTotM()
