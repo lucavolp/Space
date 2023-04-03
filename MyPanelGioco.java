@@ -6,6 +6,7 @@
 */
 
 //hai cambiato un botto di coses che non me ne ero accorto e ho fatto na figura di merda con la piergio hahah
+//ma quando? hahaha
 
 import java.awt.*;
 import javax.swing.*;
@@ -14,9 +15,8 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
-public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e non quando si clicca avvio
+public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire subito il codice e non quando si clicca avvio
 {
-    
     
     private JLabel pippo;
     public AscoltatoreEsterno as;
@@ -25,7 +25,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     private int velocitaMeteoriti;
     private int velocitaSpawn;
     protected Random rand = new Random();
-    //protected Meteoriti meteoriti;
     protected Timer timerMet;
     
     //prove
@@ -53,41 +52,19 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
     public MyPanelGioco() 
     {
         super();
-        
+        setLayout(null);
         
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv        
         velocitaMeteoriti = 7;
-        velocitaSpawn = 2000;
-        
-        //test
+        velocitaSpawn = 2000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
-        //Tutto il resto del codice (creazione e aggiunta) lo gestisce nel metodo run()
-                
-        /*// Crea un timer che genera un nuovo oggetto Meteoriti ogni x secondi
-        timerMet = new Timer(velocitaSpawn, new ActionListener()
-        {
-            public void actionPerformed(ActionEvent evt) 
-            {
-                Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
-                add(meteorite); //lo aggiunge al pannello
-                meteoritis.add(meteorite); //lo aggiunge alla lista
-                revalidate();
-                repaintCenter();
-                totM++;
-            }
-        });
-        timerMet.start();*/
+        Thread threadGioco = new Thread(this, "Generazione meteoriti");
+        threadGioco.start();
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
-        
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        /*spaceship = new Spaceship();
-        add(spaceship);
-        spaceship.setFocusable(true);*/
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^SPACESHIP^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        mainThread = new Thread(this);
-        mainThread.start();
     }
     
     public void run()
@@ -95,20 +72,23 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         while(true)
         {
             Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
+            meteorite.setBounds(0 , 0, 40, 40);
             add(meteorite); //lo aggiunge al pannello
             meteoritis.add(meteorite); //lo aggiunge alla lista
             revalidate();
-            
             repaint();
             
-            System.out.println("Ho eseguito un ciclo");
             try {
-                Thread.sleep(50); //ferma il thread ogni 10millisecondi, intervallo di ascolto
+                Thread.sleep(velocitaSpawn); //ferma il thread ogni 10millisecondi, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
         }
+    }
+    
+    public void editSpawnSpeed(int ms)
+    { //fare i vari controlli per le eccezzioni
+        velocitaSpawn = ms;
     }
     
     public void repaintCenter() 
@@ -125,7 +105,6 @@ public class MyPanelGioco extends JPanel //Inizia ad eseguire subito il codice e
         //timerMet.stop();
         //timerGame.stop();
     }
-    
     
     public int getTotM()
     {

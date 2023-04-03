@@ -81,7 +81,6 @@ public class AscoltatoreEsterno implements ActionListener
     {
         Container container = panelGioco.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
         container.removeAll();
-        //panelGioco.stopTimer(); //dato che non li elimina richiama il metodo stopTimer() almeno smette di generare robe e contare punti
         panelGioco = null; //dovrebbe eliminare i pannelli però non li elimina haha siummm
         panelScore = null;
         panelMenu = null;
@@ -106,9 +105,7 @@ public class AscoltatoreEsterno implements ActionListener
         f.add(panelGioco, BorderLayout.CENTER);
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
-        
-        
-
+        //Aggiunge il pannello con la navicella
         f.add(spaceship, BorderLayout.PAGE_END);
         
         spaceship.setFocusable(true);
@@ -116,10 +113,7 @@ public class AscoltatoreEsterno implements ActionListener
         if(spaceship.isFocusOwner())
             System.out.println("focus");
 
-        
-        
         f.revalidate();
         f.repaint();
-        //panelGioco.timerMet.start();
     }
 }
