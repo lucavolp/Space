@@ -56,10 +56,10 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv        
         velocitaMeteoriti = 7;
-        velocitaSpawn = 2000; //millisecondi
+        velocitaSpawn = 700; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
-        Thread threadGioco = new Thread(this, "Generazione meteoriti");
-        threadGioco.start();
+        mainThread = new Thread(this, "Gioco");
+        mainThread.start();
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvSPACESHIPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
@@ -100,10 +100,12 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         repaint(repaintRect);
     }
     
-    public void stopTimer()
+    public void stopThread()
     {
-        //timerMet.stop();
-        //timerGame.stop();
+        for (Meteoriti meteorite : meteoritis) {
+            meteorite.stopThread();
+        }
+        mainThread.stop();
     }
     
     public int getTotM()

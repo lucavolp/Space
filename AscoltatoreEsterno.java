@@ -18,14 +18,10 @@ public class AscoltatoreEsterno implements ActionListener
     private MyPanelMenu panelMenu;
     private Spaceship spaceship;
     
-    //Eeeeeeeeeeeeeeeee basta io ci rinuncio
     
     public AscoltatoreEsterno(MyPanel p)//Viene usato dalla pagina principale
     {
         this.p = p;
-        /*panelGioco = p2;
-        panelScore = p3;
-        panelMenu = p4;*/
     }
     
     public AscoltatoreEsterno(){}   //costruttore vuoto normale
@@ -43,7 +39,6 @@ public class AscoltatoreEsterno implements ActionListener
         //Controlli schermata principale
         if(e.getActionCommand().equals("New Game"))
         {
-            //change();
             avviaGioco();
         }
         if(e.getActionCommand().equals("Chiudi"))
@@ -54,18 +49,13 @@ public class AscoltatoreEsterno implements ActionListener
         //Controlli pannello del menù
         if(e.getActionCommand().equals("Pausa"))
         {
-            panelGioco.stopTimer();
-            //panelGioco.meteoriti.stopTimer();
-            //panelMenu.pause.(false);
-            //System.out.println("Ho premuto il bottone");
+            panelGioco.stopThread();
         }
         if(e.getActionCommand().equals("Riprendi"))
         {
             panelMenu.resume.setEnabled(false);
             panelMenu.pause.setEnabled(true);
-            //panelGioco.timerGame.start();
             panelGioco.timerMet.start();
-            //panelGioco.meteoriti.startTimer();
         }
         if(e.getActionCommand().equals("Restart"))
         {
@@ -81,7 +71,7 @@ public class AscoltatoreEsterno implements ActionListener
     {
         Container container = panelGioco.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
         container.removeAll();
-        panelGioco = null; //dovrebbe eliminare i pannelli però non li elimina haha siummm
+        panelGioco = null;
         panelScore = null;
         panelMenu = null;
         container.add(p);
