@@ -5,8 +5,6 @@
  * @version (1.0)
 */
 
-//hai cambiato un botto di coses che non me ne ero accorto e ho fatto na figura di merda con la piergio hahah
-//ma quando? hahaha
 
 import java.awt.*;
 import javax.swing.*;
@@ -14,9 +12,6 @@ import java.awt.event.*;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
-
-
-
 
 
 public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire subito il codice e non quando si clicca avvio
@@ -128,7 +123,9 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         for (Meteoriti meteorite : meteoritis) {
             meteorite.startThread();
         }
+        mainThread = new Thread(this, "Gioco");
         mainThread.start();
+        
     }
     
     public int getTotM()

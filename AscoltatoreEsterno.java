@@ -57,7 +57,7 @@ public class AscoltatoreEsterno implements ActionListener
         if(e.getActionCommand().equals("Riprendi"))
         {
             panelMenu.resume.setVisible(false);
-            //panelGioco.startThread(); -----------------------------------------------------------da errore perche startThread non so se si possa fare così
+            panelGioco.startThread(); //-----------------------------------------------------------da errore perche startThread non so se si possa fare così
             panelMenu.isGamePaused=false;
             panelMenu.pause.setVisible(true);
         }
