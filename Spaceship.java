@@ -121,14 +121,14 @@ public class Spaceship extends JPanel implements KeyListener
         
         
         dimX=Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
-        dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende la larghezza dello schermo
+        dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
         
-        posX=(dimX/2)-40;  //posiziona partenza al centro dello schermo
+        posX=(dimX/2)-50;  //posiziona partenza al centro dello schermo
         posY=dimY; //posiziona un po' staccata dal fondo
         
     }
     
-    private void move()    //fa fare l'azione di movimento solo se si è all'interno dei 
+    private void move()    //fa fare l'azione di movimento solo se si è all'interno dello spazio corretto
     {
         if((posX>0)&&(posX<dimX-80))
             posX+=spaceshipSpeed;

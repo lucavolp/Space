@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.*;
 import java.util.Timer;
 
-public class MyPanelScore extends JPanel
+public class MyPanelScore extends JPanel implements Runnable
 {
     private MyPanelGioco pannelloGioco;
     private JLabel punteggio;
@@ -22,6 +22,7 @@ public class MyPanelScore extends JPanel
     private int tUpdate;        //ms di aggiornamento e aggiunta punti
     private Timer update;
     
+    private Thread punti;
     public MyPanelScore(MyPanelGioco p2)
     {
         super();
@@ -29,7 +30,7 @@ public class MyPanelScore extends JPanel
         
         pannelloGioco = p2;
         
-        punteggio = new JLabel("0");       
+        punteggio = new JLabel("SCORE: 0");       
         
         add(punteggio);
         
@@ -43,11 +44,34 @@ public class MyPanelScore extends JPanel
             }
         }, 0, 500);
         */
+        
+        
+        
+        punti = new Thread(this, "Meteorite");
+        punti.start();
     }
         
-    public void aggPunti()
+    public void run()
     {
-        pt++;
-        punteggio.setText("SCORE: "+(p2.getTotM()+pt)+"");
+        try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        while(true)
+        {
+            pt++;
+            punteggio.setText("SCORE: "+(p2.getTotM()+pt)+"");
+            
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void stop(){
+        punti.stop();
     }
 }

@@ -116,6 +116,7 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
             meteorite.stopThread();
         }
         mainThread.stop();
+        //MyPanelScore.stop();
     }
     
     public void startThread()
