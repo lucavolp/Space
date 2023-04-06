@@ -213,6 +213,12 @@ public class Spaceship extends JPanel implements KeyListener
     {
         return (double)posY;
     }
+    
+    //metodo che mi serve per le collisioni
+    public Rectangle boundsNavicella()
+    {
+        return imm.getBounds();
+    }
 }
     
 

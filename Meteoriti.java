@@ -120,6 +120,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
                 posGenerazione = colonne + posX*9;
                 break;
         }
+        posGenerazione = (1920/2) - 30;
     }
     
     public int getPosizioneGenerazione(){
@@ -141,5 +142,14 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
     public void startThread(){
         movimento = new Thread(this, "Meteorite");
         movimento.start();
+    }
+    
+    //Metodo per le collisioni
+    public Rectangle boundsMeteorite(){
+        return this.getBounds();
+    }
+    
+    public String toString(){
+        return "Debug!!";
     }
 }
