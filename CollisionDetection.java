@@ -7,15 +7,16 @@ import java.util.List;
  * @version (1.0)
 */
 
-public class CollisionDetection extends MyPanelGioco implements Runnable
+public class CollisionDetection extends MyPanelGioco implements Runnable //forse le collisioni bisogna gestirle all'interno della classe MyPanelGioco
 {
     Thread thread;
     Spaceship spaceship;
     List<Meteoriti> lista;
     
-    public CollisionDetection(Spaceship ss)
+    public CollisionDetection(Spaceship ss, List<Meteoriti> meteoritis)
     {
         setSpaceship(ss);
+        setLista(meteoritis);
         
         thread = new Thread(this, "Collisioni");
         thread.start();
@@ -26,11 +27,11 @@ public class CollisionDetection extends MyPanelGioco implements Runnable
     public void run()
     {
         while (!gameStatus()) {
-            lista = getLista();
+            //lista = getLista();
             System.out.println(lista.size());
             if (lista.size() > 0) {
                 // prende l'ultimo elemento della lista meteoritis
-                Meteoriti lastMeteorite = meteoritis.get(meteoritis.size() - 1);
+                Meteoriti lastMeteorite = lista.get(lista.size() - 1);
                 System.out.println("Aggiunto un oggetto meteorite");
                 // verifica se è avvenuta la collisione
                 if (lastMeteorite.getBounds().intersects(spaceship.getBounds())) {
@@ -47,6 +48,10 @@ public class CollisionDetection extends MyPanelGioco implements Runnable
             }
         }
         System.out.println("È game over");
+    }
+    
+    public void setLista(List<Meteoriti> meteoritis) {
+        lista = meteoritis;
     }
     
     public void setSpaceship(Spaceship s){

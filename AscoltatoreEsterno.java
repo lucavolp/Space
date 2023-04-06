@@ -91,7 +91,7 @@ public class AscoltatoreEsterno implements ActionListener
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
         spaceship = new Spaceship();
         
-        CollisionDetection cd = new CollisionDetection(spaceship);
+        CollisionDetection cd = new CollisionDetection(spaceship, panelGioco.meteoritis);
         //panelGioco.setSpaceship(spaceship); //Passa al pannello di gioco il pannello con la navicella così può usare i suoi metodi per verificare le collisioni
         
         Container f = p.getParent();
