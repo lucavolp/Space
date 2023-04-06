@@ -19,16 +19,16 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
     
     private JLabel pippo;
     public AscoltatoreEsterno as;
+    private Thread mainThread;
+    private boolean GameOver = false;
     
     //Variabili per i meteoriti
     private int velocitaMeteoriti;
     private int velocitaSpawn;
     protected Random rand = new Random();
     protected Timer timerMet;
+    protected List<Meteoriti> meteoritis;
     
-    //prove
-    private List<Meteoriti> meteoritis;
-    private Thread mainThread;
     
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
@@ -65,24 +65,22 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         mainThread.start();
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
-        
-        
     }
     
     public void run()
     {
-        while(true)
+        while(!GameOver)
         {
             Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
             meteorite.setBounds(0 , 0, 40, 40);
-            totM++;     //contatore di meteoriti utilizzato per il punteggio
+            totM++; //contatore di meteoriti utilizzato per il punteggio
             add(meteorite); //lo aggiunge al pannello
             meteoritis.add(meteorite); //lo aggiunge alla lista
             revalidate();
             repaint();
             
             try {
-                Thread.sleep(velocitaSpawn); //ferma il thread ogni 10millisecondi, intervallo di ascolto
+                Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -96,12 +94,31 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         }
     }
     
+    /*
+    public void collisionDetection() 
+    {
+        while (!GameOver) {
+            if (meteoritis.size() > 0) {
+                // prende l'ultimo elemento della lista meteoritis
+                Meteoriti lastMeteorite = meteoritis.get(meteoritis.size() - 1);
+    
+                // verifica se è avvenuta la collisione
+                if (lastMeteorite.getBounds().intersects(spaceship.getBounds())) {
+                    System.out.println("Collisione avvenuta");
+                    GameOver = true;
+                    //break; // esce dal ciclo una volta che la collisione è stata rilevata
+                }
+            }
+        }
+    }
+    */
+    
     public void editSpawnSpeed(int ms)
     { //fare i vari controlli per le eccezzioni
         velocitaSpawn = ms;
     }
     
-    public void repaintCenter() 
+    public void repaintCenter() //Non serve più giusto?
     {
         int centerX = getWidth();
         int centerY =  getHeight();
@@ -114,6 +131,7 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
     {
         for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();
+            //System.out.println(meteorite.toString());
         }
         mainThread.stop();
     }
@@ -125,12 +143,23 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         }
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
-        
     }
     
     public int getTotM()
     {
         return totM;
+    }
+    
+    public boolean gameStatus(){
+        return GameOver;
+    }
+    
+    public void setGameStatus(boolean l){
+        GameOver = l;
+    }
+    
+    public List<Meteoriti> getLista(){
+        return meteoritis;
     }
 }
 

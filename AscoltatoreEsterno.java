@@ -57,7 +57,7 @@ public class AscoltatoreEsterno implements ActionListener
         if(e.getActionCommand().equals("Riprendi"))
         {
             panelMenu.resume.setVisible(false);
-            panelGioco.startThread(); //-----------------------------------------------------------da errore perche startThread non so se si possa fare così
+            panelGioco.startThread(); //-----------------------------------------------------------da errore perche startThread non so se si possa fare così| ora dovrebbe funzionare
             panelMenu.isGamePaused=false;
             panelMenu.pause.setVisible(true);
         }
@@ -78,17 +78,21 @@ public class AscoltatoreEsterno implements ActionListener
         panelGioco = null;
         panelScore = null;
         panelMenu = null;
+        spaceship = null;
         container.add(p);
         container.revalidate();
         container.repaint();
     }
     
-    public void avviaGioco() //La funzione che ti dicevo che crea la nuova finestra quando si preme new game
+    public void avviaGioco() //Metodo che che crea la nuova finestra quando si preme new game
     {
         panelGioco = new MyPanelGioco();
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
         spaceship = new Spaceship();
+        
+        CollisionDetection cd = new CollisionDetection(spaceship);
+        //panelGioco.setSpaceship(spaceship); //Passa al pannello di gioco il pannello con la navicella così può usare i suoi metodi per verificare le collisioni
         
         Container f = p.getParent();
         //Rimouve il pannello contenente il menù principale
@@ -102,11 +106,12 @@ public class AscoltatoreEsterno implements ActionListener
         //Aggiunge il pannello con la navicella
         f.add(spaceship, BorderLayout.PAGE_END);
         
+        //Setta il focus sul pannello della navicella
         spaceship.setFocusable(true);
         spaceship.grabFocus();
-        if(spaceship.isFocusOwner())
-            System.out.println("focus");
-
+        
+        cd.startThread();
+        
         f.revalidate();
         f.repaint();
     }
