@@ -14,13 +14,14 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire subito il codice e non quando si clicca avvio
+public class MyPanelGioco extends JPanel implements Runnable
 {
     
     private JLabel pippo;
     public AscoltatoreEsterno as;
     private Thread mainThread;
     private boolean GameOver = false;
+    protected boolean isPaused = false;
     
     //Variabili per i meteoriti
     private int velocitaMeteoriti;
@@ -59,10 +60,11 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
         
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv        
         velocitaMeteoriti = 7;
-        velocitaSpawn = 700; //millisecondi
+        velocitaSpawn = 90; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
+        totM = 0;
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
     }
@@ -75,9 +77,17 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
             meteorite.setBounds(0 , 0, 40, 40);
             totM++; //contatore di meteoriti utilizzato per il punteggio
             add(meteorite); //lo aggiunge al pannello
-            meteoritis.add(meteorite); //lo aggiunge alla lista
+            meteoritis.add(meteorite); //lo aggiunge alla lista, aggiunge in coda
             revalidate();
             repaint();
+            
+            for (int i = 0; i < meteoritis.size(); i++) {
+                Meteoriti m = meteoritis.get(i);
+                if(m.getEliminato())
+                {
+                    meteoritis.remove(i);
+                }
+            }
             
             try {
                 Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto
@@ -134,6 +144,7 @@ public class MyPanelGioco extends JPanel implements Runnable//Inizia ad eseguire
             //System.out.println(meteorite.toString());
         }
         mainThread.stop();
+        isPaused = true;
         //MyPanelScore.stop();
     }
     

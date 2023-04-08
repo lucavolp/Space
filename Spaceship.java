@@ -42,6 +42,7 @@ public class Spaceship extends JPanel implements KeyListener
     
     private List<Projectile> projectiles;
     
+    
     public Spaceship() 
     {
         //this.setLocation(posX, posY);
@@ -219,6 +220,14 @@ public class Spaceship extends JPanel implements KeyListener
     {
         return imm.getBounds();
     }
+    /*
+    public void setText(String s){
+        test = s;
+    }
+    
+    public String getTest(){
+        return test;
+    }*/
 }
     
 

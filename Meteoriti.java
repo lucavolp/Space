@@ -29,6 +29,8 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
     //Thread per il movimento del meteorite
     private Thread movimento;
     
+    private String test = "Giuseppe";
+    
     public Meteoriti(int pos, int deltaY) //Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
         setPosizioneGenerazione(pos);
@@ -59,12 +61,15 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
             move();
             
             Point labelLocation = this.getLocation();//Prende la posizione della Label
-            if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height) //Controlla se la Label contenente il meteorite è andata fuori dallo schermo
+            //System.out.println(labelLocation.y);
+            if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height - 200) //Controlla se la Label contenente il meteorite è andata fuori dallo schermo
             {
+                
                 Container parent = getParent(); //ottieni il pannello genitore
-                parent.remove(this); //rimuovi il componente dal pannello
-                movimento.stop();  //Stoppa il thread
                 eliminato = true;   //Smette di fare il ciclo
+                System.out.println("Meteorite Eliminato");
+                parent.remove(this); //rimuovi il componente dal pannello
+                stopThread();  //Stoppa il thread
             }
             
             repaint();
@@ -120,7 +125,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
                 posGenerazione = colonne + posX*9;
                 break;
         }
-        posGenerazione = (1920/2) - 30;
+        posGenerazione = (1920/2) - 100;
     }
     
     public int getPosizioneGenerazione(){
@@ -144,6 +149,10 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
         movimento.start();
     }
     
+    public boolean getEliminato(){
+        return eliminato;
+    }
+    
     //Metodo per le collisioni
     public Rectangle boundsMeteorite(){
         return this.getBounds();
@@ -151,5 +160,13 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
     
     public String toString(){
         return "Debug!!";
+    }
+    
+    public void setText(String s){
+        test = s;
+    }
+    
+    public String getTest(){
+        return test;
     }
 }
