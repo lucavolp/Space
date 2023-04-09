@@ -109,7 +109,6 @@ public class Spaceship extends JPanel implements KeyListener
         });
         //this.setFocusable(true);
         */
-       
         this.setFocusable(true);
 
 
@@ -229,5 +228,3 @@ public class Spaceship extends JPanel implements KeyListener
         return test;
     }*/
 }
-    
-

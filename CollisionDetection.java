@@ -29,6 +29,7 @@ public class CollisionDetection extends MyPanelGioco implements Runnable //forse
         super.paintComponent(g);
         g.drawRect(boxcolliderSpaceship.x, boxcolliderSpaceship.y, boxcolliderSpaceship.width, boxcolliderSpaceship.height-100);
     }*/
+    
     //Thread che verifica in continuo le collisioni
     public void run()
     {

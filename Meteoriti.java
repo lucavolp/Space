@@ -67,7 +67,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
                 
                 Container parent = getParent(); //ottieni il pannello genitore
                 eliminato = true;   //Smette di fare il ciclo
-                System.out.println("Meteorite Eliminato");
+                //System.out.println("Meteorite Eliminato");
                 parent.remove(this); //rimuovi il componente dal pannello
                 stopThread();  //Stoppa il thread
             }
