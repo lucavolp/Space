@@ -13,7 +13,8 @@ import java.awt.event.*;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
-
+import javax.imageio.*;
+import java.io.*;
 
 public class MyPanelGioco extends JPanel implements Runnable
 {
@@ -68,6 +69,12 @@ public class MyPanelGioco extends JPanel implements Runnable
         totM = 0;
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
+        
+        /*
+        try {
+          this.setContentPane(
+            new JLabel(new ImageIcon(ImageIO.read(new File("your_file.jpeg")))));
+        } catch (IOException e) {};*/
     }
     
     public void run()

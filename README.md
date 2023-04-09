@@ -12,8 +12,6 @@ schermata home
 ho lasciato degli appunti per i proiettili in una cartella
 
 navicella che si muove
-
-roba che cambia il tasto pausa/resume cambiando il nome del pulsante e usando la variabile booleana.
  
 
 rimettere la roba del saveX appena repainta

@@ -49,7 +49,7 @@ public class Spaceship extends JPanel implements KeyListener
         super();
         setPosizioneGenerazione();
         imm=new JLabel();
-        
+        this.setBounds(0,0,1800,100);
         
         //setLayout(null);
         
@@ -69,7 +69,7 @@ public class Spaceship extends JPanel implements KeyListener
         add(imm);
         imm.setLocation(posX, posY);
         
-        
+        //setLayout(null);
         
         /*
         addKeyListener(new KeyAdapter() {
@@ -114,6 +114,7 @@ public class Spaceship extends JPanel implements KeyListener
 
         this.addKeyListener(this); 
         
+        this.setOpaque(false);
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
@@ -159,7 +160,7 @@ public class Spaceship extends JPanel implements KeyListener
     
     
      public void keyTyped(KeyEvent e) {
-        imm.setBounds(0,0,80,80);
+        //imm.setBounds(0,0,80,80);
     }
 
     @Override
@@ -171,47 +172,52 @@ public class Spaceship extends JPanel implements KeyListener
         
         
         
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyCode() == KeyEvent.VK_UP)
+        {
             pr= new Projectile(posX,posY,15);
             projectiles.add(pr);
             setVisible(true);
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) 
+        {
             System.out.println("Freccia Giu");
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+        {
             spaceshipSpeed = -(incr);
             //System.out.println("Sinistra");     //DEBUG
             spaceshipX += spaceshipSpeed;
             move();
-            imm.setBounds(posX, posY,100,100);
+            imm.setLocation(getPX(), getPY());
             saveX=posX;
             saveY=posY;
             //imm.setBounds(0,0,80,80);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            debug();
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) 
+        {
             spaceshipSpeed = incr;
             //System.out.println("Destra");     //DEBUG
             spaceshipX += spaceshipSpeed;
             move();
-            imm.setBounds(posX, posY,100,100);
+            imm.setLocation(getPX(), getPY());
             saveX=posX;
             saveY=posY;
+            debug();
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) 
     {
-        int keyCode = e.getKeyCode();
-            spaceshipSpeed = 0;        
+        imm.setLocation(getPX(), getPY());
     }
     
-    public double getPX()
+    public int getPX()
     {
-        return (double)posX;
+        return (int)posX;
     }
     
-    public double getPY()
+    public int getPY()
     {
-        return (double)posY;
+        return (int)posY;
     }
     
     //metodo che mi serve per le collisioni
@@ -219,11 +225,12 @@ public class Spaceship extends JPanel implements KeyListener
     {
         return imm.getBounds();
     }
-    /*
-    public void setText(String s){
-        test = s;
-    }
     
+    public void debug(){
+        System.out.println("posizione: "+getPX());
+        imm.setLocation(saveX, saveY);
+    }
+    /*
     public String getTest(){
         return test;
     }*/

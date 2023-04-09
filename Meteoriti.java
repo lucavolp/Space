@@ -74,7 +74,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
             
             repaint();
             try {
-                Thread.sleep(10); //ferma il thread ogni 10millisecondi, intervallo di ascolto
+                Thread.sleep(80); //ferma il thread ogni 10millisecondi, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -125,7 +125,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
                 posGenerazione = colonne + posX*9;
                 break;
         }
-        posGenerazione = (1920/2) - 100;
+        //posGenerazione = (1920/2) - 100;                  //commentato sennò mi spawna meteoriti solo in una colonna a destra uno sopra l'altro senza spostarli (perche ho una dimensione dello schermo che non è 1920 penso)
     }
     
     public int getPosizioneGenerazione(){
