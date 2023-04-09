@@ -3,6 +3,7 @@
  * 
  * @author (Battistelli Kevin - Volpinari Luca)
  * @version (1.0)
+ * Lu, ma se rifai la spaceship come jlabel? dato che non avendo più layout in teoria quando repainta non dovrebbe spostarla al centro, e prima il movimento funzionava
 */
 
 
