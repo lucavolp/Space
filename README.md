@@ -18,7 +18,7 @@ rimettere la roba del saveX appena repainta
 
 sistemare tasto riprendi
 
-sistemare eliminazione meteoriti nella lista
+
 
 
 
