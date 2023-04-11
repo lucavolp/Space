@@ -47,11 +47,13 @@ public class Spaceship extends JPanel implements KeyListener
     {
         //this.setLocation(posX, posY);
         super();
+        //setLayout(null);
         setPosizioneGenerazione();
         imm=new JLabel();
+        //imm.setBounds(posX,posY,120,120);
         this.setBounds(0,0,1800,100);
         
-        //setLayout(null);
+        
         
         
         //Inserimento e ridimensionamento dell'immagine
@@ -66,10 +68,10 @@ public class Spaceship extends JPanel implements KeyListener
         
         imm.setIcon(new ImageIcon(sps));
         
-        add(imm);
-        imm.setLocation(posX, posY);
         
-        //setLayout(null);
+        imm.setLocation(posX, posY);
+        add(imm);
+        
         
         /*
         addKeyListener(new KeyAdapter() {
@@ -111,7 +113,6 @@ public class Spaceship extends JPanel implements KeyListener
         */
         this.setFocusable(true);
 
-
         this.addKeyListener(this); 
         
         this.setOpaque(false);
@@ -119,7 +120,6 @@ public class Spaceship extends JPanel implements KeyListener
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
     {
-        
         
         dimX=Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
         dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
@@ -158,7 +158,6 @@ public class Spaceship extends JPanel implements KeyListener
     }
     
     
-    
      public void keyTyped(KeyEvent e) {
         //imm.setBounds(0,0,80,80);
     }
@@ -191,16 +190,18 @@ public class Spaceship extends JPanel implements KeyListener
             saveY=posY;
             //imm.setBounds(0,0,80,80);
             debug();
+            repaint();
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) 
         {
             spaceshipSpeed = incr;
             //System.out.println("Destra");     //DEBUG
             spaceshipX += spaceshipSpeed;
-            move();
+            move();            
             imm.setLocation(getPX(), getPY());
             saveX=posX;
             saveY=posY;
             debug();
+            repaint();
         }
     }
 

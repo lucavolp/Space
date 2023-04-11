@@ -20,31 +20,25 @@ public class CollisionDetection extends MyPanelGioco implements Runnable //forse
         setSpaceship(ss);
         setLista(meteoritis);
         
-        thread = new Thread(this, "Collisioni");
-        thread.start();
+        /*thread = new Thread(this, "Collisioni");
+        thread.start();*/
         //System.out.println("Creato l'oggetto per le collisioni");
     }
-
-    /*protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawRect(boxcolliderSpaceship.x, boxcolliderSpaceship.y, boxcolliderSpaceship.width, boxcolliderSpaceship.height-100);
-    }*/
     
     //Thread che verifica in continuo le collisioni
     public void run()
     {
-        while (!gameStatus() || !isPaused) 
+        while (!super.gameStatus() || !super.isPaused) 
         {
             //System.out.println(lista.size());
             if (lista.size() > 0) {
                 // prende l'ultimo elemento della lista meteoritis
                 Meteoriti lastMeteorite = lista.get(lista.size() - 1);
-                //System.out.println(lastMeteorite.getTest());
                 Rectangle m = lastMeteorite.getBounds();
                 // verifica se è avvenuta la collisione
                 if (boxcolliderSpaceship.intersects(m)) {
-                    System.out.println("Collisione avvenuta");
-                    setGameStatus(true); //Imposta il gioco il gameover
+                    //System.out.println("Collisione avvenuta");
+                    super.setGameStatus(true); //Imposta il gioco il gameover
                     //break; // esce dal ciclo una volta che la collisione è stata rilevata
                 }
             }
@@ -60,12 +54,12 @@ public class CollisionDetection extends MyPanelGioco implements Runnable //forse
     
     public void setLista(List<Meteoriti> meteoritis) {
         lista = meteoritis;
+        System.out.println("Sono nel metodo per inserire la lista");
     }
     
     public void setSpaceship(Spaceship s){
         spaceship = s;
         boxcolliderSpaceship = spaceship.getBounds();
-        //System.out.println(spaceship.getTest());
     }
     
     public void startThread(){

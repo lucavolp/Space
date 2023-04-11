@@ -30,7 +30,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     private int velocitaSpawn;
     protected Random rand = new Random();
     protected Timer timerMet;
-    protected List<Meteoriti> meteoritis;
+    public List<Meteoriti> meteoritis;
     
     
     //^^^^^^^^^^^^^^^^^^^^^^^
@@ -51,25 +51,26 @@ public class MyPanelGioco extends JPanel implements Runnable
     //^^^^^^^^^^^^^^^^^^^^^^^^^^
     
     
-    
-    //private List<Projectile> projectiles;
+    //Test
+    MovingLabel roberto;
 
     
     public MyPanelGioco() 
     {
         super();
         setLayout(null);
-        
+        //setFocusable(true);
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv        
         velocitaMeteoriti = 7;
-        velocitaSpawn = 90; //millisecondi
+        velocitaSpawn = 9000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
         totM = 0;
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
-        
+        roberto = new MovingLabel();
+        add(roberto);
         /*
         try {
           this.setContentPane(
@@ -111,25 +112,6 @@ public class MyPanelGioco extends JPanel implements Runnable
             */
         }
     }
-    
-    /*
-    public void collisionDetection() 
-    {
-        while (!GameOver) {
-            if (meteoritis.size() > 0) {
-                // prende l'ultimo elemento della lista meteoritis
-                Meteoriti lastMeteorite = meteoritis.get(meteoritis.size() - 1);
-    
-                // verifica se è avvenuta la collisione
-                if (lastMeteorite.getBounds().intersects(spaceship.getBounds())) {
-                    System.out.println("Collisione avvenuta");
-                    GameOver = true;
-                    //break; // esce dal ciclo una volta che la collisione è stata rilevata
-                }
-            }
-        }
-    }
-    */
     
     public void editSpawnSpeed(int ms)
     { //fare i vari controlli per le eccezzioni

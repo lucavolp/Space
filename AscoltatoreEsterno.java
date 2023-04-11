@@ -97,12 +97,13 @@ public class AscoltatoreEsterno implements ActionListener {
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
         // Aggiunge il pannello con la navicella
-        f.add(spaceship, BorderLayout.PAGE_END);
+        //f.add(spaceship, BorderLayout.PAGE_END);
 
         // Setta il focus sul pannello della navicella
-        spaceship.setFocusable(true);
-        spaceship.grabFocus();
-        //spaceship.setText("Navicella creata nell'ascoltatore");
+        //spaceship.setFocusable(true);
+        //spaceship.grabFocus();
+        //panelGioco.setFocusable(true);
+        //panelGioco.grabFocus();
 
         CollisionDetection cd = new CollisionDetection(spaceship, panelGioco.meteoritis);
 

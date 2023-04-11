@@ -62,7 +62,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
             
             Point labelLocation = this.getLocation();//Prende la posizione della Label
             //System.out.println(labelLocation.y);
-            if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height - 200) //Controlla se la Label contenente il meteorite è andata fuori dallo schermo
+            if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height - 100) //Controlla se la Label contenente il meteorite è andata fuori dallo schermo
             {
                 
                 Container parent = getParent(); //ottieni il pannello genitore
@@ -74,7 +74,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
             
             repaint();
             try {
-                Thread.sleep(80); //ferma il thread ogni 10millisecondi, intervallo di ascolto
+                Thread.sleep(10); //ferma il thread ogni 10millisecondi, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
