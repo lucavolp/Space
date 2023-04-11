@@ -18,7 +18,7 @@ rimettere la roba del saveX appena repainta
 
 sistemare tasto riprendi
 
-
+Le collisioni con la label roberto workano, tocca solo migliorare un pochino però il concetto funziona, se vuoi modificare la classe per la label che si muove e metterci tutte le cose della navicella quella funziona
 
 
 
