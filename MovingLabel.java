@@ -36,7 +36,6 @@ public class MovingLabel extends JLabel implements KeyListener {
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
     {
-        
         int dimX=Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
         int dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
         
@@ -44,31 +43,33 @@ public class MovingLabel extends JLabel implements KeyListener {
         posX=(dimX/2)-50;  //posiziona partenza al centro dello schermo
         posY=dimY; //posiziona un po' staccata dal fondo
         
-        posX= 910;
-        posY= 900;
+        posX= 880;
+        posY= 890;
     }
     
-    //Gestione pressione tasti    
-    @Override
+    //Gestione pressione tasti
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         switch(keyCode) {
             case KeyEvent.VK_LEFT:
-                posX -= 5;
+                posX -= 8;
                 setLocation(posX, posY);
                 break;
             case KeyEvent.VK_RIGHT:
-                posX += 5;
+                posX += 8;
                 setLocation(posX, posY);
                 break;
         }
     }
     
-    @Override
     public void keyReleased(KeyEvent e) {
     }
     
-    @Override
     public void keyTyped(KeyEvent e) {
+    }
+    
+    public Rectangle boundsNavicella()
+    {
+        return this.getBounds();
     }
 }

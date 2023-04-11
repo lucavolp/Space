@@ -1,3 +1,4 @@
+
 import java.util.List;
 import java.awt.*;
 
@@ -6,40 +7,37 @@ import java.awt.*;
  * 
  * @author (Battistelli Kevin - Volpinari Luca)
  * @version (1.0)
-*/
+**/
 
-public class CollisionDetection extends MyPanelGioco implements Runnable //forse le collisioni bisogna gestirle all'interno della classe MyPanelGioco
+public class CollisionDetection implements Runnable //forse le collisioni bisogna gestirle all'interno della classe MyPanelGioco
 {
+    private MyPanelGioco pannello;
     private Thread thread;
-    private Spaceship spaceship;
     private List<Meteoriti> lista;
     private Rectangle boxcolliderSpaceship;
+    private boolean GameOver = false;
     
-    public CollisionDetection(Spaceship ss, List<Meteoriti> meteoritis)
+    public CollisionDetection(MyPanelGioco panelGioco)
     {
-        setSpaceship(ss);
-        setLista(meteoritis);
-        
-        /*thread = new Thread(this, "Collisioni");
-        thread.start();*/
-        //System.out.println("Creato l'oggetto per le collisioni");
+        setPannello(panelGioco);
     }
     
     //Thread che verifica in continuo le collisioni
     public void run()
     {
-        while (!super.gameStatus() || !super.isPaused) 
+        while (!GameOver || !pannello.getPause()) 
         {
-            //System.out.println(lista.size());
-            if (lista.size() > 0) {
+            //System.out.println(pannello.meteoritis.size());
+            if (pannello.meteoritis.size() > 0) {
                 // prende l'ultimo elemento della lista meteoritis
-                Meteoriti lastMeteorite = lista.get(lista.size() - 1);
+                Meteoriti lastMeteorite = pannello.meteoritis.get(pannello.meteoritis.size() - 1);
                 Rectangle m = lastMeteorite.getBounds();
+                boxcolliderSpaceship = pannello.roberto.getBounds();
                 // verifica se è avvenuta la collisione
-                if (boxcolliderSpaceship.intersects(m)) {
-                    //System.out.println("Collisione avvenuta");
-                    super.setGameStatus(true); //Imposta il gioco il gameover
-                    //break; // esce dal ciclo una volta che la collisione è stata rilevata
+                if (boxcolliderSpaceship.intersects(m)) //Dovrei eliminare tutti i meteoriti o li metto in stato di pausa
+                {
+                    pannello.setGameStatus(true); //Imposta il gioco il gameover
+                    pannello.verificaEliminati(); //Elimina gli ultimi meteoriti 
                 }
             }
             
@@ -48,18 +46,16 @@ public class CollisionDetection extends MyPanelGioco implements Runnable //forse
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            
+            GameOver = pannello.gameStatus();
         }
+        
         System.out.println("È game over");
     }
     
-    public void setLista(List<Meteoriti> meteoritis) {
-        lista = meteoritis;
-        System.out.println("Sono nel metodo per inserire la lista");
-    }
-    
-    public void setSpaceship(Spaceship s){
-        spaceship = s;
-        boxcolliderSpaceship = spaceship.getBounds();
+    public void setPannello(MyPanelGioco panelGioco) {
+        pannello = panelGioco;
+        //boxcolliderSpaceship = pannello.getBounds();
     }
     
     public void startThread(){

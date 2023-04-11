@@ -23,7 +23,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     public AscoltatoreEsterno as;
     private Thread mainThread;
     private boolean GameOver = false;
-    protected boolean isPaused = false;
+    private boolean isPaused = false;
     
     //Variabili per i meteoriti
     private int velocitaMeteoriti;
@@ -52,6 +52,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     
     //Test
+    //Navicella funzionante
     MovingLabel roberto;
 
     
@@ -60,17 +61,19 @@ public class MyPanelGioco extends JPanel implements Runnable
         super();
         setLayout(null);
         //setFocusable(true);
-        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv        
+        //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 7;
-        velocitaSpawn = 9000; //millisecondi
+        velocitaSpawn = 1000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
         totM = 0;
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
+        //Label con la navicella
         roberto = new MovingLabel();
         add(roberto);
+        
         /*
         try {
           this.setContentPane(
@@ -86,17 +89,11 @@ public class MyPanelGioco extends JPanel implements Runnable
             meteorite.setBounds(0 , 0, 40, 40);
             totM++; //contatore di meteoriti utilizzato per il punteggio
             add(meteorite); //lo aggiunge al pannello
-            meteoritis.add(meteorite); //lo aggiunge alla lista, aggiunge in coda
+            meteoritis.add(0, meteorite); //lo aggiunge alla lista, aggiunge in coda
             revalidate();
             repaint();
             
-            for (int i = 0; i < meteoritis.size(); i++) {
-                Meteoriti m = meteoritis.get(i);
-                if(m.getEliminato())
-                {
-                    meteoritis.remove(i);
-                }
-            }
+            verificaEliminati(); 
             
             try {
                 Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto
@@ -113,25 +110,28 @@ public class MyPanelGioco extends JPanel implements Runnable
         }
     }
     
+    public void verificaEliminati() //Metodo per eliminare dalla lista i meteoriti eliminati dal pannello
+    {
+        for (int i = meteoritis.size() - 1; i >= 0; i--) 
+        {
+            Meteoriti m = meteoritis.get(i);
+            if(m.getEliminato())
+            {
+                meteoritis.remove(i);
+                System.out.println("Elemento "+ i + " in teoria eliminato");
+            }
+        }
+    }
+    
     public void editSpawnSpeed(int ms)
     { //fare i vari controlli per le eccezzioni
         velocitaSpawn = ms;
-    }
-    
-    public void repaintCenter() //Non serve più giusto?
-    {
-        int centerX = getWidth();
-        int centerY =  getHeight();
-        Rectangle repaintRect = new Rectangle(0, centerY, centerX, centerY+150);
-        
-        repaint(repaintRect);
     }
     
     public void stopThread()
     {
         for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();
-            //System.out.println(meteorite.toString());
         }
         mainThread.stop();
         isPaused = true;
@@ -150,6 +150,14 @@ public class MyPanelGioco extends JPanel implements Runnable
     public int getTotM()
     {
         return totM;
+    }
+    
+    public boolean getPause(){
+        return isPaused;
+    }
+    
+    public void setGamePause(boolean l){
+        isPaused = l;
     }
     
     public boolean gameStatus(){

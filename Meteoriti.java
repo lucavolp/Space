@@ -61,14 +61,12 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
             move();
             
             Point labelLocation = this.getLocation();//Prende la posizione della Label
-            //System.out.println(labelLocation.y);
             if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height - 100) //Controlla se la Label contenente il meteorite è andata fuori dallo schermo
             {
                 
                 Container parent = getParent(); //ottieni il pannello genitore
                 eliminato = true;   //Smette di fare il ciclo
-                //System.out.println("Meteorite Eliminato");
-                parent.remove(this); //rimuovi il componente dal pannello
+                parent.remove(this); //rimuove il componente dal pannello
                 stopThread();  //Stoppa il thread
             }
             
@@ -125,7 +123,7 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
                 posGenerazione = colonne + posX*9;
                 break;
         }
-        //posGenerazione = (1920/2) - 100;                  //commentato sennò mi spawna meteoriti solo in una colonna a destra uno sopra l'altro senza spostarli (perche ho una dimensione dello schermo che non è 1920 penso)
+        posGenerazione = (1920/2) - 30;                  //commentato sennò mi spawna meteoriti solo in una colonna a destra uno sopra l'altro senza spostarli (perche ho una dimensione dello schermo che non è 1920 penso)
     }
     
     public int getPosizioneGenerazione(){
@@ -160,13 +158,5 @@ public class Meteoriti extends JLabel implements Runnable //da modificare e mett
     
     public String toString(){
         return "Debug!!";
-    }
-    
-    public void setText(String s){
-        test = s;
-    }
-    
-    public String getTest(){
-        return test;
     }
 }

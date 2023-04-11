@@ -78,35 +78,36 @@ public class AscoltatoreEsterno implements ActionListener {
     }
 
     public void avviaGioco() // Metodo che che crea la nuova finestra quando si preme new game
-    {
+    {   
+        Container f = p.getParent();
+        
         panelGioco = new MyPanelGioco();
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
-        Spaceship spaceship = new Spaceship();
-
-        // panelGioco.setSpaceship(spaceship); //Passa al pannello di gioco il pannello
-        // con la navicella così può usare i suoi metodi per verificare le collisioni
-
-        Container f = p.getParent();
+        //-Spaceship spaceship = new Spaceship();        
+        
         // Rimouve il pannello contenente il menù principale
         f.remove(p);
+        
         // Imposta il layout per aggiungere i 3 pannelli
         f.setLayout(new BorderLayout());
+        
         // Aggiunge i 3 pannelli
         f.add(panelGioco, BorderLayout.CENTER);
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
+        
         // Aggiunge il pannello con la navicella
-        //f.add(spaceship, BorderLayout.PAGE_END);
+        //-f.add(spaceship, BorderLayout.PAGE_END);
 
         // Setta il focus sul pannello della navicella
         //spaceship.setFocusable(true);
         //spaceship.grabFocus();
         //panelGioco.setFocusable(true);
         //panelGioco.grabFocus();
-
-        CollisionDetection cd = new CollisionDetection(spaceship, panelGioco.meteoritis);
-
+        
+        //Crea e avvia la classe che sta ad ascoltare se si verificano collisioni
+        CollisionDetection cd = new CollisionDetection(panelGioco);
         cd.startThread();
 
         f.revalidate();

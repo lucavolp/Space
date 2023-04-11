@@ -231,8 +231,4 @@ public class Spaceship extends JPanel implements KeyListener
         System.out.println("posizione: "+getPX());
         imm.setLocation(saveX, saveY);
     }
-    /*
-    public String getTest(){
-        return test;
-    }*/
 }
