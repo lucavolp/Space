@@ -62,7 +62,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         setLayout(null);
         //setFocusable(true);
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        velocitaMeteoriti = 7;
+        velocitaMeteoriti = 5;
         velocitaSpawn = 1000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         mainThread = new Thread(this, "Gioco");
@@ -86,7 +86,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         while(!GameOver)
         {
             Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
-            meteorite.setBounds(0 , 0, 40, 40);
+            meteorite.setBounds(0 , 0, 55, 55);
             totM++; //contatore di meteoriti utilizzato per il punteggio
             add(meteorite); //lo aggiunge al pannello
             meteoritis.add(0, meteorite); //lo aggiunge alla lista, aggiunge in coda
@@ -118,7 +118,7 @@ public class MyPanelGioco extends JPanel implements Runnable
             if(m.getEliminato())
             {
                 meteoritis.remove(i);
-                System.out.println("Elemento "+ i + " in teoria eliminato");
+                //System.out.println("Elemento "+ i + " in teoria eliminato");
             }
         }
     }

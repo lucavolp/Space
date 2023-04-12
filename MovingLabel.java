@@ -4,16 +4,21 @@ import java.io.*;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Se ti può servire come esempio per lavorarci questa classe fa una label come navicella e si muove
  */
 
-public class MovingLabel extends JLabel implements KeyListener {
-    private static final long serialVersionUID = 1L;
+public class MovingLabel extends JLabel implements KeyListener 
+{
     private int posX = 0;
     private int posY = 0;
     private Image sps;
+    private int velocitaProiettili = 10;
+    
+    public List<Projectile> proiettili;
     
     public MovingLabel() {
         super();
@@ -30,8 +35,9 @@ public class MovingLabel extends JLabel implements KeyListener {
         { 
           e.printStackTrace();
         }
-        
         setIcon(new ImageIcon(sps));
+        
+        proiettili = new ArrayList<Projectile>();
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
@@ -48,18 +54,41 @@ public class MovingLabel extends JLabel implements KeyListener {
     }
     
     //Gestione pressione tasti
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) 
+    {
         int keyCode = e.getKeyCode();
-        switch(keyCode) {
-            case KeyEvent.VK_LEFT:
-                posX -= 8;
+        
+        switch(keyCode) 
+        {
+            case KeyEvent.VK_LEFT: //Freccia sinistra
+                posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
                 setLocation(posX, posY);
                 break;
-            case KeyEvent.VK_RIGHT:
+                
+            case KeyEvent.VK_RIGHT: //Freccia destra
                 posX += 8;
                 setLocation(posX, posY);
                 break;
+                
+            case KeyEvent.VK_SPACE: //Spazio
+                //Creazione nuovo proiettile
+                nuovoProiettile();
+                break;
         }
+    }
+    
+    private void nuovoProiettile()
+    {
+        int x = this.getLocation().x;
+        int y = this.getLocation().y;
+        
+        //Crea un nuovo proiettile e lo aggiunge alla lista
+        Projectile pnew = new Projectile(x, y, velocitaProiettili, this); //Gli passo anche questa classe così ogni volta che viene eliminato un proiettile lo elimina dalla lista
+        proiettili.add(0, pnew);
+        
+        Container parent = getParent(); // ottieni il pannello genitore
+        pnew.setBounds(0 , 0, 40, 40);
+        parent.add(pnew);
     }
     
     public void keyReleased(KeyEvent e) {
@@ -71,5 +100,17 @@ public class MovingLabel extends JLabel implements KeyListener {
     public Rectangle boundsNavicella()
     {
         return this.getBounds();
+    }
+    
+    public void verificaPEliminati()
+    {
+        for (int i = proiettili.size() - 1; i >= 0; i--) 
+        {
+            Projectile p = proiettili.get(i);
+            if(p.getEliminato())
+            {
+                proiettili.remove(i);
+            }
+        }
     }
 }

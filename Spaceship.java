@@ -173,7 +173,7 @@ public class Spaceship extends JPanel implements KeyListener
         
         if (e.getKeyCode() == KeyEvent.VK_UP)
         {
-            pr= new Projectile(posX,posY,15);
+            pr= new Projectile(posX,posY,15, new MovingLabel());
             projectiles.add(pr);
             setVisible(true);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) 

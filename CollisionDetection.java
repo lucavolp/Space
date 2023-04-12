@@ -16,6 +16,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
     private List<Meteoriti> lista;
     private Rectangle boxcolliderSpaceship;
     private boolean GameOver = false;
+    private boolean isPaused = false;
     
     public CollisionDetection(MyPanelGioco panelGioco)
     {
@@ -25,7 +26,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
     //Thread che verifica in continuo le collisioni
     public void run()
     {
-        while (!GameOver || !pannello.getPause()) 
+        while (!GameOver || !isPaused) //Gestire sto isPaused una volta finito tutto
         {
             //System.out.println(pannello.meteoritis.size());
             if (pannello.meteoritis.size() > 0) {
@@ -38,6 +39,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
                 {
                     pannello.setGameStatus(true); //Imposta il gioco il gameover
                     pannello.verificaEliminati(); //Elimina gli ultimi meteoriti 
+                    System.out.println("GameOver!!");
                 }
             }
             
@@ -48,9 +50,8 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
             }
             
             GameOver = pannello.gameStatus();
+            //isPaused = pannello.getPause();
         }
-        
-        System.out.println("È game over");
     }
     
     public void setPannello(MyPanelGioco panelGioco) {
