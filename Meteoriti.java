@@ -98,12 +98,14 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
                     if(this.getBounds().intersects(rp))
                     {
                         vita--;
-                        System.out.println("Collisione con proiettile rilevata");
+                        //System.out.println("Collisione con proiettile rilevata");
+                        p.destroy();
+                        //pannello.remove(p);
                         if(vita <= 0)
                         {
                             eliminato = true;
                             pannello.remove(this);
-                            System.out.println("Vite finite");
+                            //System.out.println("Vite finite");
                         }
                     }
                     if(i >= pannello.roberto.proiettili.size() - 1)
@@ -114,7 +116,7 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
             }
             
             try {
-                Thread.sleep(10); //ferma il thread ogni 10 ms, intervallo di ascolto
+                Thread.sleep(1); //ferma il thread ogni 10 ms, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

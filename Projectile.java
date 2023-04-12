@@ -59,6 +59,7 @@ public class Projectile extends JLabel implements Runnable
                 spaceship.verificaPEliminati();
                 stopThread(); // Stoppa il thread
             }
+            
 
             repaint();
             try {
@@ -89,5 +90,9 @@ public class Projectile extends JLabel implements Runnable
     
     public boolean getEliminato() {
         return eliminato;
+    }
+    
+    public void destroy(){
+        eliminato = true;
     }
 }
