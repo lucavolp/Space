@@ -27,7 +27,7 @@ public class Projectile extends JLabel implements Runnable
     public Projectile(int posX, int posY, int velocity, MovingLabel a) 
     {
         super();
-        this.x = posX + 40;
+        this.x = posX + 50;
         this.y = posY;
         this.velocity = velocity;
         spaceship = a;
@@ -74,7 +74,7 @@ public class Projectile extends JLabel implements Runnable
         this.setLocation(x, y); // move the projectile upwards
     }
 
-    public Rectangle getBounds() {
+    public Rectangle proiettileBounds() {
         return this.getBounds();
     }
     

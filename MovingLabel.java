@@ -26,11 +26,11 @@ public class MovingLabel extends JLabel implements KeyListener
         setFocusable(true);
         
         setPosizioneGenerazione();
-        setBounds(posX, posY, 120, 120);
+        setBounds(posX, posY, 140, 140);
         try
         {
             BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.png"));
-            sps = bufferedImage.getScaledInstance(120, 120, Image.SCALE_DEFAULT);
+            sps = bufferedImage.getScaledInstance(140, 140, Image.SCALE_DEFAULT);
         }catch(IOException e) 
         { 
           e.printStackTrace();
@@ -46,7 +46,7 @@ public class MovingLabel extends JLabel implements KeyListener
         int dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
         
         //non mi funzionano perchè come posizione dello schermo mi prende 3000x1990
-        posX=(dimX/2)-50;  //posiziona partenza al centro dello schermo
+        posX=(dimX/2);  //posiziona partenza al centro dello schermo
         posY=dimY; //posiziona un po' staccata dal fondo
         
         posX= 880;
@@ -84,7 +84,7 @@ public class MovingLabel extends JLabel implements KeyListener
         
         //Crea un nuovo proiettile e lo aggiunge alla lista
         Projectile pnew = new Projectile(x, y, velocitaProiettili, this); //Gli passo anche questa classe così ogni volta che viene eliminato un proiettile lo elimina dalla lista
-        proiettili.add(0, pnew);
+        proiettili.add(pnew);
         
         Container parent = getParent(); // ottieni il pannello genitore
         pnew.setBounds(0 , 0, 40, 40);

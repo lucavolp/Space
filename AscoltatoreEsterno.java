@@ -15,6 +15,10 @@ public class AscoltatoreEsterno implements ActionListener {
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
+    
+    //Thread per le collisioni
+    Thread threadNavicella;
+    Thread threadProiettili;
 
     public AscoltatoreEsterno(MyPanel p)// Viene usato dalla pagina principale
     {
@@ -109,7 +113,24 @@ public class AscoltatoreEsterno implements ActionListener {
         //Crea e avvia la classe che sta ad ascoltare se si verificano collisioni
         CollisionDetection cd = new CollisionDetection(panelGioco);
         cd.startThread();
-
+        /*
+        //Creo due Runnable differenti così riesco ad eseguire tramite due thread differenti due metodi della stessa classe
+        Runnable runnableNavicella = new Runnable(){
+            public void run(){
+                cd.collisioniNavicella();
+            }
+        };
+        threadNavicella = new Thread(runnableNavicella, "Collisioni navicella");
+        threadNavicella.start();
+        
+        Runnable runnableProiettili = new Runnable(){
+            public void run(){
+                cd.collisioniProiettili();
+            }
+        };
+        threadProiettili = new Thread(runnableProiettili, "Collisioni proiettili");
+        threadProiettili.start();*/
+        
         f.revalidate();
         f.repaint();
     }

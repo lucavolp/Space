@@ -12,11 +12,11 @@ import java.awt.*;
 public class CollisionDetection implements Runnable //forse le collisioni bisogna gestirle all'interno della classe MyPanelGioco
 {
     private MyPanelGioco pannello;
-    private Thread thread;
     private List<Meteoriti> lista;
     private Rectangle boxcolliderSpaceship;
     private boolean GameOver = false;
     private boolean isPaused = false;
+    private Thread thread;
     
     public CollisionDetection(MyPanelGioco panelGioco)
     {
@@ -28,8 +28,9 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
     {
         while (!GameOver || !isPaused) //Gestire sto isPaused una volta finito tutto
         {
-            //System.out.println(pannello.meteoritis.size());
-            if (pannello.meteoritis.size() > 0) {
+            //System.out.println("Pausa");
+            if (pannello.meteoritis.size() > 0) 
+            {
                 // prende l'ultimo elemento della lista meteoritis
                 Meteoriti lastMeteorite = pannello.meteoritis.get(pannello.meteoritis.size() - 1);
                 Rectangle m = lastMeteorite.getBounds();
@@ -44,7 +45,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
             }
             
             try {
-                Thread.sleep(800); //ferma il thread ogni 50 ms, intervallo di ascolto
+                Thread.sleep(50); //ferma il thread ogni 50 ms, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -53,14 +54,33 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
             //isPaused = pannello.getPause();
         }
     }
+    /*
+    public void collisioniProiettili()
+    {
+        while (!GameOver || !isPaused) //Gestire sto isPaused una volta finito tutto
+        {
+            if (pannello.roberto.proiettili.size() > 0) 
+            {
+                
+            }
+            
+            try {
+                Thread.sleep(50); //ferma il thread ogni 50 ms, intervallo di ascolto
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+            GameOver = pannello.gameStatus();
+            //isPaused = pannello.getPause();
+        }
+    }*/
     
     public void setPannello(MyPanelGioco panelGioco) {
         pannello = panelGioco;
-        //boxcolliderSpaceship = pannello.getBounds();
     }
     
     public void startThread(){
-        thread = new Thread(this, "Collisioni");
+        thread = new Thread(this, "Collisioni navicella");
         thread.start();
     }
     

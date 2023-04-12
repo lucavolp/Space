@@ -31,7 +31,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     protected Random rand = new Random();
     protected Timer timerMet;
     public List<Meteoriti> meteoritis;
-    
+    private int vitaMeteoriti;
     
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
@@ -62,7 +62,8 @@ public class MyPanelGioco extends JPanel implements Runnable
         setLayout(null);
         //setFocusable(true);
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        velocitaMeteoriti = 5;
+        velocitaMeteoriti = 1;
+        vitaMeteoriti = 1;
         velocitaSpawn = 1000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         mainThread = new Thread(this, "Gioco");
@@ -85,8 +86,8 @@ public class MyPanelGioco extends JPanel implements Runnable
     {
         while(!GameOver)
         {
-            Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti);
-            meteorite.setBounds(0 , 0, 55, 55);
+            Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti, vitaMeteoriti, this);
+            meteorite.setBounds(0 , 0, 50, 50);
             totM++; //contatore di meteoriti utilizzato per il punteggio
             add(meteorite); //lo aggiunge al pannello
             meteoritis.add(0, meteorite); //lo aggiunge alla lista, aggiunge in coda
@@ -94,6 +95,22 @@ public class MyPanelGioco extends JPanel implements Runnable
             repaint();
             
             verificaEliminati(); 
+            
+            Runnable movimento = new Runnable(){
+                public void run(){
+                    meteorite.run();
+                }
+            };
+            Thread threadMovimento = new Thread(movimento, "Movimento meteorite");
+            threadMovimento.start();
+            
+            Runnable collisioniProiettili = new Runnable(){
+                public void run(){
+                    meteorite.collisioniProiettili();
+                }
+            };
+            Thread threadCollisioni = new Thread(collisioniProiettili, "Collisioni");
+            threadCollisioni.start();
             
             try {
                 Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto
@@ -130,9 +147,9 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void stopThread()
     {
-        for (Meteoriti meteorite : meteoritis) {
+        /*for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();
-        }
+        }*/
         mainThread.stop();
         isPaused = true;
         //MyPanelScore.stop();
@@ -140,9 +157,9 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void startThread()
     {
-        for (Meteoriti meteorite : meteoritis) {
+        /*for (Meteoriti meteorite : meteoritis) {
             meteorite.startThread();
-        }
+        }*/
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
     }

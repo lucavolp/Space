@@ -14,8 +14,9 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.awt.*;
 
-public class Meteoriti extends JLabel implements Runnable // da modificare e mettere i thread
+public class Meteoriti extends JLabel //implements Runnable // da modificare e mettere i thread
 {
+    private MyPanelGioco pannello;
     // Coordinata y del meteorite
     private int y = 0;
     // Coordinata x di spawn del meteorite
@@ -30,17 +31,20 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     private boolean eliminato = false;
     // Thread per il movimento del meteorite
     private Thread movimento;
+    //Colpi che servono per distruggere un meteorite
+    private int vita;
 
-    public Meteoriti(int pos, int deltaY) // Gli passo la posizione dove generare il meteorite (random) e la velocità di
+    public Meteoriti(int pos, int deltaY, int v, MyPanelGioco p) // Gli passo la posizione dove generare il meteorite (random) e la velocità di
                                           // cascata del meteorite
     {
         setPosizioneGenerazione(pos);
         setDeltaY(deltaY);
-
+        vita = v;
+        pannello = p;
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/meteorite.png"));
-            met = bufferedImage.getScaledInstance(55, 55, Image.SCALE_DEFAULT);
+            met = bufferedImage.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,29 +52,69 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         this.setLocation(posGenerazione, 0);
 
         // Thread per far muovere il meteorite
-        movimento = new Thread(this, "Meteorite");
-        movimento.start();
+        /*movimento = new Thread(this, "Meteorite");
+        movimento.start();*/
 
     }
 
-    public void run() // Metodo chiamato dal thread per far muovere il meteorite e gestisce se va
-                      // fuori dallo schermo
+    public void run() // Metodo chiamato dal thread per far muovere il meteorite e gestisce se va fuori dallo schermo
     {
-        while (!eliminato) {
+        while (!eliminato) 
+        {
             move();
 
             Point labelLocation = this.getLocation();// Prende la posizione della Label
-            if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height - 100) // Controlla se la Label contenente il meteorite è andata fuori dallo schermo
+            if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height) // Controlla se la Label contenente il meteorite è andata fuori dallo schermo
             {
-                Container parent = getParent(); // ottieni il pannello genitore
+                //Container parent = getParent(); // ottieni il pannello genitore
                 eliminato = true; // Smette di fare il ciclo
-                parent.remove(this); // rimuove il componente dal pannello
-                stopThread(); // Stoppa il thread
+                pannello.remove(this); // rimuove il componente dal pannello
+                //stopThread(); // Stoppa il thread
             }
 
             repaint();
             try {
                 Thread.sleep(10); // ferma il thread ogni 10millisecondi, intervallo di ascolto
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void collisioniProiettili() //Ogni metodo ha un suo thread che verifica le collisioni con i proiettili
+    {
+        int i = 0;
+        while (!eliminato)
+        {
+            //System.out.println(pannello.roberto.proiettili.size()); //Gli elementi nella lista ci sono
+            //if (pannello.roberto.proiettili.size() > 0) //significa che ci sono proiettili nel pannello
+            while(pannello.roberto.proiettili.size() > 0)
+            {
+                //for(int i = 0; i < pannello.roberto.proiettili.size(); i++)//scorre tutta la lista e verifica se collidono
+                //{
+                    Projectile p = pannello.roberto.proiettili.get(i); //I proiettili li prende
+                    Rectangle rp = p.getBounds();
+                    
+                    if(this.getBounds().intersects(rp))
+                    {
+                        vita--;
+                        System.out.println("Collisione con proiettile rilevata");
+                        if(vita <= 0)
+                        {
+                            eliminato = true;
+                            pannello.remove(this);
+                            System.out.println("Vite finite");
+                        }
+                    }
+                    if(i >= pannello.roberto.proiettili.size() - 1)
+                        i = 0;
+                    else 
+                        i++;
+                //}
+            }
+            
+            try {
+                Thread.sleep(10); //ferma il thread ogni 10 ms, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -120,6 +164,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
                 posGenerazione = colonne + posX * 9;
                 break;
         }
+        posGenerazione = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 35;
     }
 
     public int getPosizioneGenerazione() {
@@ -133,7 +178,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     public int getDimCol() {
         return posX;
     }
-
+    /*
     public void stopThread() {
         movimento.stop();
     }
@@ -141,7 +186,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     public void startThread() {
         movimento = new Thread(this, "Meteorite");
         movimento.start();
-    }
+    }*/
 
     public boolean getEliminato() {
         return eliminato;
