@@ -93,6 +93,10 @@ public class Projectile extends JLabel implements Runnable
     }
     
     public void destroy(){
+        System.out.println("metodo destroy");
         eliminato = true;
+        spaceship.verificaPEliminati();
+        Container parent = getParent();
+        parent.remove(this);
     }
 }

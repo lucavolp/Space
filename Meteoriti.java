@@ -98,7 +98,7 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
                     if(this.getBounds().intersects(rp))
                     {
                         vita--;
-                        //System.out.println("Collisione con proiettile rilevata");
+                        System.out.println("Collisione con proiettile rilevata");
                         p.destroy();
                         //pannello.remove(p);
                         if(vita <= 0)

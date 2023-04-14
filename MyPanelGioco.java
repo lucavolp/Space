@@ -63,8 +63,8 @@ public class MyPanelGioco extends JPanel implements Runnable
         //setFocusable(true);
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 1;
-        vitaMeteoriti = 1;
-        velocitaSpawn = 1000; //millisecondi
+        vitaMeteoriti = 4;
+        velocitaSpawn = 5000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
