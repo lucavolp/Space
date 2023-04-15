@@ -11,14 +11,14 @@ import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class Projectile extends JLabel implements Runnable
+public class Projectile extends JLabel //implements Runnable
 {
     private int velocity; //velocità a cui va il proiettile
     private int x = 0;
     private int y = 0;
     private boolean eliminato = false;
     // Thread per il movimento del proiettile
-    private Thread movimento;
+    //private Thread movimento;
     // Immagine che contiene il meteorite
     private Image prt;
     
@@ -45,7 +45,7 @@ public class Projectile extends JLabel implements Runnable
         this.setIcon(new ImageIcon(prt));
         
         this.setLocation(x, y);
-        startThread();
+        //startThread();
     }
     
     public void run() // Metodo chiamato dal thread per far muovere il proiettile e gestisce se va fuori dallo schermo
@@ -60,15 +60,33 @@ public class Projectile extends JLabel implements Runnable
                 eliminato = true; // Smette di fare il ciclo
                 pannello.remove(this); // rimuove il componente dal pannello
                 spaceship.verificaPEliminati();
-                stopThread(); // Stoppa il thread
+                //stopThread(); // Stoppa il thread
             }
             
 
-            repaint();
+            pannello.repaint();
             try {
                 Thread.sleep(10); // ferma il thread ogni 10millisecondi, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+    
+    public void collisioneMeteoriti()
+    {
+        int i = 0;
+        
+        while(!eliminato)
+        {
+            while(pannello.meteoritis.size()>0)
+            {
+                if(this.getBounds().intersects(pannello.meteoritis.get(i).getBounds()))
+                {
+                    eliminato = true;
+                    pannello.repaint();
+                    System.out.println("Collisione con proiettile rilevata");
+                }
             }
         }
     }
@@ -82,7 +100,7 @@ public class Projectile extends JLabel implements Runnable
     public Rectangle proiettileBounds() {
         return this.getBounds();
     }
-    
+    /*
     public void stopThread() {
         movimento.stop();
     }
@@ -90,7 +108,7 @@ public class Projectile extends JLabel implements Runnable
     public void startThread() {
         movimento = new Thread(this, "Proiettile");
         movimento.start();
-    }
+    }*/
     
     public boolean getEliminato() {
         return eliminato;

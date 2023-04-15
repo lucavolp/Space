@@ -21,6 +21,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     private JLabel pippo;
     public AscoltatoreEsterno as;
+    //Thread principale per far eseguire il metodo run dentro questa classe
     private Thread mainThread;
     private boolean GameOver = false;
     private boolean isPaused = false;
@@ -96,7 +97,7 @@ public class MyPanelGioco extends JPanel implements Runnable
             
             verificaEliminati(); 
             
-            Runnable movimento = new Runnable(){
+            /*Runnable movimento = new Runnable(){
                 public void run(){
                     meteorite.run();
                 }
@@ -110,7 +111,7 @@ public class MyPanelGioco extends JPanel implements Runnable
                 }
             };
             Thread threadCollisioni = new Thread(collisioniProiettili, "Collisioni");
-            threadCollisioni.start();
+            threadCollisioni.start();*/
             
             try {
                 Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto

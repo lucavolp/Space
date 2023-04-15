@@ -103,6 +103,21 @@ public class MovingLabel extends JLabel implements KeyListener
         //Container parent = getParent(); // ottieni il pannello genitore
         pnew.setBounds(0 , 0, 40, 40);
         pannello.add(pnew);
+        Runnable movimento = new Runnable(){
+            public void run(){
+                pnew.run();
+            }
+        };
+        Thread threadMovimento = new Thread(movimento, "Movimento meteorite");
+        threadMovimento.start();
+        
+        Runnable collisioniProiettili = new Runnable(){
+            public void run(){
+                pnew.collisioneMeteoriti();
+            }
+        };
+        Thread threadCollisioni = new Thread(collisioniProiettili, "Collisioni");
+        threadCollisioni.start();
     }
     
     public void keyReleased(KeyEvent e) {
