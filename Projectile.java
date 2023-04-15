@@ -25,7 +25,10 @@ public class Projectile extends JLabel //implements Runnable
     private MyPanelGioco pannello;
     
     private MovingLabel spaceship;
-
+    
+    private long IdThreadMovimento;
+    private long IdThreadCollisioni;
+    
     public Projectile(int posX, int posY, int velocity, MyPanelGioco p) 
     {
         super();
@@ -73,6 +76,7 @@ public class Projectile extends JLabel //implements Runnable
         }
     }
     
+    //Metodo per verificare le collisioni con i meteoriti - "funziona"
     public void collisioneMeteoriti()
     {
         int i = 0;
@@ -83,10 +87,15 @@ public class Projectile extends JLabel //implements Runnable
             {
                 if(this.getBounds().intersects(pannello.meteoritis.get(i).getBounds()))
                 {
-                    eliminato = true;
-                    pannello.repaint();
                     System.out.println("Collisione con proiettile rilevata");
+                    destroy();
+                    pannello.meteoritis.get(i).destroy(); //chiama il metodo destroy del meteorite
                 }
+                
+                if(i >= pannello.roberto.proiettili.size() - 1)
+                        i = 0;
+                    else 
+                        i++;
             }
         }
     }
@@ -96,11 +105,8 @@ public class Projectile extends JLabel //implements Runnable
         this.setLocation(x, y); // move the projectile upwards
         MyPanelGioco a;
     }
-
-    public Rectangle proiettileBounds() {
-        return this.getBounds();
-    }
-    /*
+    
+    /**
     public void stopThread() {
         movimento.stop();
     }
@@ -115,10 +121,27 @@ public class Projectile extends JLabel //implements Runnable
     }
     
     public void destroy(){
-        System.out.println("metodo destroy");
         eliminato = true;
         spaceship.verificaPEliminati();
-        Container parent = getParent();
-        parent.remove(this);
+        pannello.remove(this);
+        pannello.repaint();
     }
+    
+    public void setIdThMovimento(long id){
+         IdThreadMovimento = id;
+    }
+    
+    public void setIdThCollisioni(long id){
+        IdThreadCollisioni = id;
+    }
+    
+    public long getIdThMovimento(){
+        return IdThreadMovimento;
+    }
+    
+    public long getIdThCollisioni(){
+        return IdThreadCollisioni;
+    }
+    
+    
 }

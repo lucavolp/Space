@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * Se ti può servire come esempio per lavorarci questa classe fa una label come navicella e si muove
@@ -65,8 +66,8 @@ public class MovingLabel extends JLabel implements KeyListener
         {
             case KeyEvent.VK_LEFT: //Freccia sinistra
                 posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
-                move();
-                //setLocation(posX, posY);
+                //move();
+                setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_RIGHT: //Freccia destra
@@ -103,12 +104,14 @@ public class MovingLabel extends JLabel implements KeyListener
         //Container parent = getParent(); // ottieni il pannello genitore
         pnew.setBounds(0 , 0, 40, 40);
         pannello.add(pnew);
+        
+        //Fa partire i thread che eseguono i metodi per muovere il proiettile e verificare la collisione
         Runnable movimento = new Runnable(){
             public void run(){
                 pnew.run();
             }
         };
-        Thread threadMovimento = new Thread(movimento, "Movimento meteorite");
+        Thread threadMovimento = new Thread(movimento, "Movimento");
         threadMovimento.start();
         
         Runnable collisioniProiettili = new Runnable(){
@@ -118,6 +121,9 @@ public class MovingLabel extends JLabel implements KeyListener
         };
         Thread threadCollisioni = new Thread(collisioniProiettili, "Collisioni");
         threadCollisioni.start();
+        
+        pnew.setIdThMovimento(threadMovimento.getId());
+        pnew.setIdThCollisioni(threadCollisioni.getId());
     }
     
     public void keyReleased(KeyEvent e) {
@@ -146,5 +152,40 @@ public class MovingLabel extends JLabel implements KeyListener
     private void move()
     {
         if(true);
+    }
+    
+    public void startAllThread()
+    {
+        Set<Thread> threads = Thread.getAllStackTraces().keySet();
+        for(int i = 0; i < proiettili.size() - 1; i++)
+        {
+            for (Thread t : threads) 
+            {
+                if(proiettili.get(i).getIdThMovimento() == t.getId() || proiettili.get(i).getIdThCollisioni() == t.getId())
+                {
+                    t.resume();
+                }
+            }
+        }
+    }
+    
+    public void stopAllThread()
+    {
+        //metodo per prendere tutti i thread in esecuzione
+        //ciclo for che scorre la lista proiettili
+        //per ogni elemento della lista ciclo che scorre tutti i thread in esecuzione 
+        //if per veirificare che sia il thread dei proiettili
+        //codice per far partire quel thread
+        Set<Thread> threads = Thread.getAllStackTraces().keySet();
+        for(int i = 0; i < proiettili.size() - 1; i++)
+        {
+            for (Thread t : threads) 
+            {
+                if(proiettili.get(i).getIdThMovimento() == t.getId() || proiettili.get(i).getIdThCollisioni() == t.getId())
+                {
+                    t.suspend();
+                }
+            }
+        }
     }
 }

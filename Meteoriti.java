@@ -203,4 +203,12 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     public String toString() {
         return "Debug!!";
     }
+    
+    public void destroy()
+    {
+        eliminato = true;
+        pannello.verificaEliminati();
+        pannello.remove(this);
+        pannello.repaint();
+    }
 }
