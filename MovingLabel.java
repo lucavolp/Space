@@ -66,25 +66,25 @@ public class MovingLabel extends JLabel implements KeyListener
         switch(keyCode) 
         {
             case KeyEvent.VK_LEFT: //Freccia sinistra
-                posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
+                //posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
                 move();
                 //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_RIGHT: //Freccia destra
-                posX += 8;
+                //posX += 8;
                 move();
                 //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_UP: //Freccia destra
-                posY -= 8;
+                //posY -= 8;
                 move();
                 //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_DOWN: //Freccia destra
-                posY += 8;
+                //posY += 8;
                 move();
                 //setLocation(posX, posY);
                 break;
@@ -153,8 +153,13 @@ public class MovingLabel extends JLabel implements KeyListener
     {
         System.out.println(getBounds().x);
         
-        //if((getBounds().x>0)&&(getBounds().x<dimX-80))
-            //setLocation(posX, posY);
+        if((getBounds().x>0)&&(getBounds().x<dimX))
+        {
+            posX+=8;
+            System.out.println(getBounds().x);
+            setLocation(posX, posY);
+        }
+            
         /*else if((spaceshipSpeed<0)&&(posX>=dimX-80))
             setLocation(posX, posY);
         else if((spaceshipSpeed>0)&&(posX==0))
