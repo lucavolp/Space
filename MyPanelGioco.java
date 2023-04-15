@@ -67,7 +67,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         vitaMeteoriti = 4;
         velocitaSpawn = 5000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
-        mainThread = new Thread(this, "Gioco");
+        mainThread = new Thread(this, "Space");
         mainThread.start();
         totM = 0;
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -153,7 +153,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         }*/
         mainThread.stop();
         isPaused = true;
-        //MyPanelScore.stop();
+        
     }
     
     public void startThread()

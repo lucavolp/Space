@@ -12,7 +12,7 @@ import java.io.*;
 import java.util.*;
 import java.util.Timer;
 
-public class MyPanelMenu extends JPanel
+public class MyPanelMenu extends JPanel implements Runnable
 {
     private MyPanelGioco pannelloGioco;
     
@@ -53,7 +53,7 @@ public class MyPanelMenu extends JPanel
         back = new JButton("Torna al menù principale");
         back.addActionListener(as);
         
-        timer= new JLabel("Tempo di Gioco: 00:00");
+        timer= new JLabel("00:00");
         
         // Crea un nuovo GridBagLayout e imposta il layout del pannello su di esso
         GridBagLayout layout = new GridBagLayout();
@@ -85,14 +85,20 @@ public class MyPanelMenu extends JPanel
         startThread();
     
     
-    
+        // Aggiunge al pannello
+        add(pause);
+        add(resume);
+        add(restart);
+        add(back);
+        add(timer);
+        resume.setVisible(false);
 
     }
 
     //Thread che gestisce il timer
     public void run() 
     {
-        while(!isGamePaused) //Gestire sto isPaused una volta finito tutto
+        while(true) //Gestire sto isPaused una volta finito tutto
         {
             tSec++;
             if(tSec>59)
@@ -104,11 +110,17 @@ public class MyPanelMenu extends JPanel
                 timer.setText("Tempo di Gioco: "+tMin+":"+tSec);
             else
                 timer.setText("Tempo di Gioco: "+tMin+":0"+tSec);
+                
+            try {
+                Thread.sleep(1000); //ogni secondo va avanti di un secondo
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
     
     public void startThread(){
-        time = new Thread();
+        time = new Thread(this,"timerGioco");
         time.start();
     }
     

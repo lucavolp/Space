@@ -19,6 +19,8 @@ public class MovingLabel extends JLabel implements KeyListener
     private Image sps;
     private int velocitaProiettili = 10;
     private MyPanelGioco pannello;
+    private int dimX;
+    private int dimY;
     
     public List<Projectile> proiettili;
     
@@ -65,24 +67,27 @@ public class MovingLabel extends JLabel implements KeyListener
         switch(keyCode) 
         {
             case KeyEvent.VK_LEFT: //Freccia sinistra
-                posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
-                //move();
-                setLocation(posX, posY);
+                //posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
+                move();
+                //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_RIGHT: //Freccia destra
-                posX += 8;
-                setLocation(posX, posY);
+                //posX += 8;
+                move();
+                //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_UP: //Freccia destra
-                posY -= 8;
-                setLocation(posX, posY);
+                //posY -= 8;
+                move();
+                //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_DOWN: //Freccia destra
-                posY += 8;
-                setLocation(posX, posY);
+                //posY += 8;
+                move();
+                //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_SPACE: //Spazio
@@ -148,10 +153,23 @@ public class MovingLabel extends JLabel implements KeyListener
             }
         }
     }
-        
+    
+    //fa fare l'azione di movimento solo se si è all'interno dello spazio corretto
     private void move()
     {
-        if(true);
+        System.out.println(getBounds().x);
+        
+        if((getBounds().x>0)&&(getBounds().x<dimX))
+        {
+            posX+=8;
+            System.out.println(getBounds().x);
+            setLocation(posX, posY);
+        }
+            
+        /*else if((spaceshipSpeed<0)&&(posX>=dimX-80))
+            setLocation(posX, posY);
+        else if((spaceshipSpeed>0)&&(posX==0))
+            setLocation(posX, posY);     */
     }
     
     public void startAllThread()
