@@ -54,6 +54,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
             //isPaused = pannello.getPause();
         }
     }
+    
     /*
     public void collisioniProiettili()
     {
