@@ -11,27 +11,30 @@ import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class Projectile extends JLabel implements Runnable
+public class Projectile extends JLabel //implements Runnable
 {
     private int velocity; //velocità a cui va il proiettile
     private int x = 0;
     private int y = 0;
     private boolean eliminato = false;
     // Thread per il movimento del proiettile
-    private Thread movimento;
+    //private Thread movimento;
     // Immagine che contiene il meteorite
     private Image prt;
     
+    private MyPanelGioco pannello;
+    
     private MovingLabel spaceship;
 
-    public Projectile(int posX, int posY, int velocity, MovingLabel a) 
+    public Projectile(int posX, int posY, int velocity, MyPanelGioco p) 
     {
         super();
         this.x = posX + 50;
         this.y = posY;
         this.velocity = velocity;
-        spaceship = a;
+        pannello = p;
         
+        spaceship = pannello.roberto; //prende la label con la navicella
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/proiettile.png"));
@@ -42,7 +45,7 @@ public class Projectile extends JLabel implements Runnable
         this.setIcon(new ImageIcon(prt));
         
         this.setLocation(x, y);
-        startThread();
+        //startThread();
     }
     
     public void run() // Metodo chiamato dal thread per far muovere il proiettile e gestisce se va fuori dallo schermo
@@ -53,15 +56,15 @@ public class Projectile extends JLabel implements Runnable
             Point labelLocation = this.getLocation();// Prende la posizione della Label
             if (labelLocation.y < 0) // Controlla se la Label contenente il proiettile è andata fuori dallo schermo
             {
-                Container parent = getParent(); // ottieni il pannello genitore
+                //Container parent = getParent(); // ottieni il pannello genitore
                 eliminato = true; // Smette di fare il ciclo
-                parent.remove(this); // rimuove il componente dal pannello
+                pannello.remove(this); // rimuove il componente dal pannello
                 spaceship.verificaPEliminati();
-                stopThread(); // Stoppa il thread
+                //stopThread(); // Stoppa il thread
             }
             
 
-            repaint();
+            pannello.repaint();
             try {
                 Thread.sleep(10); // ferma il thread ogni 10millisecondi, intervallo di ascolto
             } catch (InterruptedException e) {
@@ -69,16 +72,35 @@ public class Projectile extends JLabel implements Runnable
             }
         }
     }
+    
+    public void collisioneMeteoriti()
+    {
+        int i = 0;
+        
+        while(!eliminato)
+        {
+            while(pannello.meteoritis.size()>0)
+            {
+                if(this.getBounds().intersects(pannello.meteoritis.get(i).getBounds()))
+                {
+                    eliminato = true;
+                    pannello.repaint();
+                    System.out.println("Collisione con proiettile rilevata");
+                }
+            }
+        }
+    }
 
     public void move() {
         y-= velocity;
         this.setLocation(x, y); // move the projectile upwards
+        MyPanelGioco a;
     }
 
     public Rectangle proiettileBounds() {
         return this.getBounds();
     }
-    
+    /*
     public void stopThread() {
         movimento.stop();
     }
@@ -86,7 +108,7 @@ public class Projectile extends JLabel implements Runnable
     public void startThread() {
         movimento = new Thread(this, "Proiettile");
         movimento.start();
-    }
+    }*/
     
     public boolean getEliminato() {
         return eliminato;

@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 import java.io.*;
 import java.awt.*;
 
-public class Meteoriti extends JLabel //implements Runnable // da modificare e mettere i thread
+public class Meteoriti extends JLabel implements Runnable // da modificare e mettere i thread
 {
     private MyPanelGioco pannello;
     // Coordinata y del meteorite
@@ -54,7 +54,7 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
         // Thread per far muovere il meteorite
         /*movimento = new Thread(this, "Meteorite");
         movimento.start();*/
-
+        startThread();
     }
 
     public void run() // Metodo chiamato dal thread per far muovere il meteorite e gestisce se va fuori dallo schermo
@@ -80,7 +80,7 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
             }
         }
     }
-    
+    /*
     public void collisioniProiettili() //Ogni metodo ha un suo thread che verifica le collisioni con i proiettili
     {
         int i = 0;
@@ -92,19 +92,20 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
             {
                 //for(int i = 0; i < pannello.roberto.proiettili.size(); i++)//scorre tutta la lista e verifica se collidono
                 //{
-                    Projectile p = pannello.roberto.proiettili.get(i); //I proiettili li prende
-                    Rectangle rp = p.getBounds();
+                    //Projectile p = pannello.roberto.proiettili.get(i); //I proiettili li prende
                     
-                    if(this.getBounds().intersects(rp))
+                    if(this.getBounds().intersects(pannello.roberto.proiettili.get(i).getBounds()))
                     {
                         vita--;
                         System.out.println("Collisione con proiettile rilevata");
-                        p.destroy();
+                        pannello.roberto.proiettili.get(i).destroy();
                         //pannello.remove(p);
                         if(vita <= 0)
                         {
                             eliminato = true;
                             pannello.remove(this);
+                            pannello.repaint();
+                            //spaceship.verificaPEliminati();
                             //System.out.println("Vite finite");
                         }
                     }
@@ -122,7 +123,7 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
             }
         }
     }
-
+    */
     public void move() // metodo per far muovere il meteorite
     {
         y += deltaY; // Incrementa la y della velocità con cui scende il meteorite
@@ -180,7 +181,7 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
     public int getDimCol() {
         return posX;
     }
-    /*
+    
     public void stopThread() {
         movimento.stop();
     }
@@ -188,7 +189,7 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
     public void startThread() {
         movimento = new Thread(this, "Meteorite");
         movimento.start();
-    }*/
+    }
 
     public boolean getEliminato() {
         return eliminato;
