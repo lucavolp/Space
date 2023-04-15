@@ -48,8 +48,8 @@ public class MovingLabel extends JLabel implements KeyListener
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
     {
-        int dimX=Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
-        int dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
+        dimX=Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
+        dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
         
         //non mi funzionano perchè come posizione dello schermo mi prende 3000x1990
         posX=(dimX/2);  //posiziona partenza al centro dello schermo
@@ -67,25 +67,25 @@ public class MovingLabel extends JLabel implements KeyListener
         switch(keyCode) 
         {
             case KeyEvent.VK_LEFT: //Freccia sinistra
-                //posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
+                posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
                 move();
                 //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_RIGHT: //Freccia destra
-                //posX += 8;
+                posX += 8;
                 move();
                 //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_UP: //Freccia destra
-                //posY -= 8;
+                posY -= 8;
                 move();
                 //setLocation(posX, posY);
                 break;
                 
             case KeyEvent.VK_DOWN: //Freccia destra
-                //posY += 8;
+                posY += 8;
                 move();
                 //setLocation(posX, posY);
                 break;
@@ -157,11 +157,11 @@ public class MovingLabel extends JLabel implements KeyListener
     //fa fare l'azione di movimento solo se si è all'interno dello spazio corretto
     private void move()
     {
-        System.out.println(getBounds().x);
+        //System.out.println(getBounds().x);
         
         if((getBounds().x>0)&&(getBounds().x<dimX))
         {
-            posX+=8;
+            //posX+=8;
             System.out.println(getBounds().x);
             setLocation(posX, posY);
         }
