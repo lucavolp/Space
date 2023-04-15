@@ -161,10 +161,12 @@ public class MovingLabel extends JLabel implements KeyListener
         
         if((getBounds().x>0)&&(getBounds().x<dimX))
         {
-            //posX+=8;
-            System.out.println(getBounds().x);
+            //System.out.println(getBounds().x);
             setLocation(posX, posY);
         }
+        else if(getBounds().x==0);
+        
+        //RIFARE CON LA VELOCITA
             
         /*else if((spaceshipSpeed<0)&&(posX>=dimX-80))
             setLocation(posX, posY);
