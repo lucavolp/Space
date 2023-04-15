@@ -124,10 +124,9 @@ public class MovingLabel extends JLabel implements KeyListener
             }
         }
     }
-    
-    
+        
     private void move()
     {
-        
+        if(true);
     }
 }
