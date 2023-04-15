@@ -51,6 +51,7 @@ public class AscoltatoreEsterno implements ActionListener {
             panelMenu.isGamePaused = true;
             panelMenu.pause.setVisible(false);
             panelMenu.resume.setVisible(true);
+            panelGioco.roberto.stopAllThread();
         }
         if (e.getActionCommand().equals("Riprendi")) {
             panelMenu.resume.setVisible(false);
