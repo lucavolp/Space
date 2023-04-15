@@ -17,13 +17,16 @@ public class MovingLabel extends JLabel implements KeyListener
     private int posY = 0;
     private Image sps;
     private int velocitaProiettili = 10;
+    private MyPanelGioco pannello;
     
     public List<Projectile> proiettili;
     
-    public MovingLabel() {
+    public MovingLabel(MyPanelGioco p) {
         super();
         addKeyListener(this);
         setFocusable(true);
+        
+        pannello = p;
         
         setPosizioneGenerazione();
         setBounds(posX, posY, 140, 140);
@@ -94,12 +97,12 @@ public class MovingLabel extends JLabel implements KeyListener
         int y = this.getLocation().y;
         
         //Crea un nuovo proiettile e lo aggiunge alla lista
-        Projectile pnew = new Projectile(x, y, velocitaProiettili, this); //Gli passo anche questa classe così ogni volta che viene eliminato un proiettile lo elimina dalla lista
+        Projectile pnew = new Projectile(x, y, velocitaProiettili, pannello); //Gli passo anche questa classe così ogni volta che viene eliminato un proiettile lo elimina dalla lista
         proiettili.add(pnew);
         
-        Container parent = getParent(); // ottieni il pannello genitore
+        //Container parent = getParent(); // ottieni il pannello genitore
         pnew.setBounds(0 , 0, 40, 40);
-        parent.add(pnew);
+        pannello.add(pnew);
     }
     
     public void keyReleased(KeyEvent e) {

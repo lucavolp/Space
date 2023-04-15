@@ -92,14 +92,13 @@ public class Meteoriti extends JLabel //implements Runnable // da modificare e m
             {
                 //for(int i = 0; i < pannello.roberto.proiettili.size(); i++)//scorre tutta la lista e verifica se collidono
                 //{
-                    Projectile p = pannello.roberto.proiettili.get(i); //I proiettili li prende
-                    Rectangle rp = p.getBounds();
+                    //Projectile p = pannello.roberto.proiettili.get(i); //I proiettili li prende
                     
-                    if(this.getBounds().intersects(rp))
+                    if(this.getBounds().intersects(pannello.roberto.proiettili.get(i).getBounds()))
                     {
                         vita--;
                         System.out.println("Collisione con proiettile rilevata");
-                        p.destroy();
+                        pannello.roberto.proiettili.get(i).destroy();
                         //pannello.remove(p);
                         if(vita <= 0)
                         {

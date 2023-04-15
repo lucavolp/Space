@@ -72,7 +72,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
         //Label con la navicella
-        roberto = new MovingLabel();
+        roberto = new MovingLabel(this);
         add(roberto);
         
         /*

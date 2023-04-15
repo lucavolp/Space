@@ -19,8 +19,8 @@ import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Spaceship extends JPanel implements KeyListener
-{
+public class Spaceship //extends JPanel implements KeyListener
+{/*
     private Point labelLocation; 
     private Timer timer;
     private Timer timer2;
@@ -45,6 +45,7 @@ public class Spaceship extends JPanel implements KeyListener
     
     public Spaceship() 
     {
+        
         //this.setLocation(posX, posY);
         super();
         //setLayout(null);
@@ -110,7 +111,7 @@ public class Spaceship extends JPanel implements KeyListener
             }
         });
         //this.setFocusable(true);
-        */
+        *//*
         this.setFocusable(true);
 
         this.addKeyListener(this); 
@@ -173,7 +174,7 @@ public class Spaceship extends JPanel implements KeyListener
         
         if (e.getKeyCode() == KeyEvent.VK_UP)
         {
-            pr= new Projectile(posX,posY,15, new MovingLabel());
+            pr= new Projectile(posX,posY,15, new MyPanelGioco());
             projectiles.add(pr);
             setVisible(true);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) 
@@ -230,5 +231,5 @@ public class Spaceship extends JPanel implements KeyListener
     public void debug(){
         System.out.println("posizione: "+getPX());
         imm.setLocation(saveX, saveY);
-    }
+    }*/
 }

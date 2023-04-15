@@ -22,16 +22,19 @@ public class Projectile extends JLabel implements Runnable
     // Immagine che contiene il meteorite
     private Image prt;
     
+    private MyPanelGioco pannello;
+    
     private MovingLabel spaceship;
 
-    public Projectile(int posX, int posY, int velocity, MovingLabel a) 
+    public Projectile(int posX, int posY, int velocity, MyPanelGioco p) 
     {
         super();
         this.x = posX + 50;
         this.y = posY;
         this.velocity = velocity;
-        spaceship = a;
+        pannello = p;
         
+        spaceship = pannello.roberto; //prende la label con la navicella
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/proiettile.png"));
@@ -53,9 +56,9 @@ public class Projectile extends JLabel implements Runnable
             Point labelLocation = this.getLocation();// Prende la posizione della Label
             if (labelLocation.y < 0) // Controlla se la Label contenente il proiettile è andata fuori dallo schermo
             {
-                Container parent = getParent(); // ottieni il pannello genitore
+                //Container parent = getParent(); // ottieni il pannello genitore
                 eliminato = true; // Smette di fare il ciclo
-                parent.remove(this); // rimuove il componente dal pannello
+                pannello.remove(this); // rimuove il componente dal pannello
                 spaceship.verificaPEliminati();
                 stopThread(); // Stoppa il thread
             }
@@ -73,6 +76,7 @@ public class Projectile extends JLabel implements Runnable
     public void move() {
         y-= velocity;
         this.setLocation(x, y); // move the projectile upwards
+        MyPanelGioco a;
     }
 
     public Rectangle proiettileBounds() {

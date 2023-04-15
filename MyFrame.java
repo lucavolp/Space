@@ -6,7 +6,7 @@
  */
 
 import javax.swing.*;
-import java.awt.Toolkit;
+import java.awt.Toolkit; 
 
 public class MyFrame extends JFrame 
 {
