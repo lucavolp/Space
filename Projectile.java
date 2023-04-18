@@ -85,7 +85,7 @@ public class Projectile extends JLabel //implements Runnable
         {
             while(pannello.meteoritis.size()>0)
             {
-                if(this.getBounds().intersects(pannello.meteoritis.get(i).getBounds()))
+                if(this.getBounds().intersects(pannello.meteoritis.get(i).getBounds())) //Da sempre errore perchè o this.getBounds non esiste più o il meteorite non esiste più 
                 {
                     System.out.println("Collisione con proiettile rilevata");
                     destroy();
@@ -106,25 +106,15 @@ public class Projectile extends JLabel //implements Runnable
         MyPanelGioco a;
     }
     
-    /**
-    public void stopThread() {
-        movimento.stop();
-    }
-
-    public void startThread() {
-        movimento = new Thread(this, "Proiettile");
-        movimento.start();
-    }*/
-    
     public boolean getEliminato() {
         return eliminato;
     }
     
     public void destroy(){
-        eliminato = true;
-        spaceship.verificaPEliminati();
         pannello.remove(this);
         pannello.repaint();
+        eliminato = true;
+        spaceship.verificaPEliminati();
     }
     
     public void setIdThMovimento(long id){

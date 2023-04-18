@@ -3,7 +3,6 @@
  * 
  * @author (Battistelli Kevin - Volpinari Luca)
  * @version (1.0)
- * Lu, ma se rifai la spaceship come jlabel? dato che non avendo più layout in teoria quando repainta non dovrebbe spostarla al centro, e prima il movimento funzionava
 */
 
 
@@ -51,6 +50,8 @@ public class MyPanelGioco extends JPanel implements Runnable
     public int pos[];
     //^^^^^^^^^^^^^^^^^^^^^^^^^^
     
+    //Sfondo
+    private Image backgroundImage;
     
     //Test
     //Navicella funzionante
@@ -61,6 +62,13 @@ public class MyPanelGioco extends JPanel implements Runnable
     {
         super();
         setLayout(null);
+        
+        try {
+            backgroundImage = ImageIO.read(new File("img/background_game.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         //setFocusable(true);
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 1;
@@ -83,48 +91,30 @@ public class MyPanelGioco extends JPanel implements Runnable
         } catch (IOException e) {};*/
     }
     
+    //Per l'immagine di sfondo
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+    
     public void run()
     {
         while(!GameOver)
         {
             Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti, vitaMeteoriti, this);
-            meteorite.setBounds(0 , 0, 50, 50);
+            meteorite.setBounds(0 , 0, 50, 55);
             totM++; //contatore di meteoriti utilizzato per il punteggio
             add(meteorite); //lo aggiunge al pannello
             meteoritis.add(0, meteorite); //lo aggiunge alla lista, aggiunge in coda
             revalidate();
             repaint();
-            
-            verificaEliminati(); 
-            
-            /*Runnable movimento = new Runnable(){
-                public void run(){
-                    meteorite.run();
-                }
-            };
-            Thread threadMovimento = new Thread(movimento, "Movimento meteorite");
-            threadMovimento.start();
-            
-            Runnable collisioniProiettili = new Runnable(){
-                public void run(){
-                    meteorite.collisioniProiettili();
-                }
-            };
-            Thread threadCollisioni = new Thread(collisioniProiettili, "Collisioni");
-            threadCollisioni.start();*/
+            verificaEliminati();
             
             try {
                 Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
-            /*
-            Projectile pr;
-            projectiles=new ArrayList<Projectile>();
-            pr= new Projectile(800,800,15);
-            projectiles.add(pr);
-            */
         }
     }
     
@@ -148,19 +138,17 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void stopThread()
     {
-        /*for (Meteoriti meteorite : meteoritis) {
+        for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();
-        }*/
+        }
         mainThread.stop();
-        isPaused = true;
-        
     }
     
     public void startThread()
     {
-        /*for (Meteoriti meteorite : meteoritis) {
+        for (Meteoriti meteorite : meteoritis) {
             meteorite.startThread();
-        }*/
+        }
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
     }

@@ -48,15 +48,17 @@ public class AscoltatoreEsterno implements ActionListener {
         // Controlli pannello del menù
         if (e.getActionCommand().equals("Pausa")) {
             panelGioco.stopThread();
+            panelGioco.setGamePause(true);
+            
             panelMenu.isGamePaused = true;
             panelMenu.pause.setVisible(false);
             panelMenu.resume.setVisible(true);
-            panelGioco.roberto.stopAllThread();
         }
         if (e.getActionCommand().equals("Riprendi")) {
+            panelGioco.startThread();
+            panelGioco.setGamePause(false);
+            
             panelMenu.resume.setVisible(false);
-            panelGioco.startThread(); // -----------------------------------------------------------da errore perche
-                                      // startThread non so se si possa fare così| ora dovrebbe funzionare
             panelMenu.isGamePaused = false;
             panelMenu.pause.setVisible(true);
         }
@@ -102,35 +104,9 @@ public class AscoltatoreEsterno implements ActionListener {
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
         
-        // Aggiunge il pannello con la navicella
-        //-f.add(spaceship, BorderLayout.PAGE_END);
-
-        // Setta il focus sul pannello della navicella
-        //spaceship.setFocusable(true);
-        //spaceship.grabFocus();
-        //panelGioco.setFocusable(true);
-        //panelGioco.grabFocus();
-        
         //Crea e avvia la classe che sta ad ascoltare se si verificano collisioni
         CollisionDetection cd = new CollisionDetection(panelGioco);
         cd.startThread();
-        /*
-        //Creo due Runnable differenti così riesco ad eseguire tramite due thread differenti due metodi della stessa classe
-        Runnable runnableNavicella = new Runnable(){
-            public void run(){
-                cd.collisioniNavicella();
-            }
-        };
-        threadNavicella = new Thread(runnableNavicella, "Collisioni navicella");
-        threadNavicella.start();
-        
-        Runnable runnableProiettili = new Runnable(){
-            public void run(){
-                cd.collisioniProiettili();
-            }
-        };
-        threadProiettili = new Thread(runnableProiettili, "Collisioni proiettili");
-        threadProiettili.start();*/
         
         f.revalidate();
         f.repaint();

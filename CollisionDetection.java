@@ -26,7 +26,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
     //Thread che verifica in continuo le collisioni
     public void run()
     {
-        while (!GameOver || !isPaused) //Gestire sto isPaused una volta finito tutto
+        while (!pannello.gameStatus()) //Gestire sto isPaused una volta finito tutto
         {
             //System.out.println("Pausa");
             if (pannello.meteoritis.size() > 0) 
@@ -40,6 +40,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
                 {
                     pannello.setGameStatus(true); //Imposta il gioco il gameover
                     pannello.verificaEliminati(); //Elimina gli ultimi meteoriti 
+                    pannello.stopThread();
                     System.out.println("GameOver!!");
                 }
             }

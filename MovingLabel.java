@@ -17,17 +17,19 @@ public class MovingLabel extends JLabel implements KeyListener
     private int posX = 0;
     private int posY = 0;
     private Image sps;
-    private int velocitaProiettili = 10;
+    private int velocitaProiettili = 5;
     private MyPanelGioco pannello;
     private int dimX;
     private int dimY;
-    
     public List<Projectile> proiettili;
+    private long ultimoProiettile;
     
-    public MovingLabel(MyPanelGioco p) {
+    public MovingLabel(MyPanelGioco p) 
+    {
         super();
         addKeyListener(this);
         setFocusable(true);
+        grabFocus();
         
         pannello = p;
         
@@ -44,6 +46,7 @@ public class MovingLabel extends JLabel implements KeyListener
         setIcon(new ImageIcon(sps));
         
         proiettili = new ArrayList<Projectile>();
+        ultimoProiettile = System.currentTimeMillis();
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
@@ -64,37 +67,44 @@ public class MovingLabel extends JLabel implements KeyListener
     {
         int keyCode = e.getKeyCode();
         
-        switch(keyCode) 
-        {
-            case KeyEvent.VK_LEFT: //Freccia sinistra
-                posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
-                move();
-                //setLocation(posX, posY);
-                break;
-                
-            case KeyEvent.VK_RIGHT: //Freccia destra
-                posX += 8;
-                move();
-                //setLocation(posX, posY);
-                break;
-                
-            case KeyEvent.VK_UP: //Freccia destra
-                posY -= 8;
-                move();
-                //setLocation(posX, posY);
-                break;
-                
-            case KeyEvent.VK_DOWN: //Freccia destra
-                posY += 8;
-                move();
-                //setLocation(posX, posY);
-                break;
-                
-            case KeyEvent.VK_SPACE: //Spazio
-                //Creazione nuovo proiettile
-                nuovoProiettile();
-                break;
-        }
+        if(!pannello.gameStatus())
+        if(!pannello.getPause()) //se il gioco non è in pausa allora la navicella prende gli input
+            switch(keyCode) 
+            {
+                case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
+                    posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
+                    move();
+                    //setLocation(posX, posY);
+                    break;
+                    
+                case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
+                    posX += 8;
+                    move();
+                    //setLocation(posX, posY);
+                    break;
+                    
+                case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
+                    posY -= 8;
+                    move();
+                    //setLocation(posX, posY);
+                    break;
+                    
+                case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
+                    posY += 8;
+                    move();
+                    //setLocation(posX, posY);
+                    break;
+                    
+                case KeyEvent.VK_SPACE: //Spazio
+                    //Creazione nuovo proiettile
+                    long currentTime = System.currentTimeMillis();
+                    if(currentTime - ultimoProiettile >= 1000) //controlla che sia passato almeno 1000 millisecondi dalla generazione di quello precendente | possibile sostituzione con una variabile
+                    {
+                        nuovoProiettile();
+                        ultimoProiettile = currentTime;
+                    }
+                    break;
+            }
     }
     
     private void nuovoProiettile()
@@ -104,9 +114,8 @@ public class MovingLabel extends JLabel implements KeyListener
         
         //Crea un nuovo proiettile e lo aggiunge alla lista
         Projectile pnew = new Projectile(x, y, velocitaProiettili, pannello); //Gli passo anche questa classe così ogni volta che viene eliminato un proiettile lo elimina dalla lista
-        proiettili.add(pnew);
+        proiettili.add(0, pnew);
         
-        //Container parent = getParent(); // ottieni il pannello genitore
         pnew.setBounds(0 , 0, 40, 40);
         pannello.add(pnew);
         

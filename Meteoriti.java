@@ -44,7 +44,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/meteorite.png"));
-            met = bufferedImage.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+            met = bufferedImage.getScaledInstance(50, 55, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,50 +80,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
             }
         }
     }
-    /*
-    public void collisioniProiettili() //Ogni metodo ha un suo thread che verifica le collisioni con i proiettili
-    {
-        int i = 0;
-        while (!eliminato)
-        {
-            //System.out.println(pannello.roberto.proiettili.size()); //Gli elementi nella lista ci sono
-            //if (pannello.roberto.proiettili.size() > 0) //significa che ci sono proiettili nel pannello
-            while(pannello.roberto.proiettili.size() > 0)
-            {
-                //for(int i = 0; i < pannello.roberto.proiettili.size(); i++)//scorre tutta la lista e verifica se collidono
-                //{
-                    //Projectile p = pannello.roberto.proiettili.get(i); //I proiettili li prende
-                    
-                    if(this.getBounds().intersects(pannello.roberto.proiettili.get(i).getBounds()))
-                    {
-                        vita--;
-                        System.out.println("Collisione con proiettile rilevata");
-                        pannello.roberto.proiettili.get(i).destroy();
-                        //pannello.remove(p);
-                        if(vita <= 0)
-                        {
-                            eliminato = true;
-                            pannello.remove(this);
-                            pannello.repaint();
-                            //spaceship.verificaPEliminati();
-                            //System.out.println("Vite finite");
-                        }
-                    }
-                    if(i >= pannello.roberto.proiettili.size() - 1)
-                        i = 0;
-                    else 
-                        i++;
-                //}
-            }
-            
-            try {
-                Thread.sleep(1); //ferma il thread ogni 10 ms, intervallo di ascolto
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    */
+    
     public void move() // metodo per far muovere il meteorite
     {
         y += deltaY; // Incrementa la y della velocità con cui scende il meteorite
@@ -206,9 +163,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     
     public void destroy()
     {
-        eliminato = true;
-        pannello.verificaEliminati();
         pannello.remove(this);
         pannello.repaint();
+        eliminato = true;
+        pannello.verificaEliminati();
     }
 }
