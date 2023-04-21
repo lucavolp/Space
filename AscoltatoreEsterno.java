@@ -38,23 +38,26 @@ public class AscoltatoreEsterno implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         // Controlli schermata principale
-        if (e.getActionCommand().equals("New Game")) {
+        if (e.getActionCommand().equals("New Game")) 
+        {
             avviaGioco();
         }
-        if (e.getActionCommand().equals("Chiudi")) {
+        if (e.getActionCommand().equals("Chiudi")) 
+        {
             System.exit(0);
         }
 
         // Controlli pannello del menù
-        if (e.getActionCommand().equals("Pausa")) {
-            panelGioco.stopThread();
+        if (e.getActionCommand().equals("Pausa")) 
+        {
             panelGioco.setGamePause(true);
             
             panelMenu.isGamePaused = true;
             panelMenu.pause.setVisible(false);
             panelMenu.resume.setVisible(true);
         }
-        if (e.getActionCommand().equals("Riprendi")) {
+        if (e.getActionCommand().equals("Riprendi")) //Forse ho trovato la deprecatezza del metodo stop()
+        {
             panelGioco.startThread();
             panelGioco.setGamePause(false);
             
@@ -62,10 +65,12 @@ public class AscoltatoreEsterno implements ActionListener {
             panelMenu.isGamePaused = false;
             panelMenu.pause.setVisible(true);
         }
-        if (e.getActionCommand().equals("Restart")) {
+        if (e.getActionCommand().equals("Restart")) 
+        {
 
         }
-        if (e.getActionCommand().equals("Torna al menù principale")) {
+        if (e.getActionCommand().equals("Torna al menù principale")) 
+        {
             backHome();
         }
     }

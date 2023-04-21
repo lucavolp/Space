@@ -53,7 +53,6 @@ public class MyPanelGioco extends JPanel implements Runnable
     //Sfondo
     private Image backgroundImage;
     
-    //Test
     //Navicella funzionante
     MovingLabel roberto;
 
@@ -69,26 +68,20 @@ public class MyPanelGioco extends JPanel implements Runnable
             e.printStackTrace();
         }
         
-        //setFocusable(true);
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 1;
         vitaMeteoriti = 4;
         velocitaSpawn = 5000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
-        mainThread = new Thread(this, "Space");
-        mainThread.start();
         totM = 0;
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
         //Label con la navicella
         roberto = new MovingLabel(this);
         add(roberto);
-        
-        /*
-        try {
-          this.setContentPane(
-            new JLabel(new ImageIcon(ImageIO.read(new File("your_file.jpeg")))));
-        } catch (IOException e) {};*/
+
+        mainThread = new Thread(this, "Space");
+        mainThread.start();
     }
     
     //Per l'immagine di sfondo
@@ -126,7 +119,6 @@ public class MyPanelGioco extends JPanel implements Runnable
             if(m.getEliminato())
             {
                 meteoritis.remove(i);
-                //System.out.println("Elemento "+ i + " in teoria eliminato");
             }
         }
     }
@@ -136,11 +128,12 @@ public class MyPanelGioco extends JPanel implements Runnable
         velocitaSpawn = ms;
     }
     
-    public void stopThread()
+    private void stopThread() //Ferma tutti i thread dei proiettili, i meteoriti e quello principale del pannello
     {
         for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();
         }
+        roberto.stopThread();
         mainThread.stop();
     }
     
@@ -149,6 +142,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         for (Meteoriti meteorite : meteoritis) {
             meteorite.startThread();
         }
+        roberto.startThread();
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
     }
@@ -163,6 +157,10 @@ public class MyPanelGioco extends JPanel implements Runnable
     }
     
     public void setGamePause(boolean l){
+        if(l == true)
+            stopThread();
+        else
+            startThread();
         isPaused = l;
     }
     

@@ -23,6 +23,8 @@ Le collisioni con la label roberto workano, tocca solo migliorare un pochino per
 
 
 quando (e se) funzionerà 
+
+Creare metodo gameover!!
  
 highscore 
 highscore a persona

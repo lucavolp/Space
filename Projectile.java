@@ -11,12 +11,13 @@ import java.io.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-public class Projectile extends JLabel //implements Runnable
+public class Projectile extends JLabel implements Runnable
 {
     private int velocity; //velocità a cui va il proiettile
     private int x = 0;
     private int y = 0;
     private boolean eliminato = false;
+    private Thread gestioneProiettile;
     // Thread per il movimento del proiettile
     //private Thread movimento;
     // Immagine che contiene il meteorite
@@ -48,25 +49,13 @@ public class Projectile extends JLabel //implements Runnable
         this.setIcon(new ImageIcon(prt));
         
         this.setLocation(x, y);
-        //startThread();
+        startThread();
     }
     
     public void run() // Metodo chiamato dal thread per far muovere il proiettile e gestisce se va fuori dallo schermo
     {
         while (!eliminato) {
             move();
-
-            Point labelLocation = this.getLocation();// Prende la posizione della Label
-            if (labelLocation.y < 0) // Controlla se la Label contenente il proiettile è andata fuori dallo schermo
-            {
-                //Container parent = getParent(); // ottieni il pannello genitore
-                eliminato = true; // Smette di fare il ciclo
-                pannello.remove(this); // rimuove il componente dal pannello
-                spaceship.verificaPEliminati();
-                //stopThread(); // Stoppa il thread
-            }
-            
-
             pannello.repaint();
             try {
                 Thread.sleep(10); // ferma il thread ogni 10millisecondi, intervallo di ascolto
@@ -76,12 +65,25 @@ public class Projectile extends JLabel //implements Runnable
         }
     }
     
+    /*
+     * 
+    Codice per verificare se va fuori dallo schermo ma "deprecato"
+    Point labelLocation = this.getLocation();// Prende la posizione della Label
+    if (labelLocation.y < 0) // Controlla se la Label contenente il proiettile è andata fuori dallo schermo
+    {
+        //Container parent = getParent(); // ottieni il pannello genitore
+        eliminato = true; // Smette di fare il ciclo
+        pannello.remove(this); // rimuove il componente dal pannello
+        spaceship.verificaPEliminati();
+        //stopThread(); // Stoppa il thread
+    }
+    
     //Metodo per verificare le collisioni con i meteoriti - "funziona"
     public void collisioneMeteoriti()
     {
         int i = 0;
         
-        while(!eliminato)
+        while(!getEliminato())
         {
             while(pannello.meteoritis.size()>0)
             {
@@ -98,12 +100,26 @@ public class Projectile extends JLabel //implements Runnable
                         i++;
             }
         }
-    }
+    }*/
 
-    public void move() {
+    public void move()
+    {
         y-= velocity;
-        this.setLocation(x, y); // move the projectile upwards
-        MyPanelGioco a;
+        this.setLocation(x, y); // muove il proiettile verso l'alto
+        
+        for (Meteoriti meteorite : pannello.meteoritis) 
+        { // itera sulla lista di meteoriti
+            if (this.getBounds().intersects(meteorite.getBounds())) { // verifica la collisione
+                //System.out.println("Collisione con proiettile rilevata");
+                destroy();
+                meteorite.destroy(); // chiama il metodo destroy del meteorite
+                break; // esci dal ciclo for se c'è stata una collisione
+            }
+        }
+    
+        if (y < 0) { // controlla se il proiettile è uscito dallo schermo
+            destroy();
+        }
     }
     
     public boolean getEliminato() {
@@ -117,21 +133,14 @@ public class Projectile extends JLabel //implements Runnable
         spaceship.verificaPEliminati();
     }
     
-    public void setIdThMovimento(long id){
-         IdThreadMovimento = id;
+    public void startThread()
+    {
+        gestioneProiettile = new Thread(this, "Proiettile");
+        gestioneProiettile.start();
     }
     
-    public void setIdThCollisioni(long id){
-        IdThreadCollisioni = id;
+    public void stopThread()
+    {
+        gestioneProiettile.stop();
     }
-    
-    public long getIdThMovimento(){
-        return IdThreadMovimento;
-    }
-    
-    public long getIdThCollisioni(){
-        return IdThreadCollisioni;
-    }
-    
-    
 }

@@ -119,6 +119,7 @@ public class MovingLabel extends JLabel implements KeyListener
         pnew.setBounds(0 , 0, 40, 40);
         pannello.add(pnew);
         
+        /*
         //Fa partire i thread che eseguono i metodi per muovere il proiettile e verificare la collisione
         Runnable movimento = new Runnable(){
             public void run(){
@@ -127,6 +128,7 @@ public class MovingLabel extends JLabel implements KeyListener
         };
         Thread threadMovimento = new Thread(movimento, "Movimento");
         threadMovimento.start();
+        
         
         Runnable collisioniProiettili = new Runnable(){
             public void run(){
@@ -137,7 +139,7 @@ public class MovingLabel extends JLabel implements KeyListener
         threadCollisioni.start();
         
         pnew.setIdThMovimento(threadMovimento.getId());
-        pnew.setIdThCollisioni(threadCollisioni.getId());
+        pnew.setIdThCollisioni(threadCollisioni.getId());*/
     }
     
     public void keyReleased(KeyEvent e) {
@@ -183,38 +185,17 @@ public class MovingLabel extends JLabel implements KeyListener
             setLocation(posX, posY);     */
     }
     
-    public void startAllThread()
+    protected void stopThread()
     {
-        Set<Thread> threads = Thread.getAllStackTraces().keySet();
-        for(int i = 0; i < proiettili.size() - 1; i++)
-        {
-            for (Thread t : threads) 
-            {
-                if(proiettili.get(i).getIdThMovimento() == t.getId() || proiettili.get(i).getIdThCollisioni() == t.getId())
-                {
-                    t.resume();
-                }
-            }
+        for (Projectile p : proiettili) {
+            p.stopThread();
         }
     }
     
-    public void stopAllThread()
+    protected void startThread()
     {
-        //metodo per prendere tutti i thread in esecuzione
-        //ciclo for che scorre la lista proiettili
-        //per ogni elemento della lista ciclo che scorre tutti i thread in esecuzione 
-        //if per veirificare che sia il thread dei proiettili
-        //codice per far partire quel thread
-        Set<Thread> threads = Thread.getAllStackTraces().keySet();
-        for(int i = 0; i < proiettili.size() - 1; i++)
-        {
-            for (Thread t : threads) 
-            {
-                if(proiettili.get(i).getIdThMovimento() == t.getId() || proiettili.get(i).getIdThCollisioni() == t.getId())
-                {
-                    t.suspend();
-                }
-            }
+        for (Projectile p : proiettili) {
+            p.startThread();
         }
     }
 }
