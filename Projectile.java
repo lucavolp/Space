@@ -54,7 +54,7 @@ public class Projectile extends JLabel implements Runnable
     
     public void run() // Metodo chiamato dal thread per far muovere il proiettile e gestisce se va fuori dallo schermo
     {
-        while (!eliminato) {
+        while (!getEliminato()) {
             move();
             pannello.repaint();
             try {

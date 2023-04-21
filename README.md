@@ -3,29 +3,21 @@
 Spaceshooter game come negli anni 90 nelle sale giochi.
 LUCAA NON SPOILERARE
 
-sistemarela navicella che si sposta
+timer ci siamo circa
 
-
-timer     ci siamo circa
-schermata home
-
-ho lasciato degli appunti per i proiettili in una cartella
-
-navicella che si muove
- 
+schermata home, grafice, bottoni, ecc..
 
 rimettere la roba del saveX appena repainta
 
-sistemare tasto riprendi
+sistemare tasto riprendi (probabile che non funziona perchè utilizza metodi deprecati)
 
-Le collisioni con la label roberto workano, tocca solo migliorare un pochino però il concetto funziona, se vuoi modificare la classe per la label che si muove e metterci tutte le cose della navicella quella funziona
+Creare metodo gameover!!
 
-
+Sistemare gli stop() deprecati 
 
 quando (e se) funzionerà 
 
-Creare metodo gameover!!
- 
+Gestione utenti differenti salvati in file
 highscore 
 highscore a persona
 
