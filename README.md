@@ -17,6 +17,8 @@ Sistemare gli stop() deprecati
 
 quando (e se) funzionerà 
 
+gestione score (es: aggiungere score quando viene eliminato un proiettile)
+
 Gestione utenti differenti salvati in file
 highscore 
 highscore a persona
