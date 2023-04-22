@@ -56,7 +56,7 @@ public class MovingLabel extends JLabel implements KeyListener
         
         //non mi funzionano perchè come posizione dello schermo mi prende 3000x1990
         posX=(dimX/2);  //posiziona partenza al centro dello schermo
-        posY=dimY; //posiziona un po' staccata dal fondo
+        posY=dimY - 250; //posiziona un po' staccata dal fondo
         
         /*
         posX= 880;

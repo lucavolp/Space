@@ -17,8 +17,6 @@ import java.io.*;
 
 public class MyPanelGioco extends JPanel implements Runnable
 {
-    
-    private JLabel pippo;
     public AscoltatoreEsterno as;
     //Thread principale per far eseguire il metodo run dentro questa classe
     private Thread mainThread;
@@ -32,7 +30,6 @@ public class MyPanelGioco extends JPanel implements Runnable
     protected Timer timerMet;
     public List<Meteoriti> meteoritis;
     private int vitaMeteoriti;
-    
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     
@@ -40,22 +37,11 @@ public class MyPanelGioco extends JPanel implements Runnable
     public Timer timerGame;
     
     //Variabili per la navicella
-    public Spaceship spaceship;
-    private JLabel spaceshipLabel;
-    private int spaceshipX, spaceshipY;
-    private int spaceshipSpeed;
-    private JLabel pluto;
-    public int saveX=999999;
-    public int saveY=999999;
-    public int pos[];
+    MovingLabel roberto;
     //^^^^^^^^^^^^^^^^^^^^^^^^^^
     
     //Sfondo
     private Image backgroundImage;
-    
-    //Navicella funzionante
-    MovingLabel roberto;
-
     
     public MyPanelGioco() 
     {
@@ -94,14 +80,17 @@ public class MyPanelGioco extends JPanel implements Runnable
     {
         while(!GameOver)
         {
-            Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti, vitaMeteoriti, this);
-            meteorite.setBounds(0 , 0, 50, 55);
-            totM++; //contatore di meteoriti utilizzato per il punteggio
-            add(meteorite); //lo aggiunge al pannello
-            meteoritis.add(0, meteorite); //lo aggiunge alla lista, aggiunge in coda
-            revalidate();
-            repaint();
-            verificaEliminati();
+            if(!getPause())
+            {
+                Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti, vitaMeteoriti, this);
+                meteorite.setBounds(0 , 0, 50, 55);
+                totM++; //contatore di meteoriti utilizzato per il punteggio
+                add(meteorite); //lo aggiunge al pannello
+                meteoritis.add(0, meteorite); //lo aggiunge alla lista, aggiunge in coda
+                revalidate();
+                repaint();
+                verificaEliminati();
+            }
             
             try {
                 Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto
@@ -159,7 +148,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     public void setGamePause(boolean l){
         if(l == true)
         {
-            pauseThread();  
+            stopThread();  
         }
         else
             startThread();
@@ -172,11 +161,6 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void setGameStatus(boolean l){
         GameOver = l;
-    }
-    
-    protected void pauseThread()
-    {
-        
     }
 }
 
