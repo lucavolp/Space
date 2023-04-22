@@ -47,7 +47,7 @@ public class MyPanelScore extends JPanel implements Runnable
         
         
         
-        punti = new Thread(this, "Meteorite");
+        punti = new Thread(this, "Score");
         punti.start();
     }
         

@@ -158,7 +158,9 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void setGamePause(boolean l){
         if(l == true)
-            stopThread();
+        {
+            pauseThread();  
+        }
         else
             startThread();
         isPaused = l;
@@ -172,8 +174,9 @@ public class MyPanelGioco extends JPanel implements Runnable
         GameOver = l;
     }
     
-    public List<Meteoriti> getLista(){
-        return meteoritis;
+    protected void pauseThread()
+    {
+        
     }
 }
 
