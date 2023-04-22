@@ -62,7 +62,6 @@ public class AscoltatoreEsterno implements ActionListener {
         }
         if (e.getActionCommand().equals("Riprendi")) //Forse ho trovato la deprecatezza del metodo stop()
         {
-            panelGioco.startThread();
             panelGioco.setGamePause(false);
             
             panelMenu.resume.setVisible(false);

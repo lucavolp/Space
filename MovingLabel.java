@@ -58,8 +58,9 @@ public class MovingLabel extends JLabel implements KeyListener
         posX=(dimX/2);  //posiziona partenza al centro dello schermo
         posY=dimY; //posiziona un po' staccata dal fondo
         
+        /*
         posX= 880;
-        posY= 890;
+        posY= 890;*/
     }
     
     //Gestione pressione tasti
