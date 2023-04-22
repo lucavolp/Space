@@ -7,15 +7,13 @@ timer ci siamo circa
 
 schermata home, grafice, bottoni, ecc..
 
-rimettere la roba del saveX appena repainta
-
 sistemare tasto riprendi (probabile che non funziona perchè utilizza metodi deprecati)
 
 Creare metodo gameover!!
 
 Sistemare gli stop() deprecati 
 
-quando (e se) funzionerà 
+quando (e se) funzionerà:
 
 gestione score (es: aggiungere score quando viene eliminato un proiettile)
 

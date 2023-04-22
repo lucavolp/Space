@@ -63,14 +63,13 @@ public class AscoltatoreEsterno implements ActionListener {
         if (e.getActionCommand().equals("Riprendi")) //Forse ho trovato la deprecatezza del metodo stop()
         {
             panelGioco.setGamePause(false);
-            
             panelMenu.resume.setVisible(false);
             panelMenu.isGamePaused = false;
             panelMenu.pause.setVisible(true);
         }
         if (e.getActionCommand().equals("Restart")) 
         {
-
+            
         }
         if (e.getActionCommand().equals("Torna al menù principale")) 
         {
@@ -104,25 +103,13 @@ public class AscoltatoreEsterno implements ActionListener {
         dimX=Toolkit.getDefaultToolkit().getScreenSize().width;
         dimY=Toolkit.getDefaultToolkit().getScreenSize().height;
         
-        sizeA=(int)Math.nextUp((0.16)*dimX);
-        sizeB=(int)Math.nextUp((0.2)*dimX);
+        sizeA=(int)(Math.nextUp((0.16)*dimX));
+        sizeB=(int)(Math.nextUp((0.2)*dimX));
         sizeC=(int)(Math.nextUp(0.64)*dimX);
-        /*
-        p1=new Dimension(dimY,sizeA);
-        p2=new Dimension(dimY,sizeC);
-        p3=new Dimension(dimY,sizeB);
-        */      
         
         p1=new Dimension(sizeA,dimY);
         p2=new Dimension(sizeC,dimY);
         p3=new Dimension(sizeB,dimY);
-        
-        /*
-        System.out.println(sizeA);
-        System.out.println(sizeB);
-        System.out.println(sizeC);
-        */
-        //panelScore.setPreferredSize(new Dimension(300, 1080));  
     }
 
     public void avviaGioco() // Metodo che che crea la nuova finestra quando si preme new game

@@ -23,6 +23,7 @@ public class MovingLabel extends JLabel implements KeyListener
     private int dimY;
     public List<Projectile> proiettili;
     private long ultimoProiettile;
+    private int speed=0;
     
     public MovingLabel(MyPanelGioco p) 
     {
@@ -69,43 +70,46 @@ public class MovingLabel extends JLabel implements KeyListener
         int keyCode = e.getKeyCode();
         
         if(!pannello.gameStatus())
-        if(!pannello.getPause()) //se il gioco non è in pausa allora la navicella prende gli input
-            switch(keyCode) 
-            {
-                case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
-                    posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
-                    move();
-                    //setLocation(posX, posY);
-                    break;
+            if(!pannello.getPause()) //se il gioco non è in pausa allora la navicella prende gli input
+                switch(keyCode) 
+                {
+                    case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
+                        speed=-8;
                     
-                case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
-                    posX += 8;
-                    move();
-                    //setLocation(posX, posY);
-                    break;
-                    
-                case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
-                    posY -= 8;
-                    move();
-                    //setLocation(posX, posY);
-                    break;
-                    
-                case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
-                    posY += 8;
-                    move();
-                    //setLocation(posX, posY);
-                    break;
-                    
-                case KeyEvent.VK_SPACE: //Spazio
-                    //Creazione nuovo proiettile
-                    long currentTime = System.currentTimeMillis();
-                    if(currentTime - ultimoProiettile >= 1000) //controlla che sia passato almeno 1000 millisecondi dalla generazione di quello precendente | possibile sostituzione con una variabile
-                    {
-                        nuovoProiettile();
-                        ultimoProiettile = currentTime;
-                    }
-                    break;
-            }
+                        //posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
+                        move();
+                        //setLocation(posX, posY);
+                        break;
+                        
+                    case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
+                        speed=8;
+                        //posX += 8;
+                        move();
+                        //setLocation(posX, posY);
+                        break;
+                        
+                    case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
+                        posY -= 8;
+                        move();
+                        //setLocation(posX, posY);
+                        break;
+                        
+                    case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
+                        posY += 8;
+                        move();
+                        //setLocation(posX, posY);
+                        break;
+                        
+                    case KeyEvent.VK_SPACE: //Spazio
+                        //Creazione nuovo proiettile
+                        long currentTime = System.currentTimeMillis();
+                        if(currentTime - ultimoProiettile >= 1000) //controlla che sia passato almeno 1000 millisecondi dalla generazione di quello precendente | possibile sostituzione con una variabile
+                        {
+                            nuovoProiettile();
+                            ultimoProiettile = currentTime;
+                        }
+                        break;
+                }
     }
     
     private void nuovoProiettile()
@@ -144,6 +148,7 @@ public class MovingLabel extends JLabel implements KeyListener
     }
     
     public void keyReleased(KeyEvent e) {
+        speed=0;
     }
     
     public void keyTyped(KeyEvent e) {
@@ -173,17 +178,35 @@ public class MovingLabel extends JLabel implements KeyListener
         
         if((getBounds().x>0)&&(getBounds().x<dimX))
         {
-            //System.out.println(getBounds().x);
+            posX+=speed;
             setLocation(posX, posY);
         }
-        else if(getBounds().x==0);
+        else if(getBounds().x==0)
+        {
+            if(speed>0)
+            {
+                posX+=speed;
+                setLocation(posX, posY);
+            }
+                
+        }
+        else if((getBounds().x==dimX))
+        {
+            if(speed<0)
+            {
+                posX+=speed;
+                setLocation(posX, posY);
+            }
+                
+        }
         
         //RIFARE CON LA VELOCITA
             
         /*else if((spaceshipSpeed<0)&&(posX>=dimX-80))
             setLocation(posX, posY);
         else if((spaceshipSpeed>0)&&(posX==0))
-            setLocation(posX, posY);     */
+            setLocation(posX, posY);     
+        */
     }
     
     protected void stopThread()
