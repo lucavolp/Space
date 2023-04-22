@@ -15,5 +15,6 @@ public class MyFrame extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
         setExtendedState(JFrame.MAXIMIZED_BOTH); //Imposta la finestra in fullscreen
+        pack();
     }
 }

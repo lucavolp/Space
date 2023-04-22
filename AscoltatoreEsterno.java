@@ -88,6 +88,11 @@ public class AscoltatoreEsterno implements ActionListener {
         container.revalidate();
         container.repaint();
     }
+    
+    public void setPanelSize()
+    {
+        panelScore.setPreferredSize(new Dimension(300, 1080));  
+    }
 
     public void avviaGioco() // Metodo che che crea la nuova finestra quando si preme new game
     {   

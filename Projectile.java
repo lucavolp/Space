@@ -18,17 +18,12 @@ public class Projectile extends JLabel implements Runnable
     private int y = 0;
     private boolean eliminato = false;
     private Thread gestioneProiettile;
-    // Thread per il movimento del proiettile
-    //private Thread movimento;
     // Immagine che contiene il meteorite
     private Image prt;
     
     private MyPanelGioco pannello;
     
     private MovingLabel spaceship;
-    
-    private long IdThreadMovimento;
-    private long IdThreadCollisioni;
     
     public Projectile(int posX, int posY, int velocity, MyPanelGioco p) 
     {
@@ -64,44 +59,6 @@ public class Projectile extends JLabel implements Runnable
             }
         }
     }
-    
-    /*
-     * 
-    Codice per verificare se va fuori dallo schermo ma "deprecato"
-    Point labelLocation = this.getLocation();// Prende la posizione della Label
-    if (labelLocation.y < 0) // Controlla se la Label contenente il proiettile è andata fuori dallo schermo
-    {
-        //Container parent = getParent(); // ottieni il pannello genitore
-        eliminato = true; // Smette di fare il ciclo
-        pannello.remove(this); // rimuove il componente dal pannello
-        spaceship.verificaPEliminati();
-        //stopThread(); // Stoppa il thread
-    }
-    
-    //Metodo per verificare le collisioni con i meteoriti - "funziona"
-    public void collisioneMeteoriti()
-    {
-        int i = 0;
-        
-        while(!getEliminato())
-        {
-            while(pannello.meteoritis.size()>0)
-            {
-                if(this.getBounds().intersects(pannello.meteoritis.get(i).getBounds())) //Da sempre errore perchè o this.getBounds non esiste più o il meteorite non esiste più 
-                {
-                    System.out.println("Collisione con proiettile rilevata");
-                    destroy();
-                    pannello.meteoritis.get(i).destroy(); //chiama il metodo destroy del meteorite
-                }
-                
-                if(i >= pannello.roberto.proiettili.size() - 1)
-                        i = 0;
-                    else 
-                        i++;
-            }
-        }
-    }*/
-
     public void move()
     {
         y-= velocity;

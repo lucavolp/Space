@@ -49,11 +49,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
             e.printStackTrace();
         }
         this.setIcon(new ImageIcon(met));
+        
         this.setLocation(posGenerazione, 0);
-
-        // Thread per far muovere il meteorite
-        /*movimento = new Thread(this, "Meteorite");
-        movimento.start();*/
+        
         startThread();
     }
 
@@ -63,16 +61,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         {
             move();
 
-            Point labelLocation = this.getLocation();// Prende la posizione della Label
-            if (labelLocation.y > Toolkit.getDefaultToolkit().getScreenSize().height) // Controlla se la Label contenente il meteorite è andata fuori dallo schermo
-            {
-                //Container parent = getParent(); // ottieni il pannello genitore
-                eliminato = true; // Smette di fare il ciclo
-                pannello.remove(this); // rimuove il componente dal pannello
-                //stopThread(); // Stoppa il thread
-            }
-
-            repaint();
+            pannello.repaint();
             try {
                 Thread.sleep(10); // ferma il thread ogni 10millisecondi, intervallo di ascolto
             } catch (InterruptedException e) {
@@ -85,6 +74,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     {
         y += deltaY; // Incrementa la y della velocità con cui scende il meteorite
         this.setLocation(posGenerazione, y); // Sposta il meteorite
+        
+        if(y > Toolkit.getDefaultToolkit().getScreenSize().height)
+            destroy();
     }
 
     private void setPosizioneGenerazione(int pos)// Gestisce lo spawn del meteorite e lo divide nello schermo
@@ -124,7 +116,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
                 posGenerazione = colonne + posX * 9;
                 break;
         }
-        posGenerazione = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 35;
+        //posGenerazione = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 35;
     }
 
     public int getPosizioneGenerazione() {
