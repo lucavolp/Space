@@ -9,12 +9,16 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.math.*;
 
 public class AscoltatoreEsterno implements ActionListener {
     private MyPanel p;
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
+    private Dimension p1;
+    private Dimension p2;
+    private Dimension p3;
     
     //Thread per le collisioni
     Thread threadNavicella;
@@ -91,7 +95,35 @@ public class AscoltatoreEsterno implements ActionListener {
     
     public void setPanelSize()
     {
-        panelScore.setPreferredSize(new Dimension(300, 1080));  
+        float dimX;
+        int dimY;
+        int sizeA;
+        int sizeB;
+        int sizeC;
+        
+        
+        dimX=Toolkit.getDefaultToolkit().getScreenSize().width;
+        dimY=Toolkit.getDefaultToolkit().getScreenSize().height;
+        
+        sizeA=(int)Math.nextUp((0.16)*dimX);
+        sizeB=(int)Math.nextUp((0.2)*dimX);
+        sizeC=(int)(Math.nextUp(0.64)*dimX);
+        /*
+        p1=new Dimension(dimY,sizeA);
+        p2=new Dimension(dimY,sizeC);
+        p3=new Dimension(dimY,sizeB);
+        */      
+        
+        p1=new Dimension(sizeA,dimY);
+        p2=new Dimension(sizeC,dimY);
+        p3=new Dimension(sizeB,dimY);
+        
+        /*
+        System.out.println(sizeA);
+        System.out.println(sizeB);
+        System.out.println(sizeC);
+        */
+        //panelScore.setPreferredSize(new Dimension(300, 1080));  
     }
 
     public void avviaGioco() // Metodo che che crea la nuova finestra quando si preme new game
@@ -101,7 +133,11 @@ public class AscoltatoreEsterno implements ActionListener {
         panelGioco = new MyPanelGioco();
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
-        //-Spaceship spaceship = new Spaceship();        
+        //-Spaceship spaceship = new Spaceship(); 
+        setPanelSize();
+        panelScore.setPreferredSize(p1);  
+        panelGioco.setPreferredSize(p2);  
+        panelMenu.setPreferredSize(p3);
         
         // Rimouve il pannello contenente il menù principale
         f.remove(p);
@@ -118,6 +154,8 @@ public class AscoltatoreEsterno implements ActionListener {
         CollisionDetection cd = new CollisionDetection(panelGioco);
         cd.startThread();
         
+        
+          
         f.revalidate();
         f.repaint();
     }
