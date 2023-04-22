@@ -1,6 +1,7 @@
 
 import java.util.List;
 import java.awt.*;
+import javax.swing.*;
 
 /**
  * Aggiungi qui una descrizione della classe Test
@@ -38,10 +39,7 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
                 // verifica se è avvenuta la collisione
                 if (boxcolliderSpaceship.intersects(m)) //Creare metodo gameOver
                 {
-                    pannello.setGameStatus(true); //Imposta il gioco il gameover
-                    pannello.verificaEliminati(); //Elimina gli ultimi meteoriti 
-                    //pannello.stopThread();
-                    System.out.println("GameOver!!");
+                    GameOver();
                 }
             }
             
@@ -54,6 +52,20 @@ public class CollisionDetection implements Runnable //forse le collisioni bisogn
             GameOver = pannello.gameStatus();
             //isPaused = pannello.getPause();
         }
+    }
+    
+    private void GameOver()
+    {
+        pannello.setGameStatus(true); //Imposta il gioco il gameover
+        pannello.verificaEliminati(); //Elimina gli ultimi meteoriti
+        
+        //Creazione del pannello del game over
+        GameOver gg = new GameOver();
+        Container c = pannello.getParent();
+        
+        JLayeredPane layeredPane = new JLayeredPane(); //Pannello stratificato
+        
+        //System.out.println("GameOver!!");
     }
     
     public void setPannello(MyPanelGioco panelGioco) {

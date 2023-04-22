@@ -123,28 +123,6 @@ public class MovingLabel extends JLabel implements KeyListener
         
         pnew.setBounds(0 , 0, 40, 40);
         pannello.add(pnew);
-        
-        /*
-        //Fa partire i thread che eseguono i metodi per muovere il proiettile e verificare la collisione
-        Runnable movimento = new Runnable(){
-            public void run(){
-                pnew.run();
-            }
-        };
-        Thread threadMovimento = new Thread(movimento, "Movimento");
-        threadMovimento.start();
-        
-        
-        Runnable collisioniProiettili = new Runnable(){
-            public void run(){
-                pnew.collisioneMeteoriti();
-            }
-        };
-        Thread threadCollisioni = new Thread(collisioniProiettili, "Collisioni");
-        threadCollisioni.start();
-        
-        pnew.setIdThMovimento(threadMovimento.getId());
-        pnew.setIdThCollisioni(threadCollisioni.getId());*/
     }
     
     public void keyReleased(KeyEvent e) {

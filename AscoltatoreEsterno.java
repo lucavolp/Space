@@ -119,7 +119,6 @@ public class AscoltatoreEsterno implements ActionListener {
         panelGioco = new MyPanelGioco();
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
-        //-Spaceship spaceship = new Spaceship(); 
         setPanelSize();
         panelScore.setPreferredSize(p1);  
         panelGioco.setPreferredSize(p2);  

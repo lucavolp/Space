@@ -57,7 +57,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 1;
         vitaMeteoriti = 4;
-        velocitaSpawn = 5000; //millisecondi
+        velocitaSpawn = 2000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         totM = 0;
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
