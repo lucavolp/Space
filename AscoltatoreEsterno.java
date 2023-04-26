@@ -135,11 +135,6 @@ public class AscoltatoreEsterno implements ActionListener {
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
         
-        //Crea e avvia la classe che sta ad ascoltare se si verificano collisioni
-        CollisionDetection cd = new CollisionDetection(panelGioco);
-        cd.startThread();
-        
-        
           
         f.revalidate();
         f.repaint();
