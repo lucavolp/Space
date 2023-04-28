@@ -117,7 +117,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         velocitaSpawn = ms;
     }
     
-    private void stopThread() //Ferma tutti i thread dei proiettili, i meteoriti e quello principale del pannello
+    protected void stopThread() //Ferma tutti i thread dei proiettili, i meteoriti e quello principale del pannello
     {
         for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();

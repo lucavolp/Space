@@ -19,10 +19,6 @@ public class AscoltatoreEsterno implements ActionListener {
     private Dimension p1;
     private Dimension p2;
     private Dimension p3;
-    
-    //Thread per le collisioni
-    Thread threadNavicella;
-    Thread threadProiettili;
 
     public AscoltatoreEsterno(MyPanel p)// Viene usato dalla pagina principale
     {
@@ -75,17 +71,22 @@ public class AscoltatoreEsterno implements ActionListener {
         {
             backHome();
         }
+        
+        // Controlli pannello GameOver
+        if (e.getActionCommand().equals("Home")) 
+        {
+            backHome();
+        }
     }
 
     public void backHome() // Funziona e consente di tornare al pannello principale
     {
-        Container container = panelGioco.getParent(); // questo prende il contenitore che contiene tutti gli elementi
-                                                      // della pagina e da qui si possono rimuovere e aggiungere pagine
+        Container container = panelGioco.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
         container.removeAll();
         panelGioco = null;
         panelScore = null;
         panelMenu = null;
-        // spaceship = null;
+        
         container.add(p);
         container.revalidate();
         container.repaint();

@@ -88,14 +88,16 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     {
         pannello.setGameStatus(true); //Imposta il gioco il gameover
         pannello.verificaEliminati(); //Elimina gli ultimi meteoriti
+        pannello.stopThread();
         
-        /*
         //Creazione del pannello del game over
         GameOver gg = new GameOver();
         Container c = pannello.getParent();
-        */
-        
-        System.out.println("GameOver!!");
+        c.removeAll();
+        c.add(gg, BorderLayout.CENTER);
+        c.revalidate();
+        c.repaint();
+        //System.out.println("GameOver!!");
     }
     
     private void setPosizioneGenerazione(int pos)// Gestisce lo spawn del meteorite e lo divide nello schermo
