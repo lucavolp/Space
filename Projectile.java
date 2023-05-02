@@ -23,7 +23,7 @@ public class Projectile extends JLabel implements Runnable
     
     private MyPanelGioco pannello;
     
-    private MovingLabel spaceship;
+    private Spaceship spaceship;
     
     public Projectile(int posX, int posY, int velocity, MyPanelGioco p) 
     {
@@ -49,9 +49,14 @@ public class Projectile extends JLabel implements Runnable
     
     public void run() // Metodo chiamato dal thread per far muovere il proiettile e gestisce se va fuori dallo schermo
     {
-        while (!getEliminato()) {
-            move();
-            pannello.repaint();
+        while (!getEliminato()) 
+        {
+            if(!pannello.getPause())
+            {
+                move();
+                pannello.repaint();
+            }
+            
             try {
                 Thread.sleep(10); // ferma il thread ogni 10millisecondi, intervallo di ascolto
             } catch (InterruptedException e) {
@@ -59,6 +64,7 @@ public class Projectile extends JLabel implements Runnable
             }
         }
     }
+    
     public void move()
     {
         y-= velocity;

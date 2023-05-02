@@ -59,8 +59,9 @@ public class AscoltatoreEsterno implements ActionListener {
         if (e.getActionCommand().equals("Riprendi")) //Forse ho trovato la deprecatezza del metodo stop()
         {
             panelGioco.setGamePause(false);
-            panelMenu.resume.setVisible(false);
+            
             panelMenu.isGamePaused = false;
+            panelMenu.resume.setVisible(false);
             panelMenu.pause.setVisible(true);
         }
         if (e.getActionCommand().equals("Restart")) 
@@ -104,8 +105,8 @@ public class AscoltatoreEsterno implements ActionListener {
         dimX=Toolkit.getDefaultToolkit().getScreenSize().width;
         dimY=Toolkit.getDefaultToolkit().getScreenSize().height;
         
-        sizeA=(int)(Math.nextUp((0.16)*dimX));
-        sizeB=(int)(Math.nextUp((0.2)*dimX));
+        sizeA=(int)(Math.nextUp((0.19)*dimX));
+        sizeB=(int)(Math.nextUp((0.17)*dimX));
         sizeC=(int)(Math.nextUp(0.64)*dimX);
         
         p1=new Dimension(sizeA,dimY);

@@ -37,7 +37,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     public Timer timerGame;
     
     //Variabili per la navicella
-    MovingLabel roberto;
+    Spaceship roberto;
     //^^^^^^^^^^^^^^^^^^^^^^^^^^
     
     //Sfondo
@@ -63,9 +63,9 @@ public class MyPanelGioco extends JPanel implements Runnable
         //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^METEORITI^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         
         //Label con la navicella
-        roberto = new MovingLabel(this);
+        roberto = new Spaceship(this);
         add(roberto);
-
+        
         mainThread = new Thread(this, "Space");
         mainThread.start();
     }
@@ -78,7 +78,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void run()
     {
-        while(!GameOver)
+        while(!gameStatus())
         {
             if(!getPause())
             {
@@ -92,6 +92,7 @@ public class MyPanelGioco extends JPanel implements Runnable
                 verificaEliminati();
             }
             
+            //Dopo la pausa riprende a spawnare meteoriti dopo velocitaSpawn tempo
             try {
                 Thread.sleep(velocitaSpawn); //ferma il thread ogni velocitaSpawn, intervallo di ascolto
             } catch (InterruptedException e) {
@@ -141,17 +142,13 @@ public class MyPanelGioco extends JPanel implements Runnable
         return totM;
     }
     
+    //Ritorna se il gioco è in pausa o meno
     public boolean getPause(){
         return isPaused;
     }
     
+    //Cambia lo stato di pausa del gioco
     public void setGamePause(boolean l){
-        if(l == true)
-        {
-            stopThread();  
-        }
-        else
-            startThread();
         isPaused = l;
     }
     

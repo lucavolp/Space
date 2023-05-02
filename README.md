@@ -1,23 +1,32 @@
 # Space
 
 Spaceshooter game come negli anni 90 nelle sale giochi.
-LUCAA NON SPOILERARE
 
-timer ci siamo circa
+URGENTE:
 
-schermata home, grafice, bottoni, ecc..
+- Finire metodo gameover
 
-sistemare tasto riprendi (probabile che non funziona perchè utilizza metodi deprecati)
+- Aumentare la difficoltà (velocitaSpawn ecc..) quando si aumentano le score (o il tempo)
 
-Creare metodo gameover!!
+- Sistemare il focus della navicella
 
-Sistemare gli stop() deprecati 
+- Trovare due immagini sfondo per le bande laterali
 
-quando (e se) funzionerà:
 
-gestione score (es: aggiungere score quando viene eliminato un proiettile)
+MENO IMPORTANTE:
 
-Gestione utenti differenti salvati in file
-highscore 
-highscore a persona
+- Schermata home, grafice, bottoni, ecc..
+
+- Sistemare gli stop() deprecati
+
+
+QUANDO E SE FUNZIONERÀ:
+
+- Gestione score (es: aggiungere score quando viene eliminato un proiettile)
+
+- Gestione utenti differenti salvati in file
+
+- Highscore 
+
+- Highscore a persona
 

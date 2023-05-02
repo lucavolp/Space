@@ -14,32 +14,39 @@ import java.util.Timer;
 
 public class MyPanelMenu extends JPanel implements Runnable
 {
-    private MyPanelGioco pannelloGioco;
-    
     public JButton pause; // mette in pausa il gioco, ferma il timer e gli asteroidi
     public JButton resume; //toglie il gioco dalla pausa
     private JButton restart; // resetta il punteggio e ricomincia una nuova partita
     private JButton back; // torna al menù principale
     private AscoltatoreEsterno as;
-    private MyPanelGioco pg;
+    private MyPanelGioco pannelloGioco;
     private MyPanelScore ps;
     private MyPanel p;
     protected JLabel timer;
     private int tMin=0;
     private int tSec=0;
-    public boolean isGamePaused=false;
+    public boolean isGamePaused = false;
     
     private Thread time;
+    
+    //Sfondo
+    private Image backgroundImage;
     
     public MyPanelMenu(MyPanelGioco pg, MyPanelScore ps, MyPanel p)
     {
         super();
         
-        this.pg = pg;
+        /*try {
+            backgroundImage = ImageIO.read(new File("img/latosx.jpeg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        
+        this.pannelloGioco = pg;
         this.p = p;
         this.ps = ps;
         
-        as = new AscoltatoreEsterno(p, pg, ps, this);
+        as = new AscoltatoreEsterno(p, pannelloGioco, ps, this);
         
         pause = new JButton("Pausa");
         pause.addActionListener(as);
@@ -94,22 +101,31 @@ public class MyPanelMenu extends JPanel implements Runnable
         resume.setVisible(false);
 
     }
+    
+    //Per l'immagine di sfondo
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
 
     //Thread che gestisce il timer
     public void run() 
     {
-        while(true) //Gestire sto isPaused una volta finito tutto
+        while(!pannelloGioco.gameStatus())
         {
-            tSec++;
-            if(tSec>59)
+            if(!isGamePaused)
             {
-                tSec=0;
-                tMin++;
+                tSec++;
+                if(tSec>59)
+                {
+                    tSec=0;
+                    tMin++;
+                }
+                if(tSec>9)
+                    timer.setText("Tempo di Gioco: "+tMin+":"+tSec);
+                else
+                    timer.setText("Tempo di Gioco: "+tMin+":0"+tSec);
             }
-            if(tSec>9)
-                timer.setText("Tempo di Gioco: "+tMin+":"+tSec);
-            else
-                timer.setText("Tempo di Gioco: "+tMin+":0"+tSec);
                 
             try {
                 Thread.sleep(1000); //ogni secondo va avanti di un secondo

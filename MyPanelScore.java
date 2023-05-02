@@ -11,22 +11,32 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.Timer;
+import javax.imageio.*;
 
 public class MyPanelScore extends JPanel implements Runnable
 {
-    private MyPanelGioco pannelloGioco;
     private JLabel punteggio;
-    private MyPanelGioco p2;
+    private MyPanelGioco pannelloGioco;
     private Timer tUpPunti;     //timer di update dei punti
     private long pt;
     private int tUpdate;        //ms di aggiornamento e aggiunta punti
     private Timer update;
     
     private Thread punti;
+    
+    //Sfondo
+    private Image backgroundImage;
+    
     public MyPanelScore(MyPanelGioco p2)
     {
         super();
-        this.p2 = p2;
+        this.pannelloGioco = p2;
+        
+        /*try {
+            backgroundImage = ImageIO.read(new File("img/latosx.jpeg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
         
         pannelloGioco = p2;
         
@@ -50,6 +60,12 @@ public class MyPanelScore extends JPanel implements Runnable
         punti = new Thread(this, "Score");
         punti.start();
     }
+    
+    //Per l'immagine di sfondo
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
         
     public void run()
     {
@@ -58,10 +74,15 @@ public class MyPanelScore extends JPanel implements Runnable
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        while(true)
+            
+        while(!pannelloGioco.gameStatus())
         {
-            pt++;
-            punteggio.setText("SCORE: "+(p2.getTotM()+pt)+"");
+            if(!pannelloGioco.getPause())
+            {
+                pt++;
+                punteggio.setText("SCORE: "+(pannelloGioco.getTotM()+pt)+"");
+            }
+            
             
             try {
                 Thread.sleep(500);

@@ -59,12 +59,15 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     {
         while (!eliminato) 
         {
-            //Chiama il metodo per far muovere la navicella
-            move();
-            
-            //Se il meteorite colpisce la navicella è game over
-            if(this.getBounds().intersects(pannello.roberto.getBounds()))
-                GameOver();
+            if(!pannello.getPause()) //Se il pannello non è in pausa
+            {
+                //Chiama il metodo per far muovere la navicella
+                move();
+                
+                //Se il meteorite colpisce la navicella è game over
+                if(this.getBounds().intersects(pannello.roberto.getBounds()))
+                    GameOver();
+            }
             
             try {
                 Thread.sleep(10); // ferma il thread ogni 10millisecondi, intervallo di ascolto
@@ -92,12 +95,8 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         
         //Creazione del pannello del game over
         GameOver gg = new GameOver();
-        Container c = pannello.getParent();
-        c.removeAll();
-        c.add(gg, BorderLayout.CENTER);
-        c.revalidate();
-        c.repaint();
-        //System.out.println("GameOver!!");
+        
+        System.out.println("GameOver!!");
     }
     
     private void setPosizioneGenerazione(int pos)// Gestisce lo spawn del meteorite e lo divide nello schermo

@@ -8,11 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-/**
- * Se ti può servire come esempio per lavorarci questa classe fa una label come navicella e si muove
- */
-
-public class MovingLabel extends JLabel implements KeyListener 
+public class Spaceship extends JLabel implements KeyListener 
 {
     private int posX = 0;
     private int posY = 0;
@@ -23,9 +19,12 @@ public class MovingLabel extends JLabel implements KeyListener
     private int dimY;
     public List<Projectile> proiettili;
     private long ultimoProiettile;
+    //Tempo che deve aspettare prima di poter sparare di nuovo
+    private int waitShot; 
+    
     private int speed=0;
     
-    public MovingLabel(MyPanelGioco p) 
+    public Spaceship(MyPanelGioco p) 
     {
         super();
         addKeyListener(this);
@@ -48,6 +47,7 @@ public class MovingLabel extends JLabel implements KeyListener
         
         proiettili = new ArrayList<Projectile>();
         ultimoProiettile = System.currentTimeMillis();
+        waitShot = 1000;
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
@@ -69,47 +69,46 @@ public class MovingLabel extends JLabel implements KeyListener
     {
         int keyCode = e.getKeyCode();
         
-        if(!pannello.gameStatus())
-            if(!pannello.getPause()) //se il gioco non è in pausa allora la navicella prende gli input
-                switch(keyCode) 
-                {
-                    case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
-                        speed=-8;
+        if(!pannello.gameStatus() && !pannello.getPause()) //se il gioco non è in pausa allora la navicella prende gli input
+            switch(keyCode) 
+            {
+                case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
+                    speed=-8;
+                
+                    //posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
+                    move();
+                    //setLocation(posX, posY);
+                    break;
                     
-                        //posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
-                        move();
-                        //setLocation(posX, posY);
-                        break;
-                        
-                    case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
-                        speed=8;
-                        //posX += 8;
-                        move();
-                        //setLocation(posX, posY);
-                        break;
-                        
-                    case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
-                        posY -= 8;
-                        move();
-                        //setLocation(posX, posY);
-                        break;
-                        
-                    case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
-                        posY += 8;
-                        move();
-                        //setLocation(posX, posY);
-                        break;
-                        
-                    case KeyEvent.VK_SPACE: //Spazio
-                        //Creazione nuovo proiettile
-                        long currentTime = System.currentTimeMillis();
-                        if(currentTime - ultimoProiettile >= 1000) //controlla che sia passato almeno 1000 millisecondi dalla generazione di quello precendente | possibile sostituzione con una variabile
-                        {
-                            nuovoProiettile();
-                            ultimoProiettile = currentTime;
-                        }
-                        break;
-                }
+                case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
+                    speed=8;
+                    //posX += 8;
+                    move();
+                    //setLocation(posX, posY);
+                    break;
+                    
+                case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
+                    posY -= 8;
+                    move();
+                    //setLocation(posX, posY);
+                    break;
+                    
+                case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
+                    posY += 8;
+                    move();
+                    //setLocation(posX, posY);
+                    break;
+                    
+                case KeyEvent.VK_SPACE: //Spazio
+                    //Creazione nuovo proiettile
+                    long currentTime = System.currentTimeMillis();
+                    if(currentTime - ultimoProiettile >= 1000) //controlla che sia passato almeno 1000 millisecondi dalla generazione di quello precendente | possibile sostituzione con una variabile
+                    {
+                        nuovoProiettile();
+                        ultimoProiettile = currentTime;
+                    }
+                    break;
+            }
     }
     
     private void nuovoProiettile()
@@ -147,6 +146,11 @@ public class MovingLabel extends JLabel implements KeyListener
                 proiettili.remove(i);
             }
         }
+    }
+    
+    public void changeWaitShot(int w)//Cambia l'intervallo di tempo che deve avere un proiettile da un altro
+    {
+        waitShot = w;
     }
     
     //fa fare l'azione di movimento solo se si è all'interno dello spazio corretto
