@@ -21,14 +21,13 @@ MENO IMPORTANTE:
 
 - Sistemare gli stop() deprecati
 
+- Highscore 
 
 QUANDO E SE FUNZIONERÀ:
 
 - Gestione score (es: aggiungere score quando viene eliminato un proiettile)
 
 - Gestione utenti differenti salvati in file
-
-- Highscore 
 
 - Highscore a persona
 
