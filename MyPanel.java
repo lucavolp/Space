@@ -23,11 +23,6 @@ public class MyPanel extends JPanel //implements ActionListener
 
     public MyPanel()
     {
-        //panelGioco.timerMet.stop();
-        //panelGioco.timerGame.stop();
-        /*this.panelGioco = p2;
-        this.panelScore = p3;
-        this.panelMenu = p4;*/
         
         as= new AscoltatoreEsterno(this);
         lillo = new JLabel("Panel 1");

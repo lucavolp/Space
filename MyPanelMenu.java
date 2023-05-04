@@ -60,7 +60,7 @@ public class MyPanelMenu extends JPanel implements Runnable
         back = new JButton("Torna al menù principale");
         back.addActionListener(as);
         
-        timer= new JLabel("00:00");
+        //timer= new JLabel("00:00");
         
         // Crea un nuovo GridBagLayout e imposta il layout del pannello su di esso
         GridBagLayout layout = new GridBagLayout();
@@ -85,11 +85,11 @@ public class MyPanelMenu extends JPanel implements Runnable
         c.gridy = 3;
         layout.setConstraints(back, c);
         
-        c.gridy = 4;
-        layout.setConstraints(timer, c);
+        //c.gridy = 4;
+        //layout.setConstraints(timer, c);
         
         
-        startThread();
+        //startThread();
     
     
         // Aggiunge al pannello
@@ -97,7 +97,7 @@ public class MyPanelMenu extends JPanel implements Runnable
         add(resume);
         add(restart);
         add(back);
-        add(timer);
+        //add(timer);
         resume.setVisible(false);
 
     }

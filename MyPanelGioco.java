@@ -137,8 +137,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         mainThread.start();
     }
     
-    public int getTotM()
-    {
+    public int getTotM()    {
         return totM;
     }
     

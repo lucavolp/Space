@@ -24,6 +24,11 @@ public class MyPanelScore extends JPanel implements Runnable
     
     private Thread punti;
     
+    
+    protected JLabel timer;
+    private int tMin=0;
+    private int tSec=0;
+    
     //Sfondo
     private Image backgroundImage;
     
@@ -31,6 +36,7 @@ public class MyPanelScore extends JPanel implements Runnable
     {
         super();
         this.pannelloGioco = p2;
+        setLayout(new GridLayout(2,1));
         
         /*try {
             backgroundImage = ImageIO.read(new File("img/latosx.jpeg"));
@@ -38,12 +44,11 @@ public class MyPanelScore extends JPanel implements Runnable
             e.printStackTrace();
         }*/
         
-        pannelloGioco = p2;
-        
         punteggio = new JLabel("SCORE: 0");       
-        
         add(punteggio);
         
+        timer= new JLabel("Tempo di Gioco: 00:00");
+        add(timer);
         /*
         //TIMER AGGIORNA PUNTI .5/s
         tUpPunti = new Timer();
@@ -81,11 +86,22 @@ public class MyPanelScore extends JPanel implements Runnable
             {
                 pt++;
                 punteggio.setText("SCORE: "+(pannelloGioco.getTotM()+pt)+"");
+                
+                tSec++;
+                if(tSec>59)
+                {
+                    tSec=0;
+                    tMin++;
+                }
+                if(tSec>9)
+                    timer.setText("Tempo di Gioco: "+tMin+":"+tSec);
+                else
+                    timer.setText("Tempo di Gioco: "+tMin+":0"+tSec);
             }
             
             
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

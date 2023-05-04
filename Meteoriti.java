@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
 import java.awt.*;
+import java.util.Random;
 
 public class Meteoriti extends JLabel implements Runnable // da modificare e mettere i thread
 {
@@ -34,13 +35,12 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     //Colpi che servono per distruggere un meteorite
     private int vita;
 
-    public Meteoriti(int pos, int deltaY, int v, MyPanelGioco p) // Gli passo la posizione dove generare il meteorite (random) e la velocità di
-                                          // cascata del meteorite
+    public Meteoriti(int pos, int deltaY, int v, MyPanelGioco p) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
+        pannello = p;
         setPosizioneGenerazione(pos);
         setDeltaY(deltaY);
         vita = v;
-        pannello = p;
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/meteorite.png"));
@@ -101,7 +101,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     
     private void setPosizioneGenerazione(int pos)// Gestisce lo spawn del meteorite e lo divide nello schermo
     {
-        posX = Toolkit.getDefaultToolkit().getScreenSize().width;// Prende la larghezza dello schermo
+        /*posX = Toolkit.getDefaultToolkit().getScreenSize().width;// Prende la larghezza dello schermo
         posX /= 20;// Divide lo schermo in 20 parti
         int colonne = (int) posX * 5; // Le prime 5 parti le lascio per una colonna con i dati
         switch (pos) {
@@ -135,7 +135,12 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
             case 10:
                 posGenerazione = colonne + posX * 9;
                 break;
-        }
+        }*/
+        Random random = new Random();
+        Dimension size = pannello.getSize();
+        //System.out.println(size.width);
+        posGenerazione = random.nextInt(size.width + 1);
+        
         //posGenerazione = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 35;
     }
 

@@ -12,8 +12,6 @@ URGENTE:
 
 - Trovare due immagini sfondo per le bande laterali
 
-- Spostare Timer di gioco nel pannello MyPanelScore
-
 
 MENO IMPORTANTE:
 
