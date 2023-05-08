@@ -17,6 +17,9 @@ import java.util.Random;
 
 public class Meteoriti extends JLabel implements Runnable // da modificare e mettere i thread
 {
+    //Frame dove c'è il pannello
+    private MyFrame frame;
+    //Pannello del gioco 
     private MyPanelGioco pannello;
     // Coordinata y del meteorite
     private int y = 0;
@@ -35,8 +38,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     //Colpi che servono per distruggere un meteorite
     private int vita;
 
-    public Meteoriti(int deltaY, int v, MyPanelGioco p) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
+    public Meteoriti(int deltaY, int v, MyPanelGioco p, MyFrame f) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
+        frame = f;
         pannello = p;
         setPosizioneGenerazione();
         setDeltaY(deltaY);
@@ -89,7 +93,8 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
 
     private void GameOver()
     {
-        pannello.setGameStatus(true); //Imposta il gioco il gameover
+        
+        pannello.setGameStatus(true); //Imposta il gioco in gameover
         pannello.verificaEliminati(); //Elimina gli ultimi meteoriti
         pannello.stopThread();
         

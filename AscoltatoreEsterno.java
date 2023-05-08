@@ -118,7 +118,7 @@ public class AscoltatoreEsterno implements ActionListener {
     {   
         Container f = p.getParent();
         
-        panelGioco = new MyPanelGioco();
+        panelGioco = new MyPanelGioco(new MyFrame("Ciao"));
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
         setPanelSize();

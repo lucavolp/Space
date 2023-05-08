@@ -16,6 +16,7 @@ import java.io.*;
 
 public class MyPanelGioco extends JPanel implements Runnable
 {
+    private MyFrame frame;
     public AscoltatoreEsterno as;
     //Thread principale per far eseguire il metodo run dentro questa classe
     private Thread mainThread;
@@ -31,7 +32,6 @@ public class MyPanelGioco extends JPanel implements Runnable
     //si ti ho copiato le freccette perché sono carine
     
     public int totM=0;      //totale di meteoriti spawnati
-    public Timer timerGame;
     
     //Variabili per la navicella
     Spaceship roberto;
@@ -40,10 +40,11 @@ public class MyPanelGioco extends JPanel implements Runnable
     //Sfondo
     private Image backgroundImage;
     
-    public MyPanelGioco() 
+    public MyPanelGioco(MyFrame f) 
     {
         super();
         setLayout(null);
+        frame = f;
         
         try {
             backgroundImage = ImageIO.read(new File("img/background_game.jpg"));
@@ -79,7 +80,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         {
             if(!getPause())
             {
-                Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this);
+                Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this, frame);
                 meteorite.setBounds(0 , 0, 50, 55);
                 totM++; //contatore di meteoriti utilizzato per il punteggio
                 add(meteorite); //lo aggiunge al pannello

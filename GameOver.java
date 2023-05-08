@@ -19,6 +19,8 @@ public class GameOver extends JPanel {
     
     public GameOver() 
     {
+        super();
+        System.out.println("GameOver!!");
         this.setPreferredSize(new Dimension(1920, 1080));
         setLayout(new GridBagLayout());
         as = new AscoltatoreEsterno();
@@ -52,6 +54,7 @@ public class GameOver extends JPanel {
         add(spazio, c);
         c.gridx = 2;
         add(exitButton, c);
+        
         
         
     }
