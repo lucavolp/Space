@@ -35,10 +35,10 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     //Colpi che servono per distruggere un meteorite
     private int vita;
 
-    public Meteoriti(int pos, int deltaY, int v, MyPanelGioco p) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
+    public Meteoriti(int deltaY, int v, MyPanelGioco p) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
         pannello = p;
-        setPosizioneGenerazione(pos);
+        setPosizioneGenerazione();
         setDeltaY(deltaY);
         vita = v;
         // Inserimento e ridimensionamento dell'immagine
@@ -99,47 +99,20 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         System.out.println("GameOver!!");
     }
     
-    private void setPosizioneGenerazione(int pos)// Gestisce lo spawn del meteorite e lo divide nello schermo
+    private void setPosizioneGenerazione()// Gestisce lo spawn del meteorite e lo divide nello schermo
     {
-        /*posX = Toolkit.getDefaultToolkit().getScreenSize().width;// Prende la larghezza dello schermo
-        posX /= 20;// Divide lo schermo in 20 parti
-        int colonne = (int) posX * 5; // Le prime 5 parti le lascio per una colonna con i dati
-        switch (pos) {
-            case 1:
-                posGenerazione = colonne;
-                break;
-            case 2:
-                posGenerazione = colonne + posX;
-                break;
-            case 3:
-                posGenerazione = colonne + posX * 2;
-                break;
-            case 4:
-                posGenerazione = colonne + posX * 3;
-                break;
-            case 5:
-                posGenerazione = colonne + posX * 4;
-                break;
-            case 6:
-                posGenerazione = colonne + posX * 5;
-                break;
-            case 7:
-                posGenerazione = colonne + posX * 6;
-                break;
-            case 8:
-                posGenerazione = colonne + posX * 7;
-                break;
-            case 9:
-                posGenerazione = colonne + posX * 8;
-                break;
-            case 10:
-                posGenerazione = colonne + posX * 9;
-                break;
-        }*/
         Random random = new Random();
         Dimension size = pannello.getSize();
-        //System.out.println(size.width);
-        posGenerazione = random.nextInt(size.width + 1);
+        
+        //If per vedere se è troppo attaccato al margine destro o al sinistro
+        if(size.width < 50)
+            posGenerazione = random.nextInt(size.width + 70);
+        else if(size.width > pannello.getWidth() - 70)
+        {
+            posGenerazione = random.nextInt(size.width - 70);
+        }
+        else
+            posGenerazione = random.nextInt(size.width + 1);
         
         //posGenerazione = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 35;
     }

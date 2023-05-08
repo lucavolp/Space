@@ -3,17 +3,15 @@ import java.awt.*;
 import java.io.File;
 import java.util.Random;
 
-public class LucaCheFontTiPiace
-{
-    public static Color generaColoreCasuale() 
-    {
+public class LucaCheFontTiPiace {
+    public static Color generaColoreCasuale() {
         Random rand = new Random();
         int r = rand.nextInt(256);
         int g = rand.nextInt(256);
         int b = rand.nextInt(256);
         return new Color(r, g, b);
     }
-    
+
     public static void main(String[] args) throws FontFormatException, java.io.IOException {
         // Crea un nuovo frame
         JFrame frame = new JFrame("Prova Font");
@@ -28,34 +26,34 @@ public class LucaCheFontTiPiace
         JLabel label4 = new JLabel("Prova questo font");
         JLabel label5 = new JLabel("Prova questo font");
         JLabel label6 = new JLabel("Prova questo font");
-        JLabel label7 = new JLabel("Prova questo font");
+        JLabel label7 = new JLabel("Il terzo");
         JLabel label8 = new JLabel("Prova questo font");
         JLabel label9 = new JLabel("Prova questo font");
 
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/nova/SYNNova-Normal.otf"));
         label1.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/alien/TrueType/SFAlienEncounters.ttf"));
         label2.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/pinscher/SHPinscher-Regular.otf"));
         label3.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/silkscreen/slkscr.ttf"));
         label4.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/pressStart/PressStart2P-Regular.ttf"));
         label5.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/arcadeClassic/ARCADECLASSIC.TTF"));
         label6.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/astro/Futuristic Font/Astro.ttf"));
         label7.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/neuropolx/neuropol x rg.otf"));
         label8.setFont(font.deriveFont(20f));
-        
+
         font = Font.createFont(Font.TRUETYPE_FONT, new File("font/orbitron/Orbitron-VariableFont_wght.ttf"));
         label9.setFont(font.deriveFont(20f));
 

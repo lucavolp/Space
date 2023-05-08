@@ -9,7 +9,6 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import javax.imageio.*;
@@ -26,8 +25,6 @@ public class MyPanelGioco extends JPanel implements Runnable
     //Variabili per i meteoriti
     private int velocitaMeteoriti;
     private int velocitaSpawn;
-    protected Random rand = new Random();
-    protected Timer timerMet;
     public List<Meteoriti> meteoritis;
     private int vitaMeteoriti;
     //^^^^^^^^^^^^^^^^^^^^^^^
@@ -82,7 +79,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         {
             if(!getPause())
             {
-                Meteoriti meteorite = new Meteoriti((rand.nextInt(10) + 1), velocitaMeteoriti, vitaMeteoriti, this);
+                Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this);
                 meteorite.setBounds(0 , 0, 50, 55);
                 totM++; //contatore di meteoriti utilizzato per il punteggio
                 add(meteorite); //lo aggiunge al pannello
