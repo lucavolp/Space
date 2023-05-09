@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.*;
 
-public class GameOver extends JPanel {
-
+public class GameOver extends JPanel 
+{
     private JLabel scritta, spazio;
     private JButton exitButton, replayButton;
     private Image go;
@@ -20,8 +20,8 @@ public class GameOver extends JPanel {
     public GameOver() 
     {
         super();
-        System.out.println("GameOver!!");
-        this.setPreferredSize(new Dimension(1920, 1080));
+        System.out.println("GameOver dalla classe");
+        //this.setPreferredSize(new Dimension(1920, 1080));
         setLayout(new GridBagLayout());
         as = new AscoltatoreEsterno();
         
@@ -54,9 +54,6 @@ public class GameOver extends JPanel {
         add(spazio, c);
         c.gridx = 2;
         add(exitButton, c);
-        
-        
-        
     }
 
     /* Se serve per provare il layout i bottoni e cose varie

@@ -118,8 +118,11 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     protected void stopThread() //Ferma tutti i thread dei proiettili, i meteoriti e quello principale del pannello
     {
+        int i=0;
         for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();
+            i++;
+            System.out.println(i);
         }
         roberto.stopThread();
         mainThread.stop();

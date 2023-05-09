@@ -13,18 +13,16 @@ import java.util.*;
 
 public class MyPanel extends JPanel //implements ActionListener 
 {
+    private MyFrame frame;
     private JLabel lillo;
     private JButton change;
     private JButton chiudi;
     public AscoltatoreEsterno as;
-    private MyPanelGioco panelGioco;
-    private MyPanelScore panelScore;
-    private MyPanelMenu panelMenu;
 
-    public MyPanel()
+    public MyPanel(MyFrame f)
     {
-        
-        as= new AscoltatoreEsterno(this);
+        frame = f;
+        as= new AscoltatoreEsterno(this, frame);
         lillo = new JLabel("Panel 1");
         add(lillo);
         change = new JButton("New Game");
@@ -36,7 +34,7 @@ public class MyPanel extends JPanel //implements ActionListener
         
         
         //Layout home
-        new FlowLayout(FlowLayout.CENTER, 15, 15);
+        setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
         add(lillo);
         add(change);
         add(chiudi);

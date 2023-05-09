@@ -16,13 +16,15 @@ public class AscoltatoreEsterno implements ActionListener {
     private MyPanelGioco panelGioco;
     private MyPanelScore panelScore;
     private MyPanelMenu panelMenu;
+    private MyFrame frame;
     private Dimension p1;
     private Dimension p2;
     private Dimension p3;
 
-    public AscoltatoreEsterno(MyPanel p)// Viene usato dalla pagina principale
+    public AscoltatoreEsterno(MyPanel p, MyFrame f)// Viene usato dalla pagina principale
     {
         this.p = p;
+        frame = f;
     }
 
     public AscoltatoreEsterno() {
@@ -118,7 +120,7 @@ public class AscoltatoreEsterno implements ActionListener {
     {   
         Container f = p.getParent();
         
-        panelGioco = new MyPanelGioco(new MyFrame("Ciao"));
+        panelGioco = new MyPanelGioco(frame);
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
         setPanelSize();
