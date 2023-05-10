@@ -49,9 +49,9 @@ public class Projectile extends JLabel implements Runnable
     
     public void run() // Metodo chiamato dal thread per far muovere il proiettile e gestisce se va fuori dallo schermo
     {
-        while (!getEliminato()) 
+        while (!getEliminato() && !pannello.gameStatus()) 
         {
-            if(!pannello.getPause() && !pannello.gameStatus()) //Se non è in pausa o in game over
+            if(!pannello.getPause()) //Se non è in pausa o in game over
             {
                 move();
                 pannello.repaint();
@@ -75,8 +75,8 @@ public class Projectile extends JLabel implements Runnable
             if (this.getBounds().intersects(meteorite.getBounds())) 
             { // verifica la collisione
                 destroy();
-                meteorite.destroy(); // chiama il metodo destroy del meteorite
-                break; // esci dal ciclo for se c'è stata una collisione
+                meteorite.hit(1); // chiama il metodo hit del meteorite se è avvenuta la collisione
+                break; // esce dal ciclo for
             }
         }
     
@@ -101,9 +101,4 @@ public class Projectile extends JLabel implements Runnable
         gestioneProiettile = new Thread(this, "Proiettile");
         gestioneProiettile.start();
     }
-    /*
-    public void stopThread()
-    {
-        gestioneProiettile.stop();
-    }*/
 }

@@ -55,13 +55,8 @@ public class Spaceship extends JLabel implements KeyListener
         dimX=Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
         dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
         
-        //non mi funzionano perchè come posizione dello schermo mi prende 3000x1990
         posX=(dimX/2);  //posiziona partenza al centro dello schermo
         posY=dimY - 250; //posiziona un po' staccata dal fondo
-        
-        /*
-        posX= 880;
-        posY= 890;*/
     }
     
     //Gestione pressione tasti
@@ -102,7 +97,7 @@ public class Spaceship extends JLabel implements KeyListener
                 case KeyEvent.VK_SPACE: //Spazio
                     //Creazione nuovo proiettile
                     long currentTime = System.currentTimeMillis();
-                    if(currentTime - ultimoProiettile >= 1000) //controlla che sia passato almeno 1000 millisecondi dalla generazione di quello precendente | possibile sostituzione con una variabile
+                    if(currentTime - ultimoProiettile >= waitShot) //controlla che sia passato almeno 1000 millisecondi dalla generazione di quello precendente | possibile sostituzione con una variabile
                     {
                         nuovoProiettile();
                         ultimoProiettile = currentTime;
@@ -190,14 +185,6 @@ public class Spaceship extends JLabel implements KeyListener
             setLocation(posX, posY);     
         */
     }
-    
-    /*
-    protected void stopThread()
-    {
-        for (Projectile p : proiettili) {
-            p.stopThread();
-        }
-    }*/
     
     protected void startThread()
     {

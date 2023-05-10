@@ -17,10 +17,8 @@ public class MyPanelScore extends JPanel implements Runnable
 {
     private JLabel punteggio;
     private MyPanelGioco pannelloGioco;
-    private Timer tUpPunti;     //timer di update dei punti
     private long pt;
     private int tUpdate;        //ms di aggiornamento e aggiunta punti
-    private Timer update;
     private Font font;
     private Thread punti;
     
@@ -28,6 +26,7 @@ public class MyPanelScore extends JPanel implements Runnable
     protected JLabel timer;
     private int tMin=0;
     private int tSec=0;
+    private int minPrec = 0;
     
     //Sfondo
     private Image backgroundImage;
@@ -109,12 +108,6 @@ public class MyPanelScore extends JPanel implements Runnable
         
     public void run()
     {
-        try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            
         while(!pannelloGioco.gameStatus())
         {
             if(!pannelloGioco.getPause())
@@ -132,8 +125,11 @@ public class MyPanelScore extends JPanel implements Runnable
                     timer.setText("Tempo di Gioco "+tMin+":"+tSec);
                 else
                     timer.setText("Tempo di Gioco "+tMin+":0"+tSec);
+                    
+                /*if(tMin > 5) //Dopo 5 min perdi per forza hahah
+                    pannelloGioco.editSpawnSpeed(1);*/
+                aumentaDifficolta();
             }
-            
             
             try {
                 Thread.sleep(1000);
@@ -143,12 +139,27 @@ public class MyPanelScore extends JPanel implements Runnable
         }
     }
     
+    public void aumentaDifficolta()
+    {
+        if(pannelloGioco.spawnSpeed() >= 100)
+            if(tSec % 20 == 0) //Ogni 20 secondi cambia la velocità di spawn
+            {
+                pannelloGioco.editSpawnSpeed(pannelloGioco.spawnSpeed() - 20); //Diminuisce di 20 millesimi
+            }
+        
+        if(tMin - 1 == minPrec) //Ogni minuto aggiunge una vita al meteorite
+        {
+            pannelloGioco.addVitaMeteoriti();
+            minPrec = tMin;
+        }
+    }
+    
+    public void addScore(int score){
+        pt += score;
+    }
+    
     public void startThread(){
         punti = new Thread(this, "Score");
         punti.start();
-    }
-    
-    public void stop(){
-        punti.stop();
     }
 }

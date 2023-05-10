@@ -123,6 +123,10 @@ public class AscoltatoreEsterno implements ActionListener {
         panelGioco = new MyPanelGioco(frame);
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
+        
+        //Passa al MyPanelGioco il pannello con le Score così da poterlo gestire
+        panelGioco.setPanelScore(panelScore);
+        
         setPanelSize();
         panelScore.setPreferredSize(p1);  
         panelGioco.setPreferredSize(p2);  

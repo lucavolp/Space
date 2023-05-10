@@ -28,7 +28,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     // Dimensione colonne dove spawnano i meteoriti
     private int posX;
     // Velocità con cui scende il meteorite
-    private int deltaY;
+    private int speed;
     // Immagine che contiene il meteorite
     private Image met;
     // Variabile per vedere se il meteorite esiste
@@ -38,13 +38,14 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     //Colpi che servono per distruggere un meteorite
     private int vita;
 
-    public Meteoriti(int deltaY, int v, MyPanelGioco p, MyFrame f) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
+    public Meteoriti(int speed, int v, MyPanelGioco p, MyFrame f) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
         frame = f;
         pannello = p;
         setPosizioneGenerazione();
-        setDeltaY(deltaY);
+        setVelocita(speed);
         vita = v;
+        
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/meteorite.png"));
@@ -61,9 +62,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
 
     public void run() // Metodo chiamato dal thread per far muovere il meteorite e gestisce se va fuori dallo schermo
     {
-        while (!eliminato) 
+        while (!eliminato && !pannello.gameStatus()) 
         {
-            if(!pannello.getPause() && !pannello.gameStatus()) //Se il pannello non è in pausa o in game over
+            if(!pannello.getPause()) //Se il pannello non è in pausa o in game over
             {
                 //Chiama il metodo per far muovere la navicella
                 move();
@@ -82,7 +83,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     
     public void move() // metodo per far muovere il meteorite
     {
-        y += deltaY; // Incrementa la y della velocità con cui scende il meteorite
+        y += speed; // Incrementa la y della velocità con cui scende il meteorite
         this.setLocation(posGenerazione, y); // Sposta il meteorite
         
         if(y > Toolkit.getDefaultToolkit().getScreenSize().height)
@@ -117,24 +118,21 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         }
         else
             posGenerazione = random.nextInt(size.width + 1);
-        
-        //posGenerazione = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 35;
-    }
-
-    public int getPosizioneGenerazione() {
-        return posGenerazione;
-    }
-
-    private void setDeltaY(int d) {
-        deltaY = d;
-    }
-
-    public int getDimCol() {
-        return posX;
     }
     
-    public void stopThread() {
-        //movimento.stop();
+    //Damage per poter implementare più avanti con dei powerup per proiettili che fanno più danno
+    public void hit(int damage)
+    {
+        vita -= damage;
+        if(vita <= 0)
+        {
+            pannello.pannelloScore.addScore(5); //aggiunge un punteggio di 5 quando si elimina un meteorite
+            destroy();
+        }
+    }
+
+    private void setVelocita(int d) {
+        speed= d;
     }
 
     public void startThread() {
@@ -144,10 +142,6 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
 
     public boolean getEliminato() {
         return eliminato;
-    }
-
-    public String toString() {
-        return "Debug!!";
     }
     
     public void destroy()

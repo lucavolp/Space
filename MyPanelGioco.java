@@ -17,7 +17,11 @@ import java.io.*;
 public class MyPanelGioco extends JPanel implements Runnable
 {
     private MyFrame frame;
+    
     public AscoltatoreEsterno as;
+    
+    protected MyPanelScore pannelloScore;
+    
     //Thread principale per far eseguire il metodo run dentro questa classe
     private Thread mainThread;
     private boolean GameOver = false;
@@ -31,7 +35,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     
-    public int totM=0;      //totale di meteoriti spawnati
+    public int totM;      //totale di meteoriti spawnati
     
     //Variabili per la navicella
     Spaceship roberto;
@@ -54,7 +58,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
         velocitaMeteoriti = 1;
-        vitaMeteoriti = 4;
+        vitaMeteoriti = 1;
         velocitaSpawn = 2000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
         totM = 0;
@@ -111,25 +115,6 @@ public class MyPanelGioco extends JPanel implements Runnable
         }
     }
     
-    public void editSpawnSpeed(int ms)
-    { //fare i vari controlli per le eccezzioni
-        velocitaSpawn = ms;
-    }
-    
-    /*
-    protected void stopThread() //Ferma tutti i thread dei proiettili, i meteoriti e quello principale del pannello
-    {
-        
-        int i=0;
-        for (Meteoriti meteorite : meteoritis) {
-            meteorite.stopThread();
-            i++;
-            System.out.println(i);
-        }
-        roberto.stopThread();
-        mainThread.stop();
-    }*/
-    
     public void startThread()
     {
         for (Meteoriti meteorite : meteoritis) {
@@ -140,8 +125,12 @@ public class MyPanelGioco extends JPanel implements Runnable
         mainThread.start();
     }
     
-    public int getTotM()    {
+    public int getTotM(){
         return totM;
+    }
+    
+    public void setPanelScore(MyPanelScore s){
+        pannelloScore = s;
     }
     
     //Ritorna se il gioco è in pausa o meno
@@ -160,6 +149,23 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void setGameStatus(boolean l){
         GameOver = l;
+    }
+    
+    /**
+     * Metodi per modificare la difficoltà
+    **/
+    
+    public int spawnSpeed(){
+        return velocitaSpawn;
+    }
+    
+    public void editSpawnSpeed(int ms)
+    { //fare i vari controlli per le eccezzioni
+        velocitaSpawn = ms;
+    }
+    
+    public void addVitaMeteoriti(){
+        vitaMeteoriti++;
     }
 }
 
