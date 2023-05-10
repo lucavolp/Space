@@ -167,5 +167,9 @@ public class MyPanelGioco extends JPanel implements Runnable
     public void addVitaMeteoriti(){
         vitaMeteoriti++;
     }
+    
+    public void incrVelocitaMeteoriti(){
+        velocitaMeteoriti += 1;
+    }
 }
 

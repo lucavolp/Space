@@ -69,29 +69,22 @@ public class Spaceship extends JLabel implements KeyListener
             {
                 case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
                     speed=-8;
-                
-                    //posX -= 8;//8 da sostituire con una variabile per la velocità di spostamento
                     move();
-                    //setLocation(posX, posY);
                     break;
                     
                 case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
                     speed=8;
-                    //posX += 8;
                     move();
-                    //setLocation(posX, posY);
                     break;
                     
                 case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
                     posY -= 8;
                     move();
-                    //setLocation(posX, posY);
                     break;
                     
                 case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
                     posY += 8;
                     move();
-                    //setLocation(posX, posY);
                     break;
                     
                 case KeyEvent.VK_SPACE: //Spazio
@@ -104,6 +97,44 @@ public class Spaceship extends JLabel implements KeyListener
                     }
                     break;
             }
+    }
+    
+    //fa fare l'azione di movimento solo se si è all'interno dello spazio corretto
+    private void move()
+    {
+        //System.out.println(getBounds().x);
+        
+        if((getBounds().x>0)&&(getBounds().x<dimX))
+        {
+            posX+=speed;
+            setLocation(posX, posY);
+        }
+        else if(getBounds().x==0)
+        {
+            if(speed>0)
+            {
+                posX+=speed;
+                setLocation(posX, posY);
+            }
+                
+        }
+        else if((getBounds().x==dimX))
+        {
+            if(speed<0)
+            {
+                posX+=speed;
+                setLocation(posX, posY);
+            }
+                
+        }
+        
+        //RIFARE CON LA VELOCITA
+            
+        /*else if((spaceshipSpeed<0)&&(posX>=dimX-80))
+            setLocation(posX, posY);
+        else if((spaceshipSpeed>0)&&(posX==0))
+            setLocation(posX, posY);     
+        */
     }
     
     private void nuovoProiettile()
@@ -146,44 +177,6 @@ public class Spaceship extends JLabel implements KeyListener
     public void changeWaitShot(int w)//Cambia l'intervallo di tempo che deve avere un proiettile da un altro
     {
         waitShot = w;
-    }
-    
-    //fa fare l'azione di movimento solo se si è all'interno dello spazio corretto
-    private void move()
-    {
-        //System.out.println(getBounds().x);
-        
-        if((getBounds().x>0)&&(getBounds().x<dimX))
-        {
-            posX+=speed;
-            setLocation(posX, posY);
-        }
-        else if(getBounds().x==0)
-        {
-            if(speed>0)
-            {
-                posX+=speed;
-                setLocation(posX, posY);
-            }
-                
-        }
-        else if((getBounds().x==dimX))
-        {
-            if(speed<0)
-            {
-                posX+=speed;
-                setLocation(posX, posY);
-            }
-                
-        }
-        
-        //RIFARE CON LA VELOCITA
-            
-        /*else if((spaceshipSpeed<0)&&(posX>=dimX-80))
-            setLocation(posX, posY);
-        else if((spaceshipSpeed>0)&&(posX==0))
-            setLocation(posX, posY);     
-        */
     }
     
     protected void startThread()

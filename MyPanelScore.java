@@ -125,14 +125,12 @@ public class MyPanelScore extends JPanel implements Runnable
                     timer.setText("Tempo di Gioco "+tMin+":"+tSec);
                 else
                     timer.setText("Tempo di Gioco "+tMin+":0"+tSec);
-                    
-                /*if(tMin > 5) //Dopo 5 min perdi per forza hahah
-                    pannelloGioco.editSpawnSpeed(1);*/
+
                 aumentaDifficolta();
             }
             
             try {
-                Thread.sleep(1000);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -141,6 +139,9 @@ public class MyPanelScore extends JPanel implements Runnable
     
     public void aumentaDifficolta()
     {
+        /*if(tMin > 10) //Dopo 10 min perdi per forza hahah
+                    pannelloGioco.editSpawnSpeed(1);*/
+                    
         if(pannelloGioco.spawnSpeed() >= 100)
             if(tSec % 20 == 0) //Ogni 20 secondi cambia la velocità di spawn
             {
@@ -149,8 +150,15 @@ public class MyPanelScore extends JPanel implements Runnable
         
         if(tMin - 1 == minPrec) //Ogni minuto aggiunge una vita al meteorite
         {
-            pannelloGioco.addVitaMeteoriti();
-            minPrec = tMin;
+            System.out.println("Aggiunta velocità");
+            pannelloGioco.incrVelocitaMeteoriti();
+            minPrec = tMin; //Per scorrere il minuto
+        }
+        
+        if(tMin % 2 == 0 && tMin != 0 && tSec == 0) //Ogni due minuti fa cose
+        {
+            System.out.println("Aggiunta vita");
+            pannelloGioco.addVitaMeteoriti();            
         }
     }
     
