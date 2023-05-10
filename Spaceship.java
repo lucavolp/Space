@@ -191,12 +191,13 @@ public class Spaceship extends JLabel implements KeyListener
         */
     }
     
+    /*
     protected void stopThread()
     {
         for (Projectile p : proiettili) {
             p.stopThread();
         }
-    }
+    }*/
     
     protected void startThread()
     {

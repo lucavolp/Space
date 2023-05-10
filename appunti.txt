@@ -1,0 +1,1 @@
+Eliminare tutti gli oggetti (metodo Destroy) quando si ricomincia dopo il GameOver

@@ -84,7 +84,7 @@ public class MyPanelGioco extends JPanel implements Runnable
                 meteorite.setBounds(0 , 0, 50, 55);
                 totM++; //contatore di meteoriti utilizzato per il punteggio
                 add(meteorite); //lo aggiunge al pannello
-                meteoritis.add(0, meteorite); //lo aggiunge alla lista, aggiunge in coda
+                meteoritis.add(meteorite); //lo aggiunge alla lista, aggiunge in coda
                 revalidate();
                 repaint();
                 verificaEliminati();
@@ -116,8 +116,10 @@ public class MyPanelGioco extends JPanel implements Runnable
         velocitaSpawn = ms;
     }
     
+    /*
     protected void stopThread() //Ferma tutti i thread dei proiettili, i meteoriti e quello principale del pannello
     {
+        
         int i=0;
         for (Meteoriti meteorite : meteoritis) {
             meteorite.stopThread();
@@ -126,7 +128,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         }
         roberto.stopThread();
         mainThread.stop();
-    }
+    }*/
     
     public void startThread()
     {

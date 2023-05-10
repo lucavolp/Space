@@ -12,14 +12,13 @@ URGENTE:
 
 - Trovare due immagini sfondo per le bande laterali
 
+- Schermata home, grafice, bottoni, ecc..
+
 
 MENO IMPORTANTE:
 
-- Schermata home, grafice, bottoni, ecc..
-
-- Sistemare gli stop() deprecati
-
 - Highscore 
+
 
 QUANDO E SE FUNZIONERÀ:
 
@@ -28,4 +27,3 @@ QUANDO E SE FUNZIONERÀ:
 - Gestione utenti differenti salvati in file
 
 - Highscore a persona
-
