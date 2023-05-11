@@ -32,15 +32,36 @@ public class MyPanelMenu extends JPanel implements Runnable
     //Sfondo
     private Image backgroundImage;
     
+    //Font
+    private Font font;
+    
     public MyPanelMenu(MyPanelGioco pg, MyPanelScore ps, MyPanel p)
     {
         super();
         
+        setBackground(Color.BLUE);
+
         /*try {
             backgroundImage = ImageIO.read(new File("img/latosx.jpeg"));
         } catch (IOException e) {
             e.printStackTrace();
         }*/
+        
+        try
+        {
+            try
+            { 
+                font = Font.createFont(Font.TRUETYPE_FONT, new File("font/astro/Futuristic Font/Astro.ttf"));
+            }
+            catch (IOException ioe)
+            {
+                ioe.printStackTrace();
+            }
+        }
+        catch (FontFormatException ffe)
+        {
+            ffe.printStackTrace();
+        }
         
         this.pannelloGioco = pg;
         this.p = p;
@@ -49,15 +70,19 @@ public class MyPanelMenu extends JPanel implements Runnable
         as = new AscoltatoreEsterno(p, pannelloGioco, ps, this);
         
         pause = new JButton("Pausa");
+        pause.setFont(font.deriveFont(12f));
         pause.addActionListener(as);
         
         resume = new JButton("Riprendi");
+        resume.setFont(font.deriveFont(12f));
         resume.addActionListener(as);
         
         restart = new JButton("Restart");
+        restart.setFont(font.deriveFont(12f));
         restart.addActionListener(as);
         
-        back = new JButton("Torna al menù principale");
+        back = new JButton("Torna alla home");
+        back.setFont(font.deriveFont(12f));
         back.addActionListener(as);
         
         //timer= new JLabel("00:00");
@@ -69,7 +94,7 @@ public class MyPanelMenu extends JPanel implements Runnable
         // Crea un oggetto GridBagConstraints per impostare le proprietà di posizionamento dei bottoni
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(10, 10, 10, 10); // Aggiunge uno spazio vuoto intorno ai bottoni
-        c.fill = GridBagConstraints.BOTH;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;

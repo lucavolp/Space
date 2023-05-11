@@ -47,7 +47,7 @@ public class Spaceship extends JLabel implements KeyListener
         
         proiettili = new ArrayList<Projectile>();
         ultimoProiettile = System.currentTimeMillis();
-        waitShot = 1000;
+        waitShot = 900;
         velocitaProiettili = 7;
     }
     
@@ -69,22 +69,22 @@ public class Spaceship extends JLabel implements KeyListener
             switch(keyCode) 
             {
                 case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
-                    speed=-8;
+                    speed=-10;
                     move();
                     break;
                     
                 case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
-                    speed=8;
+                    speed=10;
                     move();
                     break;
                     
                 case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
-                    posY -= 8;
+                    posY -= 10;
                     move();
                     break;
                     
                 case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
-                    posY += 8;
+                    posY += 10;
                     move();
                     break;
                     
