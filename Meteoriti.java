@@ -110,11 +110,11 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         Dimension size = pannello.getSize();
         
         //If per vedere se è troppo attaccato al margine destro o al sinistro
-        if(size.width < 50)
-            posGenerazione = random.nextInt(size.width + 70);
-        else if(size.width > pannello.getWidth() - 70)
+        if(size.width < 120)
+            posGenerazione = random.nextInt(size.width + 120);
+        else if(size.width > pannello.getWidth() - 120)
         {
-            posGenerazione = random.nextInt(size.width - 70);
+            posGenerazione = random.nextInt(size.width - 120);
         }
         else
             posGenerazione = random.nextInt(size.width + 1);

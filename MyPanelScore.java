@@ -45,7 +45,7 @@ public class MyPanelScore extends JPanel implements Runnable
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        
+        setBackground(Color.BLUE);
         
         //Impostazione font Astro
         try
@@ -133,10 +133,10 @@ public class MyPanelScore extends JPanel implements Runnable
                 pannelloGioco.editSpawnSpeed(pannelloGioco.spawnSpeed() - 35); //Diminuisce di 35 millesimi
             }
         
-        if(tMin == 1 && tSec == 0) //Al primo minuto aggiunge una vita al proiettile e diminuisce di 50ms
+        if(tMin == 0 && tSec == 45) //Ai primi 45 sec aggiunge una vita al proiettile e diminuisce di 50ms
         {
             pannelloGioco.addVitaMeteoriti();
-            pannelloGioco.roberto.editWaitShot(50);
+            pannelloGioco.roberto.editWaitShot(100);
         }
             
         if(tMin - 1 == minPrec) //Ogni minuto fa cose
