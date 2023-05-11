@@ -33,11 +33,13 @@ public class Projectile extends JLabel implements Runnable
         this.velocity = velocity;
         pannello = p;
         
+        setBounds(0 , 0, 60, 40);
+        
         spaceship = pannello.roberto; //prende la label con la navicella
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/proiettile.png"));
-            prt = bufferedImage.getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+            prt = bufferedImage.getScaledInstance(14, 40, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,6 +47,7 @@ public class Projectile extends JLabel implements Runnable
         this.setIcon(new ImageIcon(prt));
         
         this.setLocation(x, y);
+        setHorizontalAlignment(JLabel.CENTER);
         startThread();
     }
     

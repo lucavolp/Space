@@ -45,11 +45,11 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         setPosizioneGenerazione();
         setVelocita(speed);
         vita = v;
-        
+        setBounds(0 , 0, 19, 55);
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/meteorite.png"));
-            met = bufferedImage.getScaledInstance(50, 55, Image.SCALE_DEFAULT);
+            met = bufferedImage.getScaledInstance(19, 55, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }

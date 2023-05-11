@@ -27,14 +27,15 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     //Thread principale per far eseguire il metodo run dentro questa classe
     private Thread mainThread;
-    private boolean GameOver = false;
-    private boolean isPaused = false;
+    private boolean GameOver;
+    private boolean isPaused;
     
     //Variabili per i meteoriti
     private int velocitaMeteoriti;
     private int velocitaSpawn;
     public List<Meteoriti> meteoritis;
     private int vitaMeteoriti;
+    private int meteoritiSpawn;
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     
@@ -54,6 +55,9 @@ public class MyPanelGioco extends JPanel implements Runnable
         
         setLayout(null);
         frame = f;
+        GameOver = false;
+        isPaused = false;
+        meteoritiSpawn = 1;
         
         try {
             backgroundImage = ImageIO.read(new File("img/background_game.jpg"));
@@ -62,7 +66,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         }
         
         //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvMETEORITIvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-        velocitaMeteoriti = 1;
+        velocitaMeteoriti = 2;
         vitaMeteoriti = 1;
         velocitaSpawn = 2000; //millisecondi
         meteoritis = new ArrayList<Meteoriti>();
@@ -106,11 +110,13 @@ public class MyPanelGioco extends JPanel implements Runnable
         {
             if(!getPause())
             {
-                Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this, frame);
-                meteorite.setBounds(0 , 0, 50, 55);
-                totM++; //contatore di meteoriti utilizzato per il punteggio
-                add(meteorite); //lo aggiunge al pannello
-                meteoritis.add(meteorite); //lo aggiunge alla lista, aggiunge in coda
+                for(int i = 0; i < meteoritiSpawn; i++) //Spawna meteoriti meteoritiSpawn volte
+                {
+                    Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this, frame);
+                    totM++; //contatore di meteoriti utilizzato per il punteggio
+                    add(meteorite); //lo aggiunge al pannello
+                    meteoritis.add(meteorite); //lo aggiunge alla lista, aggiunge in coda
+                }
                 revalidate();
                 repaint();
                 verificaEliminati();
@@ -192,6 +198,10 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void incrVelocitaMeteoriti(){
         velocitaMeteoriti += 1;
+    }
+    
+    public void aumentaSpawn(){
+        meteoritiSpawn ++;
     }
 }
 

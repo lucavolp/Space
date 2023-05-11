@@ -13,7 +13,7 @@ public class Spaceship extends JLabel implements KeyListener
     private int posX = 0;
     private int posY = 0;
     private Image sps;
-    private int velocitaProiettili = 5;
+    private int velocitaProiettili;
     private MyPanelGioco pannello;
     private int dimX;
     private int dimY;
@@ -34,11 +34,13 @@ public class Spaceship extends JLabel implements KeyListener
         pannello = p;
         
         setPosizioneGenerazione();
-        setBounds(posX, posY, 100, 100);
+        setBounds(posX, posY, 145, 120);
         try
         {
             BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.png"));
-            sps = bufferedImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
+
+            sps = bufferedImage.getScaledInstance(145, 120, Image.SCALE_DEFAULT);
+
         }catch(IOException e) 
         { 
           e.printStackTrace();
@@ -48,6 +50,7 @@ public class Spaceship extends JLabel implements KeyListener
         proiettili = new ArrayList<Projectile>();
         ultimoProiettile = System.currentTimeMillis();
         waitShot = 1000;
+        velocitaProiettili = 7;
     }
     
     private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
@@ -131,15 +134,18 @@ public class Spaceship extends JLabel implements KeyListener
     
     private void nuovoProiettile()
     {
-        int x = this.getLocation().x;
+        int x = this.getLocation().x - 8;
         int y = this.getLocation().y;
         
         //Crea un nuovo proiettile e lo aggiunge alla lista
         Projectile pnew = new Projectile(x, y, velocitaProiettili, pannello); //Gli passo anche questa classe così ogni volta che viene eliminato un proiettile lo elimina dalla lista
         proiettili.add(0, pnew);
         
-        pnew.setBounds(0 , 0, 40, 40);
         pannello.add(pnew);
+    }
+    
+    public void editWaitShot(int w){
+        waitShot -= w;
     }
     
     public void keyReleased(KeyEvent e) {
@@ -166,9 +172,8 @@ public class Spaceship extends JLabel implements KeyListener
         }
     }
     
-    public void changeWaitShot(int w)//Cambia l'intervallo di tempo che deve avere un proiettile da un altro
-    {
-        waitShot = w;
+    public void incrProjectileSpeed(int sp) {
+        velocitaProiettili += sp;
     }
     
     protected void startThread()

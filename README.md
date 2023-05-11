@@ -4,15 +4,9 @@ Spaceshooter game come negli anni 90 nelle sale giochi.
 
 URGENTE:
 
-- Finire metodo gameover
+- Impostare velocità movimento navicella non numero fisso (così è possibile cabiarlo a seconda della difficoltà)
 
-- Aumentare la difficoltà (velocitaSpawn ecc..) quando si aumentano le score (o il tempo)
-  [
-   Per ora:
-       ogni 20 secondi diminuisce la velocità di spawn dei meteoriti di 20ms fino ad arrivare ad un minimo di 100ms
-       ogni minuto i meteoriti vanno di 1 più veloce
-       ogni 2 minuti viene aggiunta una vita al meteorite
-  ]
+- Finire metodo gameover
 
 - Sistemare il focus della navicella
     [
