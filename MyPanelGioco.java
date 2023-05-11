@@ -82,7 +82,8 @@ public class MyPanelGioco extends JPanel implements Runnable
         
         
         
-        
+        //questa cosa qui simula un click sulla finestra per provare a prendere il 
+        //focus appena viene creato il pannello, stackoverflow lo consigliava ma mhh
         try {
             // Creazione dell'oggetto Robot
             Robot robot = new Robot();

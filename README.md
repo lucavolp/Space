@@ -4,7 +4,12 @@ Spaceshooter game come negli anni 90 nelle sale giochi.
 
 URGENTE:
 
-- Impostare velocità movimento navicella non numero fisso (così è possibile cabiarlo a seconda della difficoltà)
+- Impostare velocità movimento navicella non numero fisso 
+    [
+        Per ora:
+        ora aumenta di 4 ogni 20 secondi, è da valutare se va bene così o da cambiare
+    ]
+
 
 - Finire metodo gameover
 

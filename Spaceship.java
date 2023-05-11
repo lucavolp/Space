@@ -21,6 +21,7 @@ public class Spaceship extends JLabel implements KeyListener
     private long ultimoProiettile;
     //Tempo che deve aspettare prima di poter sparare di nuovo
     private int waitShot; 
+    public int incrSpost=10;    //valore velocità di movimento della navicella
     
     private int speed=0;
     
@@ -71,22 +72,22 @@ public class Spaceship extends JLabel implements KeyListener
             switch(keyCode) 
             {
                 case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
-                    speed=-10;
+                    speed=-incrSpost;
                     move();
                     break;
                     
                 case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
-                    speed=10;
+                    speed=incrSpost;
                     move();
                     break;
                     
                 case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
-                    posY -= 10;
+                    posY -= incrSpost;
                     move();
                     break;
                     
                 case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
-                    posY += 10;
+                    posY += incrSpost;
                     move();
                     break;
                     
@@ -129,7 +130,7 @@ public class Spaceship extends JLabel implements KeyListener
                 setLocation(posX, posY);
             }
         }
-        if(true);
+        
     }
     
     private void nuovoProiettile()
@@ -181,5 +182,11 @@ public class Spaceship extends JLabel implements KeyListener
         for (Projectile p : proiettili) {
             p.startThread();
         }
+    }
+    
+    public void incrVMov()
+    {
+        incrSpost+=4;
+        System.out.println("valore incrementato a: "+incrSpost);
     }
 }
