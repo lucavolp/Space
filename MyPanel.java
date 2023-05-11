@@ -32,7 +32,6 @@ public class MyPanel extends JPanel //implements ActionListener
         chiudi.addActionListener(as);
         add(chiudi);
         
-        
         //Layout home
         setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
         add(lillo);

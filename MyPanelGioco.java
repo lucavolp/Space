@@ -5,6 +5,9 @@
  * @version (1.0)
 */
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
 
 import java.awt.*;
 import javax.swing.*;
@@ -47,6 +50,8 @@ public class MyPanelGioco extends JPanel implements Runnable
     public MyPanelGioco(MyFrame f) 
     {
         super();
+        this.requestFocus();
+        
         setLayout(null);
         frame = f;
         
@@ -70,6 +75,23 @@ public class MyPanelGioco extends JPanel implements Runnable
         
         mainThread = new Thread(this, "Space");
         mainThread.start();
+        
+        
+        
+        
+        try {
+            // Creazione dell'oggetto Robot
+            Robot robot = new Robot();
+
+            // Simulazione del click sulla finestra del programma Java
+            robot.mouseMove(50, 50);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+        
+        this.requestFocus();
     }
     
     //Per l'immagine di sfondo

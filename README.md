@@ -15,12 +15,15 @@ URGENTE:
   ]
 
 - Sistemare il focus della navicella
+    [
+    Per ora:
+        il frame dice di essere focussabile e il pannello e il frame 
+        richiamano il focus, da provare su Linux perché windows sembra sbattersene
+    ]
 
 - Trovare due immagini sfondo per le bande laterali
 
 - Schermata home, grafice, bottoni, ecc..
-
-- Bordi dove si può muovere la navicella (solo sx funziona)
 
 
 MENO IMPORTANTE:

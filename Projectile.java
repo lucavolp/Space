@@ -28,7 +28,7 @@ public class Projectile extends JLabel implements Runnable
     public Projectile(int posX, int posY, int velocity, MyPanelGioco p) 
     {
         super();
-        this.x = posX + 50;
+        this.x = posX + 35;
         this.y = posY;
         this.velocity = velocity;
         pannello = p;
@@ -41,6 +41,7 @@ public class Projectile extends JLabel implements Runnable
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         this.setIcon(new ImageIcon(prt));
         
         this.setLocation(x, y);

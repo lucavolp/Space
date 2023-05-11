@@ -17,5 +17,6 @@ public class MyFrame extends JFrame
         //setBounds(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
         setExtendedState(JFrame.MAXIMIZED_BOTH); //Imposta la finestra in fullscreen
         pack();
+        this.setFocusableWindowState(true);
     }
 }

@@ -34,11 +34,11 @@ public class Spaceship extends JLabel implements KeyListener
         pannello = p;
         
         setPosizioneGenerazione();
-        setBounds(posX, posY, 140, 140);
+        setBounds(posX, posY, 100, 100);
         try
         {
             BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.png"));
-            sps = bufferedImage.getScaledInstance(140, 140, Image.SCALE_DEFAULT);
+            sps = bufferedImage.getScaledInstance(100, 100, Image.SCALE_DEFAULT);
         }catch(IOException e) 
         { 
           e.printStackTrace();
@@ -103,38 +103,30 @@ public class Spaceship extends JLabel implements KeyListener
     private void move()
     {
         //System.out.println(getBounds().x);
+        //System.out.println(pannello.getBounds().x);
         
-        if((getBounds().x>0)&&(getBounds().x<dimX))
+        if(getBounds().x>0&&(getBounds().x<pannello.getBounds().x*3))
         {
             posX+=speed;
             setLocation(posX, posY);
         }
-        else if(getBounds().x==0)
+        if(getBounds().x==0)
         {
             if(speed>0)
             {
                 posX+=speed;
                 setLocation(posX, posY);
             }
-                
         }
-        else if((getBounds().x==dimX))
+        if(getBounds().x>pannello.getBounds().x*3)
         {
             if(speed<0)
             {
                 posX+=speed;
                 setLocation(posX, posY);
             }
-                
         }
-        
-        //RIFARE CON LA VELOCITA
-            
-        /*else if((spaceshipSpeed<0)&&(posX>=dimX-80))
-            setLocation(posX, posY);
-        else if((spaceshipSpeed>0)&&(posX==0))
-            setLocation(posX, posY);     
-        */
+        if(true);
     }
     
     private void nuovoProiettile()
