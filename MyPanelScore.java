@@ -27,6 +27,7 @@ public class MyPanelScore extends JPanel implements Runnable
     private int tMin=0;
     private int tSec=0;
     private int minPrec = 0;
+    private int incr; //Incremento di punti 
     
     //Sfondo
     private Image backgroundImage;
@@ -79,23 +80,7 @@ public class MyPanelScore extends JPanel implements Runnable
         timer.setFont(font.deriveFont(20f));
         add(timer, l);
         
-        /*
-        // crea un oggetto di tipo GroupLayout.SequentialGroup per la colonna verticale
-        GroupLayout.SequentialGroup vGroup = layout.createSequentialGroup();
-        vGroup.addGap(20, 20, 20); // aggiunge un margine superiore di 10 pixel
-        vGroup.addComponent(punteggio); // aggiunge la JLabel punteggio
-        vGroup.addGap(10, 10, 10); // aggiunge un margine di 10 pixel tra le JLabel
-        vGroup.addComponent(timer); // aggiunge la JLabel timer
-        vGroup.addGap(10, 10, 10); // aggiunge un margine inferiore di 10 pixel
-        
-        // crea un oggetto di tipo GroupLayout.ParallelGroup per la colonna orizzontale
-        GroupLayout.ParallelGroup hGroup = layout.createParallelGroup(GroupLayout.Alignment.CENTER);
-        hGroup.addComponent(punteggio); // centra la JLabel punteggio orizzontalmente
-        hGroup.addComponent(timer); // centra la JLabel timer orizzontalmente
-        
-        // imposta le due colonne (verticale e orizzontale) del layout
-        layout.setHorizontalGroup(hGroup);
-        layout.setVerticalGroup(vGroup);*/
+        incr = 1;
 
         startThread();
     }
@@ -112,8 +97,8 @@ public class MyPanelScore extends JPanel implements Runnable
         {
             if(!pannelloGioco.getPause())
             {
-                pt++;
-                punteggio.setText("SCORE "+(pannelloGioco.getTotM()+pt)+"");
+                pt += incr;
+                punteggio.setText("SCORE "+pt);
                 
                 tSec++;
                 if(tSec>59)
@@ -124,13 +109,13 @@ public class MyPanelScore extends JPanel implements Runnable
                 if(tSec>9)
                     timer.setText("Tempo di Gioco "+tMin+":"+tSec);
                 else
-                    timer.setText("Tempo di Gioco "+tMin+":0"+tSec);
+                    timer.setText("Tempo di Gioco "+tMin+" 0"+tSec);
 
                 aumentaDifficolta();
             }
             
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -145,20 +130,30 @@ public class MyPanelScore extends JPanel implements Runnable
         if(pannelloGioco.spawnSpeed() >= 100)
             if(tSec % 20 == 0) //Ogni 20 secondi cambia la velocità di spawn
             {
-                pannelloGioco.editSpawnSpeed(pannelloGioco.spawnSpeed() - 20); //Diminuisce di 20 millesimi
+                pannelloGioco.editSpawnSpeed(pannelloGioco.spawnSpeed() - 35); //Diminuisce di 35 millesimi
             }
         
-        if(tMin - 1 == minPrec) //Ogni minuto aggiunge una vita al meteorite
+        if(tMin == 1 && tSec == 0) //Al primo minuto aggiunge una vita al proiettile e diminuisce di 50ms
         {
-            System.out.println("Aggiunta velocità");
-            pannelloGioco.incrVelocitaMeteoriti();
+            pannelloGioco.addVitaMeteoriti();
+            pannelloGioco.roberto.editWaitShot(50);
+        }
+            
+        if(tMin - 1 == minPrec) //Ogni minuto fa cose
+        {
+            //System.out.println("Aggiunta velocità");
+            pannelloGioco.incrVelocitaMeteoriti(); //Aggiunge una vita al meteorite
             minPrec = tMin; //Per scorrere il minuto
+            incr += 2;
         }
         
         if(tMin % 2 == 0 && tMin != 0 && tSec == 0) //Ogni due minuti fa cose
         {
-            System.out.println("Aggiunta vita");
-            pannelloGioco.addVitaMeteoriti();            
+            //System.out.println("Aggiunta vita e diminuito tempo shot");
+            pannelloGioco.roberto.editWaitShot(100); //Riduce di 100ms il tempo di attesa prima di sparare
+            pannelloGioco.addVitaMeteoriti();
+            pannelloGioco.roberto.incrProjectileSpeed(1);
+            pannelloGioco.aumentaSpawn();
         }
     }
     
