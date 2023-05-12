@@ -44,6 +44,7 @@ public class MyPanelScore extends JPanel implements Runnable
             e.printStackTrace();
         }*/
         setBackground(Color.BLUE);
+        setForeground(Color.WHITE);
         
         //Impostazione font Astro
         try
