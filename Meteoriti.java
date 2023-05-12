@@ -102,10 +102,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         //c.remove(pannello);
         //c.removeAll(); 
         //c.setComponentZOrder(gg, 0);
-        c.add(gg);
+        c.add(gg, 0);
         c.revalidate();
         c.repaint();
-        //System.out.println("GameOver!!");
     }
     
     private void setPosizioneGenerazione()// Gestisce lo spawn del meteorite e lo divide nello schermo

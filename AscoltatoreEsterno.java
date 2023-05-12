@@ -54,7 +54,6 @@ public class AscoltatoreEsterno implements ActionListener {
         {
             panelGioco.setGamePause(true);
             
-            panelMenu.isGamePaused = true;
             panelMenu.pause.setVisible(false);
             panelMenu.resume.setVisible(true);
         }
@@ -62,7 +61,6 @@ public class AscoltatoreEsterno implements ActionListener {
         {
             panelGioco.setGamePause(false);
             
-            panelMenu.isGamePaused = false;
             panelMenu.resume.setVisible(false);
             panelMenu.pause.setVisible(true);
         }
@@ -90,7 +88,7 @@ public class AscoltatoreEsterno implements ActionListener {
         panelScore = null;
         panelMenu = null;
         
-        container.add(p);
+        container.add(new MyPanel(frame));
         container.revalidate();
         container.repaint();
     }
