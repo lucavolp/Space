@@ -52,6 +52,9 @@ public class GameOver extends JPanel
         exitButton.addActionListener(as);
         
         GridBagConstraints c = new GridBagConstraints();
+        
+        c.insets=new Insets(15,15,15,15);    //dovrebbe mettere spazio fra gli elementi
+        
         c.gridwidth = 3;
         c.anchor = GridBagConstraints.CENTER;
         add(scritta, c);

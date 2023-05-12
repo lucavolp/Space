@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import javax.imageio.*;
 
 public class MyPanel extends JPanel //implements ActionListener 
 {
@@ -18,9 +19,20 @@ public class MyPanel extends JPanel //implements ActionListener
     private JButton change;
     private JButton chiudi;
     public AscoltatoreEsterno as;
-
+    
+    //Sfondo
+    private Image backgroundImage;
+    
+    
     public MyPanel(MyFrame f)
     {
+        try {
+            backgroundImage = ImageIO.read(new File("img/backgroundHome.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("erorreImmagine!!!!!!!!!!!");
+        }
+        
         frame = f;
         as= new AscoltatoreEsterno(this, frame);
         lillo = new JLabel("Panel 1");
@@ -33,11 +45,28 @@ public class MyPanel extends JPanel //implements ActionListener
         add(chiudi);
         
         //Layout home
-        setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        setLayout(new GridBagLayout());
+        
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridwidth = 3;
+        c.anchor = GridBagConstraints.CENTER;
+        add(lillo, c);
+        c.gridwidth = 1;
+        c.gridy = 1;
+        add(change, c);
+        c.gridx = 1;
+        add(chiudi, c);
+        
+        /*
         add(lillo);
         add(change);
         add(chiudi);
-        //--------
-        
+        */
+    }
+    
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
