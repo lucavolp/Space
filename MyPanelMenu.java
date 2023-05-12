@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.Timer;
 import javax.imageio.*;
 
-public class MyPanelMenu extends JPanel implements Runnable
+public class MyPanelMenu extends JPanel
 {
     public JButton pause; // mette in pausa il gioco, ferma il timer e gli asteroidi
     public JButton resume; //toglie il gioco dalla pausa
@@ -26,7 +26,6 @@ public class MyPanelMenu extends JPanel implements Runnable
     protected JLabel timer;
     private int tMin=0;
     private int tSec=0;
-    public boolean isGamePaused = false;
     
     private Thread time;
     
@@ -138,42 +137,6 @@ public class MyPanelMenu extends JPanel implements Runnable
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-    }
-
-    //Thread che gestisce il timer
-    public void run() 
-    {
-        while(!pannelloGioco.gameStatus())
-        {
-            if(!isGamePaused)
-            {
-                tSec++;
-                if(tSec>59)
-                {
-                    tSec=0;
-                    tMin++;
-                }
-                if(tSec>9)
-                    timer.setText("Tempo di Gioco: "+tMin+":"+tSec);
-                else
-                    timer.setText("Tempo di Gioco: "+tMin+":0"+tSec);
-            }
-                
-            try {
-                Thread.sleep(1000); //ogni secondo va avanti di un secondo
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    public void startThread(){
-        time = new Thread(this,"timerGioco");
-        time.start();
-    }
-    
-    public void stopThread(){
-        time.stop();
     }
 }
 

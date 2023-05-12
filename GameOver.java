@@ -21,7 +21,7 @@ public class GameOver extends JPanel
     {
         super();
         //System.out.println("GameOver dalla classe");
-        this.setOpaque(true);
+        this.setOpaque(false);
         setBackground(null);
         //this.setPreferredSize(new Dimension(1920, 1080));
         setLayout(new GridBagLayout());

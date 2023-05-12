@@ -82,12 +82,14 @@ public class MyPanelScore extends JPanel implements Runnable
         
         punteggio = new JLabel("SCORE 0"); 
         punteggio.setFont(font.deriveFont(25f));
+        punteggio.setForeground(Color.WHITE);
         add(punteggio, l);
         
         l.gridy = 1;
         l.anchor = GridBagConstraints.NORTH;
         timer= new JLabel("Tempo di Gioco 00:00");
         timer.setFont(font.deriveFont(20f));
+        timer.setForeground(Color.WHITE);
         add(timer, l);
 
         startThread();
@@ -115,7 +117,7 @@ public class MyPanelScore extends JPanel implements Runnable
                     tMin++;
                 }
                 if(tSec>9)
-                    timer.setText("Tempo di Gioco "+tMin+":"+tSec);
+                    timer.setText("Tempo di Gioco "+tMin+" "+tSec);
                 else
                     timer.setText("Tempo di Gioco "+tMin+" 0"+tSec);
 
@@ -141,7 +143,7 @@ public class MyPanelScore extends JPanel implements Runnable
             {
                 pannelloGioco.editSpawnSpeed(pannelloGioco.spawnSpeed() - 35); //Diminuisce di 35 millesimi
                 pannelloGioco.roberto.incrVMov();   //aumenta il moltiplicatore di velocità di spostamento della navicella
-                System.out.println("20 sec");
+                //System.out.println("20 sec");
             }
         
         if(tMin == 0 && tSec == 45) //Ai primi 45 sec aggiunge una vita al proiettile e diminuisce di 50ms
