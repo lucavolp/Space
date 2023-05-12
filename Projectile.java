@@ -67,6 +67,7 @@ public class Projectile extends JLabel implements Runnable
                 e.printStackTrace();
             }
         }
+        gestioneProiettile.interrupt();
     }
     
     public void move()

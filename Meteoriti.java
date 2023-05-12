@@ -79,6 +79,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
                 e.printStackTrace();
             }
         }
+        movimento.interrupt();
     }
     
     public void move() // metodo per far muovere il meteorite

@@ -120,6 +120,7 @@ public class MyPanelScore extends JPanel implements Runnable
                 e.printStackTrace();
             }
         }
+        punti.interrupt();
     }
     
     public void aumentaDifficolta()

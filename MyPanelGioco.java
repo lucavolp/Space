@@ -130,6 +130,7 @@ public class MyPanelGioco extends JPanel implements Runnable
                 e.printStackTrace();
             }
         }
+        mainThread.interrupt();
     }
     
     public void verificaEliminati() //Metodo per eliminare dalla lista i meteoriti eliminati dal pannello

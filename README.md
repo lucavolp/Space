@@ -32,8 +32,6 @@ MENO IMPORTANTE:
 
 QUANDO E SE FUNZIONERÀ:
 
-- Gestione score (es: aggiungere score quando viene eliminato un proiettile)
-
 - Gestione utenti differenti salvati in file
 
 - Highscore a persona
