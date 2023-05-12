@@ -70,7 +70,7 @@ public class AscoltatoreEsterno implements ActionListener {
         {
             
         }
-        if (e.getActionCommand().equals("Torna al menù principale")) 
+        if (e.getActionCommand().equals("Torna alla home")) 
         {
             backHome();
         }
