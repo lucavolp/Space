@@ -45,12 +45,24 @@ public class MyPanel extends JPanel //implements ActionListener
         add(chiudi);
         
         //Layout home
-        setLayout(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        setLayout(new GridBagLayout());
+        
+        
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridwidth = 3;
+        c.anchor = GridBagConstraints.CENTER;
+        add(lillo, c);
+        c.gridwidth = 1;
+        c.gridy = 1;
+        add(change, c);
+        c.gridx = 1;
+        add(chiudi, c);
+        
+        /*
         add(lillo);
         add(change);
         add(chiudi);
-        //--------
-        
+        */
     }
     
     protected void paintComponent(Graphics g) {
