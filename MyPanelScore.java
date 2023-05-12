@@ -36,8 +36,6 @@ public class MyPanelScore extends JPanel implements Runnable
     {
         super();
         this.pannelloGioco = p2;
-        setLayout(new GridBagLayout()); // imposta il layout GroupLayout
-        //GroupLayout layout = (GroupLayout)getLayout();
         
         //Immagine di sfondo
         /*try {
@@ -63,7 +61,13 @@ public class MyPanelScore extends JPanel implements Runnable
         {
             ffe.printStackTrace();
         }
+
+        incr = 1;
+        tUpdate = 1000;
         
+        //Layout
+        setLayout(new GridBagLayout()); // imposta il layout GridBagLayout
+
         GridBagConstraints l = new GridBagConstraints();
         
         l.weighty = 1;
@@ -79,8 +83,6 @@ public class MyPanelScore extends JPanel implements Runnable
         timer= new JLabel("Tempo di Gioco 00:00");
         timer.setFont(font.deriveFont(20f));
         add(timer, l);
-        
-        incr = 1;
 
         startThread();
     }
@@ -115,7 +117,7 @@ public class MyPanelScore extends JPanel implements Runnable
             }
             
             try {
-                Thread.sleep(1000);
+                Thread.sleep(tUpdate);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
