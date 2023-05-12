@@ -25,8 +25,6 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     private int y = 0;
     // Coordinata x di spawn del meteorite
     private int posGenerazione;
-    // Dimensione colonne dove spawnano i meteoriti
-    private int posX;
     // Velocità con cui scende il meteorite
     private int speed;
     // Immagine che contiene il meteorite
