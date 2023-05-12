@@ -135,7 +135,7 @@ public class Spaceship extends JLabel implements KeyListener
     
     private void nuovoProiettile()
     {
-        int x = this.getLocation().x - 8;
+        int x = this.getLocation().x + 6;
         int y = this.getLocation().y;
         
         //Crea un nuovo proiettile e lo aggiunge alla lista
