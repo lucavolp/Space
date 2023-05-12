@@ -136,6 +136,7 @@ public class MyPanelScore extends JPanel implements Runnable
             {
                 pannelloGioco.editSpawnSpeed(pannelloGioco.spawnSpeed() - 35); //Diminuisce di 35 millesimi
                 pannelloGioco.roberto.incrVMov();   //aumenta il moltiplicatore di velocità di spostamento della navicella
+                System.out.println("20 sec");
             }
         
         if(tMin == 0 && tSec == 45) //Ai primi 45 sec aggiunge una vita al proiettile e diminuisce di 50ms

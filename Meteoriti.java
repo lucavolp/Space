@@ -68,7 +68,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
                 move();
                 //Se il meteorite colpisce la navicella è game over
                 if(this.getBounds().intersects(pannello.roberto.getBounds()))
-                    GameOver();
+                    gameOver();
             }
             
             try {
@@ -90,16 +90,21 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         pannello.repaint();
     }
 
-    private void GameOver()
+    private void gameOver()
     {
         pannello.setGameStatus(true); //Imposta il gioco in gameover
-        pannello.verificaEliminati(); //Elimina gli ultimi meteoriti
+        //pannello.verificaEliminati(); //Elimina gli ultimi meteoriti
         //pannello.stopThread();
         
         //Creazione del pannello del game over
         GameOver gg = new GameOver();
         Container c = frame.getContentPane();
+        //c.remove(pannello);
+        //c.removeAll(); 
+        //c.setComponentZOrder(gg, 0);
         c.add(gg);
+        c.revalidate();
+        c.repaint();
         //System.out.println("GameOver!!");
     }
     
