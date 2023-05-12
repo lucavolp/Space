@@ -19,6 +19,8 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
 {
     //Frame dove c'è il pannello
     private MyFrame frame;
+    //Pannello iniziale
+    private MyPanel pannelloHome;
     //Pannello del gioco 
     private MyPanelGioco pannello;
     // Coordinata y del meteorite
@@ -36,8 +38,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     //Colpi che servono per distruggere un meteorite
     private int vita;
 
-    public Meteoriti(int speed, int v, MyPanelGioco p, MyFrame f) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
+    public Meteoriti(int speed, int v, MyPanelGioco p, MyFrame f, MyPanel ph) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
+        pannelloHome = ph;
         frame = f;
         pannello = p;
         setPosizioneGenerazione();
@@ -97,11 +100,8 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         //pannello.stopThread();
         
         //Creazione del pannello del game over
-        GameOver gg = new GameOver();
+        GameOver gg = new GameOver(frame, pannelloHome);
         Container c = frame.getContentPane();
-        //c.remove(pannello);
-        //c.removeAll(); 
-        //c.setComponentZOrder(gg, 0);
         c.add(gg, 0);
         c.revalidate();
         c.repaint();
@@ -112,7 +112,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         Random random = new Random();
         Dimension size = pannello.getSize();
         
-        //If per vedere se è troppo attaccato al margine destro o al sinistro
+        //If per vedere se è troppo attaccato al margine destro o al sinistro | da sistemare
         if(size.width < 120)
             posGenerazione = random.nextInt(size.width + 120);
         else if(size.width > pannello.getWidth() - 120)

@@ -21,9 +21,9 @@ public class AscoltatoreEsterno implements ActionListener {
     private Dimension p2;
     private Dimension p3;
 
-    public AscoltatoreEsterno(MyPanel p, MyFrame f)// Viene usato dalla pagina principale
+    public AscoltatoreEsterno(MyPanel ph, MyFrame f)// Viene usato dalla pagina principale
     {
-        this.p = p;
+        this.p = ph;
         frame = f;
     }
 
@@ -76,19 +76,20 @@ public class AscoltatoreEsterno implements ActionListener {
         // Controlli pannello GameOver
         if (e.getActionCommand().equals("Home")) 
         {
-            backHome();
+            //backHome();
+            avviaGioco();
         }
     }
 
     public void backHome() // Funziona e consente di tornare al pannello principale
     {
-        Container container = panelGioco.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
+        Container container = panelMenu.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
         container.removeAll();
         panelGioco = null;
         panelScore = null;
         panelMenu = null;
         
-        container.add(new MyPanel(frame));
+        container.add(p);
         container.revalidate();
         container.repaint();
     }
@@ -118,7 +119,7 @@ public class AscoltatoreEsterno implements ActionListener {
     {   
         Container f = p.getParent();
         
-        panelGioco = new MyPanelGioco(frame);
+        panelGioco = new MyPanelGioco(frame, p);
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
         
@@ -131,7 +132,7 @@ public class AscoltatoreEsterno implements ActionListener {
         panelMenu.setPreferredSize(p3);
         
         // Rimouve il pannello contenente il menù principale
-        f.remove(p);
+        f.remove(p); //Questa f è null
         
         // Imposta il layout per aggiungere i 3 pannelli
         f.setLayout(new BorderLayout());

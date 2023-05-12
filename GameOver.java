@@ -16,16 +16,22 @@ public class GameOver extends JPanel
     private JButton exitButton, replayButton;
     private Image go;
     private AscoltatoreEsterno as;
+    private MyPanel pannelloHome;
+    private MyFrame frame;
     
-    public GameOver() 
+    public GameOver(MyFrame f, MyPanel p) 
     {
         super();
         //System.out.println("GameOver dalla classe");
         this.setOpaque(false);
         setBackground(null);
+        pannelloHome = p;
+        frame = f;
+        if(pannelloHome == null)
+            System.out.println("Ciao");
         //this.setPreferredSize(new Dimension(1920, 1080));
         setLayout(new GridBagLayout());
-        as = new AscoltatoreEsterno();
+        as = new AscoltatoreEsterno(pannelloHome, frame);
         
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/game-over.png"));

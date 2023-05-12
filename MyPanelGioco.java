@@ -20,6 +20,7 @@ import java.io.*;
 public class MyPanelGioco extends JPanel implements Runnable
 {
     private MyFrame frame;
+    private MyPanel pannelloHome;
     
     public AscoltatoreEsterno as;
     
@@ -48,13 +49,14 @@ public class MyPanelGioco extends JPanel implements Runnable
     //Sfondo
     private Image backgroundImage;
     
-    public MyPanelGioco(MyFrame f) 
+    public MyPanelGioco(MyFrame f, MyPanel p) 
     {
         super();
         this.requestFocus();
-        
         setLayout(null);
+        
         frame = f;
+        pannelloHome = p;
         GameOver = false;
         isPaused = false;
         meteoritiSpawn = 1;
@@ -113,7 +115,7 @@ public class MyPanelGioco extends JPanel implements Runnable
             {
                 for(int i = 0; i < meteoritiSpawn; i++) //Spawna meteoriti meteoritiSpawn volte
                 {
-                    Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this, frame);
+                    Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this, frame, pannelloHome);
                     totM++; //contatore di meteoriti utilizzato per il punteggio
                     add(meteorite); //lo aggiunge al pannello
                     meteoritis.add(meteorite); //lo aggiunge alla lista, aggiunge in coda
