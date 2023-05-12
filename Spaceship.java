@@ -186,7 +186,7 @@ public class Spaceship extends JLabel implements KeyListener
     
     public void incrVMov()
     {
-        incrSpost+=4;
-        System.out.println("valore incrementato a: "+incrSpost);
+        incrSpost+=2;
+        //System.out.println("velocità incrementata a: "+incrSpost);
     }
 }

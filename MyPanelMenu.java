@@ -11,6 +11,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 import java.util.Timer;
+import javax.imageio.*;
 
 public class MyPanelMenu extends JPanel implements Runnable
 {
@@ -39,7 +40,13 @@ public class MyPanelMenu extends JPanel implements Runnable
     {
         super();
         
-        setBackground(Color.BLUE);
+        
+        try {
+            backgroundImage = ImageIO.read(new File("img/sfondoLaterale2.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //setBackground(Color.BLUE);
 
         /*try {
             backgroundImage = ImageIO.read(new File("img/latosx.jpeg"));

@@ -43,8 +43,13 @@ public class MyPanelScore extends JPanel implements Runnable
         } catch (IOException e) {
             e.printStackTrace();
         }*/
-        setBackground(Color.BLUE);
-        setForeground(Color.WHITE);
+
+        try {
+            backgroundImage = ImageIO.read(new File("img/sfondoLaterale1.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         
         //Impostazione font Astro
         try
