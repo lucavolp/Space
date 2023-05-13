@@ -120,6 +120,7 @@ public class Spaceship extends JLabel implements KeyListener
                         ultimoProiettile = currentTime;
                     }
                     break;
+                    
             }
     }
     

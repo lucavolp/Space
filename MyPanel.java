@@ -52,10 +52,10 @@ public class MyPanel extends JPanel //implements ActionListener
         c.gridwidth = 3;
         c.anchor = GridBagConstraints.CENTER;
         add(lillo, c);
-        c.gridwidth = 1;
+        //c.gridwidth = 1;
         c.gridy = 1;
         add(change, c);
-        c.gridx = 1;
+        c.gridx = 3;
         add(chiudi, c);
         
         /*
