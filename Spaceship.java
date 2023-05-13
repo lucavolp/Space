@@ -71,22 +71,42 @@ public class Spaceship extends JLabel implements KeyListener
         if(!pannello.gameStatus() && !pannello.getPause()) //se il gioco non è in pausa allora la navicella prende gli input
             switch(keyCode) 
             {
-                case KeyEvent.VK_LEFT, KeyEvent.VK_A: //Freccia sinistra
+                case KeyEvent.VK_LEFT: //Freccia sinistra
+                    speed=-incrSpost;
+                    move();
+                    break;
+                
+                case KeyEvent.VK_A: //Freccia sinistra
                     speed=-incrSpost;
                     move();
                     break;
                     
-                case KeyEvent.VK_RIGHT, KeyEvent.VK_D : //Freccia destra
+                case KeyEvent.VK_RIGHT: //Freccia destra
+                    speed=incrSpost;
+                    move();
+                    break;
+                
+                case KeyEvent.VK_D : //Freccia destra
                     speed=incrSpost;
                     move();
                     break;
                     
-                case KeyEvent.VK_UP, KeyEvent.VK_W: //Freccia su
+                case KeyEvent.VK_UP: //Freccia su
                     posY -= incrSpost;
                     move();
                     break;
                     
-                case KeyEvent.VK_DOWN, KeyEvent.VK_S: //Freccia giù
+                case KeyEvent.VK_W: //Freccia su
+                    posY -= incrSpost;
+                    move();
+                    break;
+                    
+                case KeyEvent.VK_DOWN: //Freccia giù
+                    posY += incrSpost;
+                    move();
+                    break;
+                    
+                case KeyEvent.VK_S: //Freccia giù
                     posY += incrSpost;
                     move();
                     break;
