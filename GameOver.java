@@ -18,8 +18,9 @@ public class GameOver extends JPanel
     private AscoltatoreEsterno as;
     private MyPanel pannelloHome;
     private MyFrame frame;
+    private MyPanelMenu pM;
     
-    public GameOver(MyFrame f, MyPanel p) 
+    public GameOver(MyFrame f, MyPanel p,MyPanelMenu mM) 
     {
         super();
         //System.out.println("GameOver dalla classe");
@@ -27,11 +28,12 @@ public class GameOver extends JPanel
         setBackground(null);
         pannelloHome = p;
         frame = f;
+        pM = mM;    //pm=MyPanelMenu
         if(pannelloHome == null)
             System.out.println("Ciao");
         //this.setPreferredSize(new Dimension(1920, 1080));
         setLayout(new GridBagLayout());
-        as = new AscoltatoreEsterno(pannelloHome, frame);
+        as = new AscoltatoreEsterno(pannelloHome, frame,mM);
         
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/game-over.png"));
@@ -41,19 +43,23 @@ public class GameOver extends JPanel
         }
         
         spazio = new JLabel();
-        spazio.setPreferredSize(new Dimension(100, 20));
         scritta = new JLabel();
         scritta.setIcon(new ImageIcon(go));
-        
         replayButton = new JButton("Rigioca");
         replayButton.addActionListener(as);
-        
         exitButton = new JButton("Home");
         exitButton.addActionListener(as);
         
+        scritta.setPreferredSize(new Dimension(300,300));
+        replayButton.setPreferredSize(new Dimension(300,50));
+        spazio.setPreferredSize(new Dimension(300,50));
+        exitButton.setPreferredSize(new Dimension(300,50));
+        
+        
+        
         GridBagConstraints c = new GridBagConstraints();
         
-        c.insets=new Insets(15,15,15,15);    //dovrebbe mettere spazio fra gli elementi
+        //c.insets=new Insets(15,15,15,15);    //dovrebbe mettere spazio fra gli elementi
         
         c.gridwidth = 3;
         c.anchor = GridBagConstraints.CENTER;
@@ -65,8 +71,12 @@ public class GameOver extends JPanel
         add(spazio, c);
         c.gridx = 2;
         add(exitButton, c);
+        
+
     }
 
+    
+    
     /* Se serve per provare il layout i bottoni e cose varie
     public static void main(String[] args) {
         JFrame frame = new JFrame("Esempio Game Over");

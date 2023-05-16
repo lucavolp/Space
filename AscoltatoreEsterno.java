@@ -11,6 +11,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.math.*;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+
 public class AscoltatoreEsterno implements ActionListener {
     private MyPanel p;
     private MyPanelGioco panelGioco;
@@ -25,6 +29,13 @@ public class AscoltatoreEsterno implements ActionListener {
     {
         this.p = ph;
         frame = f;
+    }
+    
+    public AscoltatoreEsterno(MyPanel ph, MyFrame f,MyPanelMenu pm)// Viene usato dalla pagina principale
+    {
+        this.p = ph;
+        frame = f;
+        panelMenu=pm;
     }
 
     public AscoltatoreEsterno() {
@@ -72,7 +83,10 @@ public class AscoltatoreEsterno implements ActionListener {
         {
             backHome();
         }
-        
+        if(e.getActionCommand().equals("Home"))
+        {
+            backToHome();
+        }
         // Controlli pannello GameOver
         if (e.getActionCommand().equals("Home")) 
         {
@@ -91,7 +105,23 @@ public class AscoltatoreEsterno implements ActionListener {
         
         container.add(p);
         container.revalidate();
-        container.repaint();
+        container.repaint();    
+    }
+    
+    public void backToHome() // Funziona e consente di tornare al pannello principale
+    {
+        try {
+            // Creazione dell'oggetto Robot
+            Robot robot = new Robot();
+
+            // Simulazione del click sulla finestra del programma Java
+            robot.mouseMove(this.panelMenu.back.getBounds().x+5, this.panelMenu.back.getBounds().x+5);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+            System.out.println("ciao");
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }  
     }
     
     public void setPanelSize()
@@ -119,7 +149,7 @@ public class AscoltatoreEsterno implements ActionListener {
     {   
         Container f = p.getParent();
         
-        panelGioco = new MyPanelGioco(frame, p);
+        panelGioco = new MyPanelGioco(frame, p,panelMenu);
         panelScore = new MyPanelScore(panelGioco);
         panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
         

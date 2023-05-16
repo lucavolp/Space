@@ -38,7 +38,9 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
     //Colpi che servono per distruggere un meteorite
     private int vita;
 
-    public Meteoriti(int speed, int v, MyPanelGioco p, MyFrame f, MyPanel ph) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
+    private MyPanelMenu pannelloMenu;
+    
+    public Meteoriti(int speed, int v, MyPanelGioco p, MyFrame f, MyPanel ph, MyPanelMenu mM) // Gli passo la posizione dove generare il meteorite (random) e la velocità di cascata del meteorite
     {
         pannelloHome = ph;
         frame = f;
@@ -47,6 +49,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         setVelocita(speed);
         vita = v;
         setBounds(0 , 0, 19, 55);
+        pannelloMenu = mM;
         // Inserimento e ridimensionamento dell'immagine
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/meteorite.png"));
@@ -100,7 +103,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         //pannello.stopThread();
         
         //Creazione del pannello del game over
-        GameOver gg = new GameOver(frame, pannelloHome);
+        GameOver gg = new GameOver(frame, pannelloHome,pannelloMenu);
         Container c = frame.getContentPane();
         c.add(gg, 0);
         c.revalidate();

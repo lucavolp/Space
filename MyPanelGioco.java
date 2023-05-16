@@ -25,6 +25,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     public AscoltatoreEsterno as;
     
     protected MyPanelScore pannelloScore;
+    protected MyPanelMenu pannelloMenu;
     
     //Thread principale per far eseguire il metodo run dentro questa classe
     private Thread mainThread;
@@ -49,7 +50,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     //Sfondo
     private Image backgroundImage;
     
-    public MyPanelGioco(MyFrame f, MyPanel p) 
+    public MyPanelGioco(MyFrame f, MyPanel p, MyPanelMenu mpm) 
     {
         super();
         this.requestFocus();
@@ -60,6 +61,7 @@ public class MyPanelGioco extends JPanel implements Runnable
         GameOver = false;
         isPaused = false;
         meteoritiSpawn = 1;
+        pannelloMenu=mpm;
         
         try {
             backgroundImage = ImageIO.read(new File("img/background_game.jpg"));
@@ -115,7 +117,7 @@ public class MyPanelGioco extends JPanel implements Runnable
             {
                 for(int i = 0; i < meteoritiSpawn; i++) //Spawna meteoriti meteoritiSpawn volte
                 {
-                    Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this, frame, pannelloHome);
+                    Meteoriti meteorite = new Meteoriti(velocitaMeteoriti, vitaMeteoriti, this, frame, pannelloHome, pannelloMenu);
                     totM++; //contatore di meteoriti utilizzato per il punteggio
                     add(meteorite); //lo aggiunge al pannello
                     meteoritis.add(meteorite); //lo aggiunge alla lista, aggiunge in coda

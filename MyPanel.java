@@ -66,8 +66,6 @@ public class MyPanel extends JPanel //implements ActionListener
         add(lillo3, c);
         c.gridy = 2;
         add(lillo4, c);
-        
-        
         c.gridy = 3;
         c.gridx = 0;
         add(change, c);

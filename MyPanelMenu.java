@@ -18,7 +18,7 @@ public class MyPanelMenu extends JPanel
     public JButton pause; // mette in pausa il gioco, ferma il timer e gli asteroidi
     public JButton resume; //toglie il gioco dalla pausa
     private JButton restart; // resetta il punteggio e ricomincia una nuova partita
-    private JButton back; // torna al menù principale
+    public JButton back; // torna al menù principale
     private AscoltatoreEsterno as;
     private MyPanelGioco pannelloGioco;
     private MyPanelScore ps;
