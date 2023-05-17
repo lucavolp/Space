@@ -24,7 +24,7 @@ public class GameOver extends JPanel
     {
         super();
         //System.out.println("GameOver dalla classe");
-        this.setOpaque(false);
+        //this.setOpaque(false);
         setBackground(null);
         pannelloHome = p;
         frame = f;
@@ -37,7 +37,7 @@ public class GameOver extends JPanel
         
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/game-over.png"));
-            go = bufferedImage.getScaledInstance(50, 55, Image.SCALE_DEFAULT);
+            go = bufferedImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,7 +55,11 @@ public class GameOver extends JPanel
         spazio.setPreferredSize(new Dimension(300,50));
         exitButton.setPreferredSize(new Dimension(300,50));
         
+        this.setBackground(new Color(192, 192, 192, 128));
+        
         GridBagConstraints c = new GridBagConstraints();
+        
+        
         
         //c.insets=new Insets(15,15,15,15);    //dovrebbe mettere spazio fra gli elementi
         

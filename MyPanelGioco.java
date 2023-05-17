@@ -85,21 +85,22 @@ public class MyPanelGioco extends JPanel implements Runnable
         mainThread.start();
         
         
-        
-        
-        //questa cosa qui simula un click sulla finestra per provare a prendere il 
-        //focus appena viene creato il pannello, stackoverflow lo consigliava ma mhh
-        /*try {
+        /*
+        try {
             // Creazione dell'oggetto Robot
             Robot robot = new Robot();
 
             // Simulazione del click sulla finestra del programma Java
-            robot.mouseMove(50, 50);
+            robot.mouseMove(pannelloMenu.back.getLocation().x, pannelloMenu.back.getLocation().y+10);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         } catch (AWTException e) {
             e.printStackTrace();
-        }*/
+        }
+        
+        System.out.println(pannelloMenu.back.getLocation().x);
+        */
+        
     }
     
     //Per l'immagine di sfondo

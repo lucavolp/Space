@@ -193,5 +193,26 @@ public class AscoltatoreEsterno implements ActionListener {
           
         f.revalidate();
         f.repaint();
+        
+        
+        
+        panelMenu.pause.doClick();
+        
+        try {
+            // Creazione dell'oggetto Robot
+            Robot robot = new Robot();
+
+            // Simulazione del click sulla finestra del programma Java
+            robot.mouseMove(this.panelMenu.resume.getBounds().x+5, this.panelMenu.resume.getBounds().x+5);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        System.out.println("x: "+panelMenu.pause.getLocationOnScreen().x+"\ny: "+panelMenu.pause.getLocationOnScreen().y);
+        //panelMenu.resume.doClick();
     }
 }
