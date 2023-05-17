@@ -19,7 +19,7 @@ public class MyPanel extends JPanel //implements ActionListener
     private JLabel lillo2;  //Label vuota per impaginazione
     private JLabel lillo3;  //Label vuota per impaginazione
     private JLabel lillo4;  //Label vuota per impaginazione
-    private JButton change;
+    public JButton change;
     private JButton chiudi;
     public AscoltatoreEsterno as;
     

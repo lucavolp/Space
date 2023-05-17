@@ -86,9 +86,10 @@ public class MyPanelGioco extends JPanel implements Runnable
         
         
         
+        
         //questa cosa qui simula un click sulla finestra per provare a prendere il 
         //focus appena viene creato il pannello, stackoverflow lo consigliava ma mhh
-        try {
+        /*try {
             // Creazione dell'oggetto Robot
             Robot robot = new Robot();
 
@@ -98,9 +99,7 @@ public class MyPanelGioco extends JPanel implements Runnable
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         } catch (AWTException e) {
             e.printStackTrace();
-        }
-        
-        this.requestFocus();
+        }*/
     }
     
     //Per l'immagine di sfondo
@@ -124,7 +123,6 @@ public class MyPanelGioco extends JPanel implements Runnable
                 }
                 revalidate();
                 repaint();
-                verificaEliminati();
             }
             
             //Dopo la pausa riprende a spawnare meteoriti dopo velocitaSpawn tempo
@@ -151,10 +149,6 @@ public class MyPanelGioco extends JPanel implements Runnable
     
     public void startThread()
     {
-        for (Meteoriti meteorite : meteoritis) {
-            meteorite.startThread();
-        }
-        roberto.startThread();
         mainThread = new Thread(this, "Gioco");
         mainThread.start();
     }

@@ -1,4 +1,3 @@
-
 /**
  * Aggiungi qui una descrizione della classe Test
  * 
@@ -41,8 +40,9 @@ public class AscoltatoreEsterno implements ActionListener {
     public AscoltatoreEsterno() {
     } // costruttore vuoto normale
 
-    public AscoltatoreEsterno(MyPanel p, MyPanelGioco pg, MyPanelScore ps, MyPanelMenu pm) // usato dal MyPanelMenu
+    public AscoltatoreEsterno(MyFrame f, MyPanel p, MyPanelGioco pg, MyPanelScore ps, MyPanelMenu pm) // usato dal MyPanelMenu
     {
+        frame = f;
         this.p = p;
         panelGioco = pg;
         panelScore = ps;
@@ -77,21 +77,19 @@ public class AscoltatoreEsterno implements ActionListener {
         }
         if (e.getActionCommand().equals("Restart")) 
         {
-            
+            replay();
         }
         if (e.getActionCommand().equals("Torna alla home")) 
         {
             backHome();
         }
-        if(e.getActionCommand().equals("Home"))
-        {
-            backToHome();
-        }
+        
         // Controlli pannello GameOver
-        if (e.getActionCommand().equals("Home")) 
-        {
-            //backHome();
-            avviaGioco();
+        if (e.getActionCommand().equals("Home")) {
+            GOBackToHome();                     
+        }
+        if (e.getActionCommand().equals("Rigioca")) {
+            GOReplay();                     
         }
     }
 
@@ -108,8 +106,17 @@ public class AscoltatoreEsterno implements ActionListener {
         container.repaint();    
     }
     
-    public void backToHome() // Funziona e consente di tornare al pannello principale
+    public void replay()
     {
+        panelMenu.back.doClick();
+        p.change.doClick();
+    }
+    
+    
+    //Metodi invocati dal pannello GameOver
+    public void GOBackToHome() // Funziona e consente di tornare al pannello principale
+    {
+        /*
         try {
             // Creazione dell'oggetto Robot
             Robot robot = new Robot();
@@ -121,7 +128,13 @@ public class AscoltatoreEsterno implements ActionListener {
             System.out.println("ciao");
         } catch (AWTException e) {
             e.printStackTrace();
-        }  
+        }*/
+        panelMenu.back.doClick();
+    }
+    
+    public void GOReplay()
+    {
+        panelMenu.restart.doClick();
     }
     
     public void setPanelSize()
@@ -149,9 +162,14 @@ public class AscoltatoreEsterno implements ActionListener {
     {   
         Container f = p.getParent();
         
-        panelGioco = new MyPanelGioco(frame, p,panelMenu);
+        
+        
+        panelMenu = new MyPanelMenu(frame, p); //certo che è null
+        panelGioco = new MyPanelGioco(frame, p, panelMenu);
         panelScore = new MyPanelScore(panelGioco);
-        panelMenu = new MyPanelMenu(panelGioco, panelScore, p);
+        
+        panelMenu.setPanelScore(panelScore);
+        panelMenu.setPanelGioco(panelGioco);
         
         //Passa al MyPanelGioco il pannello con le Score così da poterlo gestire
         panelGioco.setPanelScore(panelScore);

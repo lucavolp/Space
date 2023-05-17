@@ -20,7 +20,7 @@ public class GameOver extends JPanel
     private MyFrame frame;
     private MyPanelMenu pM;
     
-    public GameOver(MyFrame f, MyPanel p,MyPanelMenu mM) 
+    public GameOver(MyFrame f, MyPanel p, MyPanelMenu mM) 
     {
         super();
         //System.out.println("GameOver dalla classe");
@@ -33,7 +33,7 @@ public class GameOver extends JPanel
             System.out.println("Ciao");
         //this.setPreferredSize(new Dimension(1920, 1080));
         setLayout(new GridBagLayout());
-        as = new AscoltatoreEsterno(pannelloHome, frame,mM);
+        as = new AscoltatoreEsterno(pannelloHome, frame, mM);
         
         try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/game-over.png"));
@@ -54,8 +54,6 @@ public class GameOver extends JPanel
         replayButton.setPreferredSize(new Dimension(300,50));
         spazio.setPreferredSize(new Dimension(300,50));
         exitButton.setPreferredSize(new Dimension(300,50));
-        
-        
         
         GridBagConstraints c = new GridBagConstraints();
         

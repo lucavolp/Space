@@ -17,17 +17,14 @@ public class MyPanelMenu extends JPanel
 {
     public JButton pause; // mette in pausa il gioco, ferma il timer e gli asteroidi
     public JButton resume; //toglie il gioco dalla pausa
-    private JButton restart; // resetta il punteggio e ricomincia una nuova partita
+    public JButton restart; // resetta il punteggio e ricomincia una nuova partita
     public JButton back; // torna al menù principale
+    
     private AscoltatoreEsterno as;
     private MyPanelGioco pannelloGioco;
-    private MyPanelScore ps;
+    private MyPanelScore pannelloScore;
     private MyPanel p;
-    protected JLabel timer;
-    private int tMin=0;
-    private int tSec=0;
-    
-    private Thread time;
+    private MyFrame frame;
     
     //Sfondo
     private Image backgroundImage;
@@ -35,24 +32,18 @@ public class MyPanelMenu extends JPanel
     //Font
     private Font font;
     
-    public MyPanelMenu(MyPanelGioco pg, MyPanelScore ps, MyPanel p)
+    public MyPanelMenu(MyFrame f, MyPanel p)
     {
         super();
         
-        
+        //Immagine sfondo banda laterale
         try {
             backgroundImage = ImageIO.read(new File("img/sfondoLaterale2.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //setBackground(Color.BLUE);
-
-        /*try {
-            backgroundImage = ImageIO.read(new File("img/latosx.jpeg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         
+        //Impostazione Font
         try
         {
             try
@@ -69,29 +60,27 @@ public class MyPanelMenu extends JPanel
             ffe.printStackTrace();
         }
         
-        this.pannelloGioco = pg;
         this.p = p;
-        this.ps = ps;
+        this.frame = f;
         
-        as = new AscoltatoreEsterno(p, pannelloGioco, ps, this);
+        
         
         pause = new JButton("Pausa");
         pause.setFont(font.deriveFont(12f));
-        pause.addActionListener(as);
+        
         
         resume = new JButton("Riprendi");
         resume.setFont(font.deriveFont(12f));
-        resume.addActionListener(as);
+        
         
         restart = new JButton("Restart");
         restart.setFont(font.deriveFont(12f));
-        restart.addActionListener(as);
+        
         
         back = new JButton("Torna alla home");
         back.setFont(font.deriveFont(12f));
-        back.addActionListener(as);
         
-        //timer= new JLabel("00:00");
+        
         
         // Crea un nuovo GridBagLayout e imposta il layout del pannello su di esso
         GridBagLayout layout = new GridBagLayout();
@@ -137,6 +126,19 @@ public class MyPanelMenu extends JPanel
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
+    
+    public void setPanelScore(MyPanelScore ps){
+        pannelloScore = ps;
+    }
+    
+    public void setPanelGioco(MyPanelGioco pg){
+        pannelloGioco = pg;
+        as = new AscoltatoreEsterno(frame, p, pannelloGioco, pannelloScore, this);
+        pause.addActionListener(as);
+        resume.addActionListener(as);
+        restart.addActionListener(as);
+        back.addActionListener(as);
     }
 }
 

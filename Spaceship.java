@@ -35,7 +35,6 @@ public class Spaceship extends JLabel implements KeyListener
         pannello = p;
         
         setPosizioneGenerazione();
-        setBounds(posX, posY, 145, 120);
         try
         {
             BufferedImage bufferedImage = ImageIO.read(new File("img/spaceship.png"));
@@ -54,13 +53,14 @@ public class Spaceship extends JLabel implements KeyListener
         velocitaProiettili = 7;
     }
     
-    private void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
+    public void setPosizioneGenerazione()//Setta la posizione al centro dello schermo al primo lancio della partita
     {
         dimX=Toolkit.getDefaultToolkit().getScreenSize().width;//Prende la larghezza dello schermo
         dimY=Toolkit.getDefaultToolkit().getScreenSize().height;//Prende l'altezza dello schermo
         
         posX=(dimX/2);  //posiziona partenza al centro dello schermo
         posY=dimY - 250; //posiziona un po' staccata dal fondo
+        setBounds(posX, posY, 145, 120);
     }
     
     //Gestione pressione tasti
@@ -196,13 +196,6 @@ public class Spaceship extends JLabel implements KeyListener
     
     public void incrProjectileSpeed(int sp) {
         velocitaProiettili += sp;
-    }
-    
-    protected void startThread()
-    {
-        for (Projectile p : proiettili) {
-            p.startThread();
-        }
     }
     
     public void incrVMov()

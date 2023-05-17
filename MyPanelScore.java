@@ -70,6 +70,7 @@ public class MyPanelScore extends JPanel implements Runnable
 
         incr = 1;
         tUpdate = 1000;
+        pt = 0;
         
         //Layout
         setLayout(new GridBagLayout()); // imposta il layout GridBagLayout

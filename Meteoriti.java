@@ -141,7 +141,7 @@ public class Meteoriti extends JLabel implements Runnable // da modificare e met
         speed= d;
     }
 
-    public void startThread() {
+    private void startThread() {
         movimento = new Thread(this, "Meteorite");
         movimento.start();
     }
