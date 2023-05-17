@@ -13,6 +13,7 @@ URGENTE:
     Per ora:
         il frame dice di essere focussabile e il pannello e il frame 
         richiamano il focus, da provare su Linux perché windows sembra sbattersene
+        IL FOCUS CE L'HA IL BOTTONE DEL PANNELLO INIZIALE
     ]
 
 - Trovare due immagini sfondo per le bande laterali
