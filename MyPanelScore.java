@@ -21,7 +21,7 @@ public class MyPanelScore extends JPanel implements Runnable
     private int tUpdate;        //ms di aggiornamento e aggiunta punti
     private Font font;
     private Thread punti;
-    
+    private JButton btnStart;
     
     protected JLabel timer;
     private int tMin=0;
@@ -36,6 +36,9 @@ public class MyPanelScore extends JPanel implements Runnable
     {
         super();
         this.pannelloGioco = p2;
+        
+        btnStart=new JButton();
+        btnStart.setPreferredSize(new Dimension(1,1));
         
         //Immagine di sfondo
         /*try {
@@ -76,7 +79,8 @@ public class MyPanelScore extends JPanel implements Runnable
         setLayout(new GridBagLayout()); // imposta il layout GridBagLayout
 
         GridBagConstraints l = new GridBagConstraints();
-        
+        //add(btnStart);
+        //btnStart.setBounds(1,1,0,0);
         l.weighty = 1;
         l.gridy = 0;
         l.anchor = GridBagConstraints.CENTER;
@@ -92,7 +96,7 @@ public class MyPanelScore extends JPanel implements Runnable
         timer.setFont(font.deriveFont(20f));
         timer.setForeground(Color.WHITE);
         add(timer, l);
-
+        
         startThread();
     }
     

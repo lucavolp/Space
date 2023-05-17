@@ -195,7 +195,7 @@ public class AscoltatoreEsterno implements ActionListener {
         f.repaint();
         
         
-        
+        /*
         panelMenu.pause.doClick();
         
         try {
@@ -203,7 +203,7 @@ public class AscoltatoreEsterno implements ActionListener {
             Robot robot = new Robot();
 
             // Simulazione del click sulla finestra del programma Java
-            robot.mouseMove(this.panelMenu.resume.getBounds().x+5, this.panelMenu.resume.getBounds().x+5);
+            robot.mouseMove(0,0);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         } catch (AWTException e) {
@@ -211,8 +211,8 @@ public class AscoltatoreEsterno implements ActionListener {
         }
         
         
-        
-        System.out.println("x: "+panelMenu.pause.getLocationOnScreen().x+"\ny: "+panelMenu.pause.getLocationOnScreen().y);
-        //panelMenu.resume.doClick();
+        panelMenu.resume.doClick();
+        //System.out.println("x: "+panelMenu.pause.getLocationOnScreen().x+"\ny: "+panelMenu.pause.getLocationOnScreen().y);
+        //panelMenu.resume.doClick();*/
     }
 }
