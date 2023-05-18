@@ -32,6 +32,11 @@ public class MyPanelScore extends JPanel implements Runnable
     //Sfondo
     private Image backgroundImage;
     
+    //Lista score
+    private DefaultListModel<String> model;
+    private JList<String> scoreRecenti;
+    private JScrollPane scrollPane;
+    
     public MyPanelScore(MyPanelGioco p2)
     {
         super();
@@ -39,13 +44,6 @@ public class MyPanelScore extends JPanel implements Runnable
         
         btnStart=new JButton();
         btnStart.setPreferredSize(new Dimension(1,1));
-        
-        //Immagine di sfondo
-        /*try {
-            backgroundImage = ImageIO.read(new File("img/latosx.jpeg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         try {
             backgroundImage = ImageIO.read(new File("img/sfondoLaterale1.png"));
@@ -75,6 +73,10 @@ public class MyPanelScore extends JPanel implements Runnable
         tUpdate = 1000;
         pt = 0;
         
+        //Robe per la lista
+        model = new DefaultListModel<>();
+        scoreRecenti = new JList<>(model);
+        
         //Layout
         setLayout(new GridBagLayout()); // imposta il layout GridBagLayout
 
@@ -84,18 +86,21 @@ public class MyPanelScore extends JPanel implements Runnable
         l.weighty = 1;
         l.gridy = 0;
         l.anchor = GridBagConstraints.CENTER;
+        timer= new JLabel("Tempo di Gioco 00:00");
+        timer.setFont(font.deriveFont(20f));
+        timer.setForeground(Color.WHITE);
+        add(timer, l);        
         
+        l.gridy = 1;
+        l.anchor = GridBagConstraints.NORTH;
         punteggio = new JLabel("SCORE 0"); 
         punteggio.setFont(font.deriveFont(25f));
         punteggio.setForeground(Color.WHITE);
         add(punteggio, l);
         
-        l.gridy = 1;
-        l.anchor = GridBagConstraints.NORTH;
-        timer= new JLabel("Tempo di Gioco 00:00");
-        timer.setFont(font.deriveFont(20f));
-        timer.setForeground(Color.WHITE);
-        add(timer, l);
+        l.gridy = 2;
+        //add(scoreRecenti, l);
+        
         
         startThread();
     }
