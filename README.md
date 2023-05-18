@@ -4,10 +4,6 @@ Spaceshooter game come negli anni 90 nelle sale giochi.
 
 URGENTE:
 
-- Restart [Funziona ma è un po storto, provalo e vedi se va bene comunque così]
-
-- Finire metodo gameover
-
 - Sistemare il focus della navicella
     [
     Per ora:
@@ -16,9 +12,6 @@ URGENTE:
         IL FOCUS CE L'HA IL BOTTONE DEL PANNELLO INIZIALE
         Prova con il robottino a fargli cliccare il pulsante pausa e poi riprendi, che in questo modo si prende il focus
     ]
-
-- Schermata home, grafice, bottoni, ecc..
-
 
 MENO IMPORTANTE:
 
