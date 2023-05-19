@@ -39,6 +39,8 @@ public class MyPanelScore extends JPanel implements Runnable
     
     private JLabel user;
     
+    private JLabel highScore;
+    
     public MyPanelScore(MyPanelGioco p2)
     {
         super();
@@ -88,10 +90,15 @@ public class MyPanelScore extends JPanel implements Runnable
         punteggio.setFont(font.deriveFont(25f));
         punteggio.setForeground(Color.WHITE);
         
-        user = new JLabel("Utente");
+        user = new JLabel();
         user.setFont(font.deriveFont(20f));
         user.setForeground(Color.WHITE);
         user.setHorizontalAlignment(JLabel.CENTER);
+        
+        highScore = new JLabel("HighScore: ");
+        highScore.setFont(font.deriveFont(20f));
+        highScore.setForeground(Color.WHITE);
+        highScore.setHorizontalAlignment(JLabel.CENTER);
         
         //Layout
         setLayout(new GridBagLayout()); // imposta il layout GridBagLayout
@@ -102,19 +109,18 @@ public class MyPanelScore extends JPanel implements Runnable
         l.gridy = 0;
         add(user, l);
         
-        l.weighty = 1;
         l.gridy = 1;
-        l.anchor = GridBagConstraints.CENTER;
+        add(highScore, l);
         
-        add(timer, l);        
-        
+        l.weighty = 1;
         l.gridy = 2;
-        l.anchor = GridBagConstraints.NORTH;
-        
+        l.anchor = GridBagConstraints.CENTER;
         add(punteggio, l);
         
+        l.gridy = 3;
         
-        //add(scoreRecenti, l);
+        l.anchor = GridBagConstraints.NORTH;
+        add(timer, l); 
         
         
         startThread();
@@ -198,22 +204,72 @@ public class MyPanelScore extends JPanel implements Runnable
     public void caricaUser()
     {
         try {
-            String nome = "ciao";
+            String nome = "";
+            String savedScore = "";
+            
             File file = new File("save/punteggi.txt"); // Specifica il percorso e il nome del file da leggere
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line); // Stampa ogni riga del file
-                nome = line;
+            while ((line = bufferedReader.readLine()) != null) 
+            {
+                String parts[] = line.split(";");
+                nome = parts[0];
+                savedScore = parts[1];
             }
-
             bufferedReader.close();
             
             user.setText(nome);
+            highScore.setText(savedScore);
+            
         } catch (IOException e) {
             System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
+        }
+    }
+    
+    public void salvaHighScore() //Le score sono nella variabile pt
+    {
+        long vecchie = Long.parseLong(highScore.getText()); //highScore contiene anche la parola
+        boolean vuoto = true;
+        if(pt > vecchie) //Se l'utente ha fatto un nuovo record di score
+        {
+            try{
+                File file = new File("save/punteggi.txt");
+                //Lettura
+                FileReader fileReader = new FileReader(file);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                //Scrittura
+                FileWriter fileWriter = new FileWriter(file); // true per aprire il file in modalità append
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                
+                String line;
+                ArrayList<String> fileLine = new ArrayList<>();
+                
+                while ((line = bufferedReader.readLine()) != null)
+                {
+                    fileLine.add(line);//la mia lista contiene tutte le righe del file
+                    vuoto = false;
+                }
+                bufferedReader.close();
+                
+                if(!vuoto)
+                    fileLine.remove(fileLine.size());// = user.getText() + ";" + pt;
+                fileLine.add(user.getText() + ";" + pt);
+                
+                //Riscrive il file
+                for(int i = 0; i < fileLine.size(); i++) //Carica tutta la lista nel file
+                {
+                    System.out.println(fileLine.get(i));
+                    bufferedWriter.write(fileLine.get(i));
+                    bufferedWriter.newLine(); // Vai a una nuova riga
+                }
+                bufferedWriter.close();
+            }
+            catch(IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
     

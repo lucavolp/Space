@@ -98,6 +98,7 @@ public class AscoltatoreEsterno implements ActionListener {
         Container container = panelMenu.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
         container.removeAll();
         panelGioco.setGameStatus(true); 
+        panelScore.salvaHighScore();
         panelGioco = null;
         panelScore = null;
         panelMenu = null;

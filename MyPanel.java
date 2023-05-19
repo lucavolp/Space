@@ -127,33 +127,74 @@ public class MyPanel extends JPanel //implements ActionListener
     
     public void salvaUser()
     {
-        String name;
-        
-        name = userInput.getText();
+        String name = userInput.getText();
         
         if(name.isEmpty())
             name = "iuser";
             
-        try {
+        try 
+        {
             File file = new File("save/punteggi.txt");
 
-            if (file.exists()) {
-                FileWriter fileWriter = new FileWriter(file, true); // Apri il file in modalità append
+            if (file.exists()) //Se la trova, prende i dati e li mette in una nuova linea
+            {
+                //Cerca nel file se il nome utente esiste già e quindi prende le sue top score
+                //Crea un reader per leggere il contenuto del file
+                FileReader fileReader = new FileReader(file);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                
+                String line;
+                ArrayList<String> fileLine = new ArrayList<>();
+                boolean trovato = false;
+                
+                while ((line = bufferedReader.readLine()) != null)
+                {
+                    //if(line.equals(name) && !line.equals("iuser"))
+                    fileLine.add(line);//la mia lista contiene tutte le righe del file
+                }
+                bufferedReader.close();
+                
+                for(int i = 0; i < fileLine.size(); i++)
+                {
+                    String[] parti = fileLine.get(i).split(";"); //Divide la stringa presa in due parti così da poter controllare il nome
+                    if(parti[0].equals(name) && !name.equals("iuser")) //Significa che è stato trovato lo stesso utente
+                    {
+                        fileLine.add(fileLine.get(i)); //Aggiunge alla fine la riga con l'utente che è stata trovata
+                        fileLine.remove(i);
+                        trovato = true;
+                        System.out.println("Trovato");
+                    }
+                }
+                
+                if(!trovato)
+                {
+                    System.out.println("Aggiunto");
+                    fileLine.add(name + ";0");
+                }
+                
+                //Scrive nel file il nome utente
+                FileWriter fileWriter = new FileWriter(file); // true per aprire il file in modalità append
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-                bufferedWriter.newLine(); // Vai a una nuova riga
-                bufferedWriter.write(name);
+                
+                for(int i = 0; i < fileLine.size(); i++) //Carica tutta la lista nel file
+                {
+                    bufferedWriter.write(fileLine.get(i));
+                    bufferedWriter.newLine(); // Vai a una nuova riga
+                }
 
                 bufferedWriter.close();
-                System.out.println("Punteggio salvato in append nel file esistente.");
-            } else {
+                //System.out.println("Punteggio salvato in append nel file esistente.");
+            } 
+            else 
+            {
                 FileWriter fileWriter = new FileWriter(file);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-                bufferedWriter.write(name);
+                bufferedWriter.write(name + ";0");
 
                 bufferedWriter.close();
-                System.out.println("Punteggio salvato in un nuovo file.");
+                //System.out.println("Punteggio salvato in un nuovo file.");
             }
         } catch (IOException e) {
             System.out.println("Si è verificato un errore durante il salvataggio del punteggio nel file: " + e.getMessage());
