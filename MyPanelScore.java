@@ -99,18 +99,21 @@ public class MyPanelScore extends JPanel implements Runnable
         GridBagConstraints l = new GridBagConstraints();
         //add(btnStart);
         //btnStart.setBounds(1,1,0,0);
-        l.weighty = 1;
         l.gridy = 0;
+        add(user, l);
+        
+        l.weighty = 1;
+        l.gridy = 1;
         l.anchor = GridBagConstraints.CENTER;
         
         add(timer, l);        
         
-        l.gridy = 1;
+        l.gridy = 2;
         l.anchor = GridBagConstraints.NORTH;
         
         add(punteggio, l);
         
-        l.gridy = 2;
+        
         //add(scoreRecenti, l);
         
         
@@ -195,6 +198,7 @@ public class MyPanelScore extends JPanel implements Runnable
     public void caricaUser()
     {
         try {
+            String nome = "ciao";
             File file = new File("save/punteggi.txt"); // Specifica il percorso e il nome del file da leggere
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -202,9 +206,12 @@ public class MyPanelScore extends JPanel implements Runnable
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line); // Stampa ogni riga del file
+                nome = line;
             }
 
             bufferedReader.close();
+            
+            user.setText(nome);
         } catch (IOException e) {
             System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
         }
