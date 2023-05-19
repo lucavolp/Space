@@ -38,7 +38,6 @@ public class MyPanelGioco extends JPanel implements Runnable
     public List<Meteoriti> meteoritis;
     private int vitaMeteoriti;
     private int meteoritiSpawn;
-    
     //^^^^^^^^^^^^^^^^^^^^^^^
     //si ti ho copiato le freccette perché sono carine
     

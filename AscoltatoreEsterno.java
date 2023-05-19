@@ -97,6 +97,7 @@ public class AscoltatoreEsterno implements ActionListener {
     {
         Container container = panelMenu.getParent(); // questo prende il contenitore che contiene tutti gli elementi della pagina e da qui si possono rimuovere e aggiungere pagine
         container.removeAll();
+        panelGioco.setGameStatus(true); 
         panelGioco = null;
         panelScore = null;
         panelMenu = null;
@@ -160,9 +161,9 @@ public class AscoltatoreEsterno implements ActionListener {
 
     public void avviaGioco() // Metodo che che crea la nuova finestra quando si preme new game
     {   
+        p.salvaUser();
+        
         Container f = p.getParent();
-        
-        
         
         panelMenu = new MyPanelMenu(frame, p); //certo che è null
         panelGioco = new MyPanelGioco(frame, p, panelMenu);
@@ -178,6 +179,8 @@ public class AscoltatoreEsterno implements ActionListener {
         panelScore.setPreferredSize(p1);  
         panelGioco.setPreferredSize(p2);  
         panelMenu.setPreferredSize(p3);
+        
+        panelScore.caricaUser();
         
         // Rimouve il pannello contenente il menù principale
         f.remove(p); //Questa f è null

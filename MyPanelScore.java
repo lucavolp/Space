@@ -37,6 +37,8 @@ public class MyPanelScore extends JPanel implements Runnable
     private JList<String> scoreRecenti;
     private JScrollPane scrollPane;
     
+    private JLabel user;
+    
     public MyPanelScore(MyPanelGioco p2)
     {
         super();
@@ -77,6 +79,20 @@ public class MyPanelScore extends JPanel implements Runnable
         model = new DefaultListModel<>();
         scoreRecenti = new JList<>(model);
         
+        //Creazione label
+        timer= new JLabel("Tempo di Gioco 00:00");
+        timer.setFont(font.deriveFont(20f));
+        timer.setForeground(Color.WHITE);
+        
+        punteggio = new JLabel("SCORE 0"); 
+        punteggio.setFont(font.deriveFont(25f));
+        punteggio.setForeground(Color.WHITE);
+        
+        user = new JLabel("Utente");
+        user.setFont(font.deriveFont(20f));
+        user.setForeground(Color.WHITE);
+        user.setHorizontalAlignment(JLabel.CENTER);
+        
         //Layout
         setLayout(new GridBagLayout()); // imposta il layout GridBagLayout
 
@@ -86,16 +102,12 @@ public class MyPanelScore extends JPanel implements Runnable
         l.weighty = 1;
         l.gridy = 0;
         l.anchor = GridBagConstraints.CENTER;
-        timer= new JLabel("Tempo di Gioco 00:00");
-        timer.setFont(font.deriveFont(20f));
-        timer.setForeground(Color.WHITE);
+        
         add(timer, l);        
         
         l.gridy = 1;
         l.anchor = GridBagConstraints.NORTH;
-        punteggio = new JLabel("SCORE 0"); 
-        punteggio.setFont(font.deriveFont(25f));
-        punteggio.setForeground(Color.WHITE);
+        
         add(punteggio, l);
         
         l.gridy = 2;
@@ -177,6 +189,24 @@ public class MyPanelScore extends JPanel implements Runnable
             pannelloGioco.addVitaMeteoriti();
             pannelloGioco.roberto.incrProjectileSpeed(1);
             pannelloGioco.aumentaSpawn();
+        }
+    }
+    
+    public void caricaUser()
+    {
+        try {
+            File file = new File("save/punteggi.txt"); // Specifica il percorso e il nome del file da leggere
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line); // Stampa ogni riga del file
+            }
+
+            bufferedReader.close();
+        } catch (IOException e) {
+            System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
         }
     }
     
