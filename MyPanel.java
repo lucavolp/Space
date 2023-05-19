@@ -76,6 +76,8 @@ public class MyPanel extends JPanel //implements ActionListener
         c.gridx = 2;
         add(chiudi, c);
         
+        change.setDefaultCapable(false);
+        chiudi.setDefaultCapable(false);
         /*
         add(lillo);
         add(change);

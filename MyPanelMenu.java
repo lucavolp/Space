@@ -119,7 +119,11 @@ public class MyPanelMenu extends JPanel
         add(back);
         //add(timer);
         resume.setVisible(false);
-
+        /*
+        pause.setDefaultCapable(false);
+        restart.setDefaultCapable(false);
+        back.setDefaultCapable(false);
+        resume.setDefaultCapable(false);*/
     }
     
     //Per l'immagine di sfondo

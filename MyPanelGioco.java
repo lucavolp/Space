@@ -43,6 +43,7 @@ public class MyPanelGioco extends JPanel implements Runnable
     //si ti ho copiato le freccette perché sono carine
     
     public int totM;      //totale di meteoriti spawnati
+    private JButton btnStart;
     
     //Variabili per la navicella
     Spaceship roberto;
@@ -64,6 +65,9 @@ public class MyPanelGioco extends JPanel implements Runnable
         meteoritiSpawn = 1;
         pannelloMenu=mpm;
         
+        btnStart=new JButton("ciaoooooooooooooooo");
+        //btnStart.setPreferredSize(new Dimension(1,1));
+        
         try {
             backgroundImage = ImageIO.read(new File("img/background_game.jpg"));
         } catch (IOException e) {
@@ -82,9 +86,54 @@ public class MyPanelGioco extends JPanel implements Runnable
         roberto = new Spaceship(this);
         add(roberto);
         
+        btnStart.setBounds(0,0,1,1);
+        
         mainThread = new Thread(this, "Space");
         mainThread.start();
         
+        add(btnStart);
+        //System.out.println(btnStart.getLocationOnScreen().x+btnStart.getLocationOnScreen().y);
+        /*
+        try {
+            // Creazione dell'oggetto Robot
+            Robot robot = new Robot();
+
+            // Simulazione del click sulla finestra del programma Java
+            robot.mouseMove(btnStart.getLocationOnScreen().x,btnStart.getLocationOnScreen().y);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+        */
+        //System.out.println(pannelloMenu.back.getLocation().x);
+        btnStart.setDefaultCapable(false);
+        
+        //questo blocco di codice ti dice che componente ha il focus
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                if (e.getID() == KeyEvent.KEY_TYPED) {
+                    Component focusedComponent = manager.getFocusOwner();
+                    System.out.println("Focused component: " + focusedComponent);
+                }
+                return false;
+            }
+        });
+        
+        
+        try {
+            // Creazione dell'oggetto Robot
+            Robot robot = new Robot();
+
+            // Simulazione del click sulla finestra del programma Java
+            robot.mouseMove(this.getBounds().x,0);
+            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
         
         /*
         try {
@@ -92,16 +141,19 @@ public class MyPanelGioco extends JPanel implements Runnable
             Robot robot = new Robot();
 
             // Simulazione del click sulla finestra del programma Java
-            robot.mouseMove(pannelloMenu.back.getLocation().x, pannelloMenu.back.getLocation().y+10);
-            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+            robot.keyPress(KeyEvent.VK_TAB);
+            robot.keyRelease(KeyEvent.VK_TAB);
+            //robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         } catch (AWTException e) {
             e.printStackTrace();
-        }
+        }*/
         
-        System.out.println(pannelloMenu.back.getLocation().x);
-        */
         
+        
+        //se non prende sto focus gli do fuoco io
+        
+        
+        roberto.requestFocusInWindow();
     }
     
     //Per l'immagine di sfondo
