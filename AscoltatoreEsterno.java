@@ -184,15 +184,16 @@ public class AscoltatoreEsterno implements ActionListener {
         
         // Rimouve il pannello contenente il menù principale
         f.remove(p); //Questa f è null
-        
+        //p=null;
+        //System.out.println(p.isVisible());
         // Imposta il layout per aggiungere i 3 pannelli
         f.setLayout(new BorderLayout());
         
         // Aggiunge i 3 pannelli
-        f.add(panelGioco, BorderLayout.CENTER);
+        
         f.add(panelMenu, BorderLayout.EAST);
         f.add(panelScore, BorderLayout.WEST);
-        
+        f.add(panelGioco, BorderLayout.CENTER);
           
         f.revalidate();
         f.repaint();
@@ -217,5 +218,7 @@ public class AscoltatoreEsterno implements ActionListener {
         panelMenu.resume.doClick();
         //System.out.println("x: "+panelMenu.pause.getLocationOnScreen().x+"\ny: "+panelMenu.pause.getLocationOnScreen().y);
         //panelMenu.resume.doClick();*/
+        
+        panelGioco.roberto.requestFocusInWindow();
     }
 }

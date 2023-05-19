@@ -115,6 +115,9 @@ public class MyPanel extends JPanel //implements ActionListener
         c.gridy = 3;
         c.gridx = 2;
         add(chiudi, c);
+        
+        change.setDefaultCapable(false);
+        chiudi.setDefaultCapable(false);
     }
     
     protected void paintComponent(Graphics g) {
