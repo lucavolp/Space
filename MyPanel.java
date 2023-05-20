@@ -164,6 +164,9 @@ public class MyPanel extends JPanel //implements ActionListener
                         trovato = true;
                         //System.out.println("Trovato");
                     }
+                    
+                    if(parti[0].equals("iuser"))
+                        fileLine.remove(i);
                 }
                 
                 if(!trovato)
@@ -179,7 +182,8 @@ public class MyPanel extends JPanel //implements ActionListener
                 
                 for(int i = 0; i < fileLine.size(); i++) //Carica tutta la lista nel file
                 {
-                    bufferedWriter.write(fileLine.get(i));
+                    //if(!fileLine.equals("iuser")) //Se non è l'utente senza nome
+                        bufferedWriter.write(fileLine.get(i));
                     if(i+1 < fileLine.size()) //se non è all'ultima riga va a capo
                         bufferedWriter.newLine(); // Vai a una nuova riga
                 }
@@ -191,10 +195,11 @@ public class MyPanel extends JPanel //implements ActionListener
             {
                 FileWriter fileWriter = new FileWriter(file);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
+                
                 bufferedWriter.write(name + ";0");
 
                 bufferedWriter.close();
+                
                 //System.out.println("Punteggio salvato in un nuovo file.");
             }
         } catch (IOException e) {

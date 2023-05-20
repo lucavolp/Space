@@ -19,6 +19,10 @@ public class GameOver extends JPanel
     private MyPanel pannelloHome;
     private MyFrame frame;
     private MyPanelMenu pM;
+    //Sfondo
+    private Image backgroundImage;
+    
+    private Font font;
     
     public GameOver(MyFrame f, MyPanel p, MyPanelMenu mM) 
     {
@@ -35,22 +39,51 @@ public class GameOver extends JPanel
         setLayout(new GridBagLayout());
         as = new AscoltatoreEsterno(pannelloHome, frame, mM);
         
-        try {
+        /*try {
             BufferedImage bufferedImage = ImageIO.read(new File("img/game-over.png"));
-            go = bufferedImage.getScaledInstance(300, 300, Image.SCALE_DEFAULT);
+            //System.out.println(Toolkit.getDefaultToolkit().getScreenSize().width + "x" + Toolkit.getDefaultToolkit().getScreenSize().height + "y");
+            go = bufferedImage.getScaledInstance(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height, Image.SCALE_DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        //Apri sfondo
+        try {
+            backgroundImage = ImageIO.read(new File("img/game-over.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         
+        //Impostazione font Astro
+        try
+        {
+            try
+            { 
+                font = Font.createFont(Font.TRUETYPE_FONT, new File("font/astro/Futuristic Font/Astro.ttf"));
+            }
+            catch (IOException ioe)
+            {
+                ioe.printStackTrace();
+            }
+        }
+        catch (FontFormatException ffe)
+        {
+            ffe.printStackTrace();
+        }
+        
         spazio = new JLabel();
         scritta = new JLabel();
-        scritta.setIcon(new ImageIcon(go));
+        //scritta.setIcon(new ImageIcon(go));
         replayButton = new JButton("Rigioca");
+        replayButton.setFont(font.deriveFont(20f));
+        //replayButton.setForeground(Color.WHITE);
         replayButton.addActionListener(as);
+        
         exitButton = new JButton("Home");
+        exitButton.setFont(font.deriveFont(20f));
+        //exitButton.setForeground(Color.WHITE);
         exitButton.addActionListener(as);
         
-        scritta.setPreferredSize(new Dimension(300,300));
+        scritta.setPreferredSize(new Dimension(300,500));
         replayButton.setPreferredSize(new Dimension(300,50));
         spazio.setPreferredSize(new Dimension(300,50));
         exitButton.setPreferredSize(new Dimension(300,50));
@@ -73,18 +106,11 @@ public class GameOver extends JPanel
         add(spazio, c);
         c.gridx = 2;
         add(exitButton, c);
-        
-
     }
 
-    
-    
-    /* Se serve per provare il layout i bottoni e cose varie
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Esempio Game Over");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(new GameOver());
-        frame.setSize(1920, 1080);
-        frame.setVisible(true);
-    }*/
+    //Per l'immagine di sfondo
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+    }
 }

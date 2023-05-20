@@ -82,6 +82,16 @@ public class MyPanelScore extends JPanel implements Runnable
         scoreRecenti = new JList<>(model);
         
         //Creazione label
+        user = new JLabel();
+        user.setFont(font.deriveFont(27f));
+        user.setForeground(new Color(135, 206, 235));
+        user.setHorizontalAlignment(JLabel.CENTER);
+        
+        highScore = new JLabel("HighScore: ");
+        highScore.setFont(font.deriveFont(20f));
+        highScore.setForeground(new Color(135, 206, 235));
+        highScore.setHorizontalAlignment(JLabel.CENTER);
+        
         timer= new JLabel("Tempo di Gioco 00:00");
         timer.setFont(font.deriveFont(20f));
         timer.setForeground(Color.WHITE);
@@ -89,16 +99,6 @@ public class MyPanelScore extends JPanel implements Runnable
         punteggio = new JLabel("SCORE 0"); 
         punteggio.setFont(font.deriveFont(25f));
         punteggio.setForeground(Color.WHITE);
-        
-        user = new JLabel();
-        user.setFont(font.deriveFont(20f));
-        user.setForeground(Color.WHITE);
-        user.setHorizontalAlignment(JLabel.CENTER);
-        
-        highScore = new JLabel("HighScore: ");
-        highScore.setFont(font.deriveFont(20f));
-        highScore.setForeground(Color.WHITE);
-        highScore.setHorizontalAlignment(JLabel.CENTER);
         
         //Layout
         setLayout(new GridBagLayout()); // imposta il layout GridBagLayout
@@ -130,6 +130,10 @@ public class MyPanelScore extends JPanel implements Runnable
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        
+        // Imposta il colore e lo spessore della linea
+        g.setColor(Color.BLUE);
+        g.drawLine(0, highScore.getBounds().y, getWidth(), highScore.getBounds().y);
     }
         
     public void run()
@@ -221,7 +225,7 @@ public class MyPanelScore extends JPanel implements Runnable
             bufferedReader.close();
             
             user.setText(nome);
-            highScore.setText(savedScore);
+            highScore.setText("Highscore " + savedScore);
             
         } catch (IOException e) {
             System.out.println("Si è verificato un errore durante la lettura del file: " + e.getMessage());
@@ -230,7 +234,8 @@ public class MyPanelScore extends JPanel implements Runnable
     
     public void salvaHighScore() //Le score sono nella variabile pt
     {
-        long vecchie = Long.parseLong(highScore.getText()); //highScore contiene anche la parola
+        String parts[] = highScore.getText().split(" "); //Divide la parola Highscore dal punteggio
+        long vecchie = Long.parseLong(parts[1]);
         boolean vuoto = true;
         if(pt > vecchie) //Se l'utente ha fatto un nuovo record di score
         {
@@ -240,7 +245,6 @@ public class MyPanelScore extends JPanel implements Runnable
                 FileReader fileReader = new FileReader(file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
                 
-                
                 String line;
                 ArrayList<String> fileLine = new ArrayList<>();
                 
@@ -249,16 +253,15 @@ public class MyPanelScore extends JPanel implements Runnable
                 
                 while ((line = bufferedReader.readLine()) != null) //Non entra mai in questo ciclo perchè dice che il file è null
                 {
-                    System.out.println("Lillo");
                     fileLine.add(line);//la mia lista contiene tutte le righe del file
                     vuoto = false;
                 }
                 bufferedReader.close();
                 
-                if(!vuoto)
+                if(!vuoto) //Se il file non è vuoto toglie l'ultimo elemento
                 {
                     fileLine.remove(fileLine.size()-1);// = user.getText() + ";" + pt;
-                    System.out.println("Non è vuoto ed elimino l'ultima linea");    
+                    //System.out.println("Non è vuoto ed elimino l'ultima linea");    
                 }
                 fileLine.add(user.getText() + ";" + pt);
                 
@@ -269,7 +272,6 @@ public class MyPanelScore extends JPanel implements Runnable
                 //Riscrive il file
                 for(int i = 0; i < fileLine.size(); i++) //Carica tutta la lista nel file
                 {
-                    System.out.println(fileLine.get(i));
                     bufferedWriter.write(fileLine.get(i));
                     if(i+1 < fileLine.size()) //se non è all'ultima riga va a capo
                         bufferedWriter.newLine(); // Vai a una nuova riga

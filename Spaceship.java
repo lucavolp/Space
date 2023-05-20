@@ -137,7 +137,7 @@ public class Spaceship extends JLabel implements KeyListener
         }
         if(getBounds().x==0)
         {
-            if(speed>0)
+            if(speed>=0)
             {
                 posX+=speed;
                 setLocation(posX, posY);
@@ -145,7 +145,7 @@ public class Spaceship extends JLabel implements KeyListener
         }
         if(getBounds().x>pannello.getBounds().x*3)
         {
-            if(speed<0)
+            if(speed<=0)
             {
                 posX+=speed;
                 setLocation(posX, posY);
