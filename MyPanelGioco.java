@@ -161,6 +161,11 @@ public class MyPanelGioco extends JPanel implements Runnable
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
     
+    public void focus()
+    {
+        roberto.requestFocusInWindow();
+    }
+    
     public void run()
     {
         while(!gameStatus())

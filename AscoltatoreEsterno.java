@@ -74,6 +74,8 @@ public class AscoltatoreEsterno implements ActionListener {
             
             panelMenu.resume.setVisible(false);
             panelMenu.pause.setVisible(true);
+            panelGioco.roberto.requestFocusInWindow();
+            panelGioco.focus();
         }
         if (e.getActionCommand().equals("Restart")) 
         {
