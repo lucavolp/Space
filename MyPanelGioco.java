@@ -115,7 +115,7 @@ public class MyPanelGioco extends JPanel implements Runnable
             public boolean dispatchKeyEvent(KeyEvent e) {
                 if (e.getID() == KeyEvent.KEY_TYPED) {
                     Component focusedComponent = manager.getFocusOwner();
-                    System.out.println("Focused component: " + focusedComponent);
+                    //System.out.println("Focused component: " + focusedComponent);
                 }
                 return false;
             }

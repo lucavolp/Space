@@ -239,31 +239,42 @@ public class MyPanelScore extends JPanel implements Runnable
                 //Lettura
                 FileReader fileReader = new FileReader(file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
-                //Scrittura
-                FileWriter fileWriter = new FileWriter(file); // true per aprire il file in modalità append
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                
                 
                 String line;
                 ArrayList<String> fileLine = new ArrayList<>();
                 
-                while ((line = bufferedReader.readLine()) != null)
+                // Riposiziona il puntatore all'inizio del file
+                //fileReader.reset();
+                
+                while ((line = bufferedReader.readLine()) != null) //Non entra mai in questo ciclo perchè dice che il file è null
                 {
+                    System.out.println("Lillo");
                     fileLine.add(line);//la mia lista contiene tutte le righe del file
                     vuoto = false;
                 }
                 bufferedReader.close();
                 
                 if(!vuoto)
-                    fileLine.remove(fileLine.size());// = user.getText() + ";" + pt;
+                {
+                    fileLine.remove(fileLine.size()-1);// = user.getText() + ";" + pt;
+                    System.out.println("Non è vuoto ed elimino l'ultima linea");    
+                }
                 fileLine.add(user.getText() + ";" + pt);
+                
+                //Scrittura
+                FileWriter fileWriter = new FileWriter(file); // true per aprire il file in modalità append
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 
                 //Riscrive il file
                 for(int i = 0; i < fileLine.size(); i++) //Carica tutta la lista nel file
                 {
                     System.out.println(fileLine.get(i));
                     bufferedWriter.write(fileLine.get(i));
-                    bufferedWriter.newLine(); // Vai a una nuova riga
+                    if(i+1 < fileLine.size()) //se non è all'ultima riga va a capo
+                        bufferedWriter.newLine(); // Vai a una nuova riga
                 }
+                
                 bufferedWriter.close();
             }
             catch(IOException e)

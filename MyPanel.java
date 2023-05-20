@@ -162,13 +162,13 @@ public class MyPanel extends JPanel //implements ActionListener
                         fileLine.add(fileLine.get(i)); //Aggiunge alla fine la riga con l'utente che è stata trovata
                         fileLine.remove(i);
                         trovato = true;
-                        System.out.println("Trovato");
+                        //System.out.println("Trovato");
                     }
                 }
                 
                 if(!trovato)
                 {
-                    System.out.println("Aggiunto");
+                    //System.out.println("Aggiunto");
                     fileLine.add(name + ";0");
                 }
                 
@@ -180,7 +180,8 @@ public class MyPanel extends JPanel //implements ActionListener
                 for(int i = 0; i < fileLine.size(); i++) //Carica tutta la lista nel file
                 {
                     bufferedWriter.write(fileLine.get(i));
-                    bufferedWriter.newLine(); // Vai a una nuova riga
+                    if(i+1 < fileLine.size()) //se non è all'ultima riga va a capo
+                        bufferedWriter.newLine(); // Vai a una nuova riga
                 }
 
                 bufferedWriter.close();

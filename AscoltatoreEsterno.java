@@ -99,6 +99,7 @@ public class AscoltatoreEsterno implements ActionListener {
         container.removeAll();
         panelGioco.setGameStatus(true); 
         panelScore.salvaHighScore();
+        //System.out.println("Chiamato quello per salvare le highscore");
         panelGioco = null;
         panelScore = null;
         panelMenu = null;
@@ -114,23 +115,9 @@ public class AscoltatoreEsterno implements ActionListener {
         p.change.doClick();
     }
     
-    
     //Metodi invocati dal pannello GameOver
     public void GOBackToHome() // Funziona e consente di tornare al pannello principale
     {
-        /*
-        try {
-            // Creazione dell'oggetto Robot
-            Robot robot = new Robot();
-
-            // Simulazione del click sulla finestra del programma Java
-            robot.mouseMove(this.panelMenu.back.getBounds().x+5, this.panelMenu.back.getBounds().x+5);
-            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-            System.out.println("ciao");
-        } catch (AWTException e) {
-            e.printStackTrace();
-        }*/
         panelMenu.back.doClick();
     }
     
